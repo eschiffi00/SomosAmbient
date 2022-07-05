@@ -1,0 +1,9 @@
+C:\SomosAmbient\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.exe.config
+C:\SomosAmbient\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.exe
+C:\SomosAmbient\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.pdb
+C:\SomosAmbient\Sistema\DbTableClassGen\bin\Debug\LibDB2.dll
+C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.CoreCompileInputs.cache
+C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.CopyComplete
+C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.exe
+C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.pdb
+C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.AssemblyReference.cache

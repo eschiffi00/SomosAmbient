@@ -1,0 +1,176 @@
+﻿/*https://bootstrapcreative.com/bootstrap-text-sizes/*/
+
+html {
+    /*font-size:14px;*/
+    /*font-weight: 400;*/
+    /*line-height: 0.8;*/
+}
+body {
+}
+
+.invisible {
+    display: none;
+}
+
+.bg-rosa {
+    background-color: pink !important;
+}
+
+.searchicon, .importicon, .exporticon {
+    color: dodgerblue;
+    font-size: medium;
+}
+
+.searchicon, .importicon:hover {
+    cursor: pointer;
+}
+
+.exporticonButton {
+    color: white !important;
+    background-color: white !important;
+    border: none !important;
+}
+
+.faborde {
+    border: 1px solid dodgerblue;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.fabordeVigente {
+    border: 1px solid dodgerblue;
+    padding: 3px;
+    border-radius: 3px;
+    color: dodgerblue;
+}
+
+.columna-iconos-td, .columna-iconos-th {
+    width: 100px;
+    /*background-color: #fff;*/
+    border: 0 1px !important;
+    border-right: 1px solid black !important;
+    
+}
+
+.columna50-iconos-td, .columna50-iconos-th {
+    width: 50px;
+    /*background-color: #fff;*/
+    border: 0 1px !important;
+    border-right: 1px solid black !important;
+}
+
+
+.columna-iconos-gridview {
+    display: flex !important;
+    justify-content: center !important;
+    max-width: 100px !important;
+}
+
+.columna-iconos-gridview > div:nth-of-type(1)
+{
+    padding-right: .5rem !important;
+}
+
+footer {
+    background-color: lightgray;
+
+}
+
+.nohaydatos {
+    margin-left: 13px;
+    font-style: italic;
+}
+
+/* Ajusta tamaños del select2 */
+.select2-selection__rendered {
+    line-height: 35px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px !important;
+    border-color: #ced4da !important;
+}
+
+.select2-selection__arrow {
+    height: 34px !important;
+}
+/* Fin Ajusta tamaños del select2 */
+
+.recuadroInput1 {
+    margin: 15px 15px 5px 15px;
+    background-color: darkseagreen;
+    padding: 30px 0 5px 0;
+    border-radius: 10px;
+    position: relative;
+}
+
+.recuadroInput2 {
+    margin: 15px 15px 5px 15px;
+    background-color: burlywood;
+    padding: 30px 0 5px 0;
+    border-radius: 10px;
+    position: relative;
+}
+
+.recuadroInput3 {
+    margin: 15px 15px 5px 15px;
+    background-color: lightgray;
+    padding: 30px 0 5px 0;
+    border-radius: 10px;
+    position: relative;
+}
+
+.recuadroInputTitulo {
+    background-color: white;
+    display: inline-block;
+    position: absolute;
+    margin: -30px 0 0 0;
+    /*border-radius: 5px;*/
+    /*min-width: 100px;*/
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.recuadroInputTitulo span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.optionTextDanger option{
+    font-weight: bold;
+}
+
+.faborderDanger {
+    border: 1px solid #DC3545;
+    color: #DC3545;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+
+.fawidth {
+    min-width: 20px;
+}
+
+
+.blinking {
+    /*animation: blinkingText 2s infinite;*/
+    /*font-size: 32px;*/
+    /*font-weight: bold;*/
+    color: orangered !important;
+    /*padding-right: 50px;
+    */
+}
+
+@keyframes blinkingText {
+    0% { color: orangered; }
+    49% { color: orangered; }
+    60% { color: transparent; }
+    99% { color: transparent; }
+    100% { color: orangered; }
+}
+
+.colSorteable a {
+    color: green;
+}

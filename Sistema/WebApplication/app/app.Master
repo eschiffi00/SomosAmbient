@@ -1,0 +1,401 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="app.master.cs" Inherits="WebApplication.app.app" %>
+
+<!DOCTYPE html>
+
+<html lang="es-ar">
+<head runat="server">
+    <title>Casa Campus - Bondi</title>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <link   href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link   href="<%=ResolveUrl("~")%>Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="<%=ResolveUrl("~")%>Scripts/jquery-3.0.0.min.js"></script>
+    <script src="<%=ResolveUrl("~")%>Scripts/umd/popper.min.js"></script>
+    <script src="<%=ResolveUrl("~")%>Scripts/bootstrap.min.js"></script>
+    <link   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
+    <link   href="<%=ResolveUrl("~")%>Content/CasaC.css" rel="stylesheet" />
+    
+    <!-- Estos dos de abajo son para el datetimepicker -->
+    <script src="<%=ResolveUrl("~")%>Content/jquery.datetimepicker.full.js"></script>
+    <link href="<%=ResolveUrl("~")%>Content/jquery.datetimepicker.min.css" rel="stylesheet" />
+
+    <!-- Estos dos de abajo son para el select2 select2.org/ -->
+    <link href="<%=ResolveUrl("~")%>Content/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="<%=ResolveUrl("~")%>Content/select2/js/select2.min.js"></script>
+
+    <!-- Jquery mask -->
+    <script src="<%=ResolveUrl("~")%>Content/jQuery-Mask/dist/jquery.mask.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#searchbox').keypress(function (event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    var comando = $('#searchbox').val();
+                    $('#searchbox').val('');
+                    //alert(comando);
+                    $('#searchcommand').val(comando);
+                    $('#btnSearch').click();
+                }
+            });
+            $(document).keydown(function (e) {
+                //alert(e.keyCode);
+                if (e.keyCode == 191 && e.ctrlKey) {    // '/'
+                    $("#searchbox").focus();
+                }
+                if (e.keyCode == 66 && e.ctrlKey) {    // 'b'
+                    $(".searchicon").click();
+                    $("input[id$='txtBuscar']").focus();
+                }
+            });
+            $.datetimepicker.setLocale('es');
+        });
+        
+        function SetUserAndEdificio(n, m) {
+            $("#divUsername").text(n);
+            $("#divUsername").css("color", "white");
+            $("#divEdificio").text(m);
+            $("#divEdificio").css("color", "white");
+            if (m.includes("_copia")) $("#divEdificio").addClass("blinking");
+        }
+
+        $(document).ready(function () {
+            $('#dvLoadingContent').fadeOut(400);
+        });
+
+        function dvLoadingContentFadeOut() {
+            $('#dvLoadingContent').fadeOut(400);
+        }
+
+        function dvIniciaSpinner() {
+            $('#dvLoadingContent').show();
+        }
+
+    </script>
+    <style>
+        .feather {
+            width: 16px;
+            height: 16px;
+            vertical-align: text-bottom;
+        }
+
+        /*
+        * Sidebar
+        */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100; /* Behind the navbar */
+            padding: 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+
+        .sidebar-sticky {
+            position: absolute;
+            top: 50px; /* Height of navbar */
+            height: calc(100vh - 50px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        }
+
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: #333;
+        }
+
+            .sidebar .nav-link .feather {
+                margin-right: 4px;
+                color: #999;
+            }
+
+            .sidebar .nav-link.active {
+                color: #007bff;
+            }
+
+                .sidebar .nav-link:hover .feather,
+                .sidebar .nav-link.active .feather {
+                    color: inherit;
+                }
+
+        .sidebar-heading {
+            font-size: .75rem;
+            text-transform: uppercase;
+        }
+
+        /*
+        * Navbar
+        */
+
+        .navbar-brand {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            font-size: 1rem;
+            background-color: rgba(0, 0, 0, .25);
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+        }
+
+        .navbar .form-control {
+            padding: .75rem 1rem;
+            border-width: 0;
+            border-radius: 0;
+        }
+
+        .form-control-dark {
+            color: #fff;
+            background-color: rgba(255, 255, 255, .1);
+            border-color: rgba(255, 255, 255, .1);
+        }
+
+        .form-control-dark:focus {
+            border-color: transparent;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+        }
+
+        /*
+        * Utilities
+        */
+
+        .border-top {
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        #searchbox {
+            background-color:#0040;
+        }
+        #searchbox:focus {
+            background-color: white;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-sm-nowrap p-0 navbar-expand-md">
+        <div class="navbar-brand d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
+            <button class="btn btn-outline-light mr-1" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
+                <i class="fa fa-bars"></i>
+            </button>
+            <input id="searchbox" class="form-control w-75 text-dark rounded ml-1"  type="text" placeholder="" aria-label="Search">
+
+            <!-- Muestra tamaño creen -->
+            <div class="NOinvisible">
+            <div class="d-block d-sm-none"><span class="label label-info">xs</span></div>
+            <div class="d-none d-sm-block d-md-none"><span class="label label-info text-white">sm</span></div>
+            <div class="d-none d-md-block d-lg-none"><span class="label label-info text-white">md</span></div>
+            <div class="d-none d-lg-block d-xl-none"><span class="label label-info text-white">lg</span></div>
+            <div class="d-none d-xl-block"><span class="label label-info text-white">xl</span></div>
+            </div>
+
+            <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
+                <span data-feather="menu" class="my-1"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse text-right" id="topnav">
+            <a class="text-light" href="/" style="width:160px">
+                <div style="width:40px; float:left">
+                   <img src="/img/gotita.png" class="rounded ml-2 mr-2 d-inline-block" style="background-color: white;margin:auto;padding-top:3px" height="30" />
+                </div>
+                <div class="rounded text-left text-nowrap" style="background-color:white;color:black;height:35px;vertical-align:bottom;padding-top:3px">casa campus</div>
+            </a>
+            
+            <div class="m-auto w-100 px-5">
+                <div id="divEdificio" class="d-block h6 small mt-3"></div>
+                <div id="divUsername" class="d-block h6 small mb-3"></div>
+            </div>
+        </div>
+    </nav>
+
+
+    <form id="form1" runat="server" novalidate>
+    <asp:TextBox ID="searchcommand" runat="server" ClientIDMode="Static" CssClass="invisible"  OnTextChanged="searchcommand_TextChanged"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" ClientIDMode="Static" CssClass="invisible" UseSubmitBehavior="false" Text="search" />
+    <div class="container-fluid">
+          
+
+
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 bg-light navbar-collapse collapse sidebar" id="sidenav">
+                <div class="sidebar-sticky flex-column w-100 mt-1">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/main">
+                                <span data-feather="home"></span>Home <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Ventas</span>
+                            <a class="d-flex align-items-center text-muted" href="#">
+                                <span data-feather="plus-circle"></span>
+                            </a>
+                        </h6>
+                        <li class="nav-item" runat="server" id="idProveedores">
+                            <asp:HyperLink ID="WebApplication_app_Administracion_ProveedorBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=ListaProveedor %>" Visible="true"><i class="fa fa-users mr-1 fawidth" ></i>Proveedores</asp:HyperLink>
+                        </li>
+                        <li class="nav-item" runat="server" id="idClientes">
+                            <asp:HyperLink ID="WebApplication_app_Administracion_ClienteBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=ListaCliente %>" Visible="true"><i class="fa fa-handshake-o mr-1 fawidth" ></i>Clientes</asp:HyperLink>
+                        </li>
+                        <li class="nav-item" runat="server" id="Li1">
+                            <asp:HyperLink ID="WebApplication_app_Ventas_OrdenBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-first-order mr-1 fawidth" ></i>Ordenes</asp:HyperLink>
+                        </li>
+                        <li class="nav-item" runat="server" id="Li2">
+                            <asp:HyperLink ID="WebApplication_app_Ventas_ReservaBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-book mr-1 fawidth" ></i>Room-Plan</asp:HyperLink>
+                        </li>
+                    </ul>
+
+
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Parámetros</span>
+                       
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Unidades</a>
+                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+<%--                                <asp:HyperLink ID="HyperLink01" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="" ></i>Unidades</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink05" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="" ></i>Tipo unidades</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink07" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-list-alt mr-1" ></i>Lista <%= GetCaractName("Caracteristica1Nombre") %></asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink10" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-list-alt mr-1" ></i>Lista <%= GetCaractName("Caracteristica2Nombre") %></asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink08" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-list-alt mr-1" ></i>Lista <%= GetCaractName("Caracteristica3Nombre") %></asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink09" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-list-alt mr-1" ></i>Lista <%= GetCaractName("Caracteristica4Nombre") %></asp:HyperLink>--%>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Precios</a>
+                           <%--- <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span><i class="fa fa-money mr-1" ></i>Lista de precios
+                            </a>--%>
+                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                                 <asp:HyperLink ID="HyperLink1" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="" >...</i> de órdenes</asp:HyperLink>
+                                 <asp:HyperLink ID="HyperLink2" runat="server" CssClass="dropdown-item" NavigateUrl="" Visible="true"><i class="" >...</i> de adicionales</asp:HyperLink>
+                                 <asp:HyperLink ID="HyperLink3" runat="server" CssClass="dropdown-item" NavigateUrl="" Visible="true"><i class="" >...</i> de promociones</asp:HyperLink>
+                            </div>
+                        </li>
+                        <%--
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span><i class="fa fa-thumbs-up mr-1" ></i>Promociones
+                            </a>
+                        </li>
+                        --%>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Seguridad</a>
+                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                                <%--<asp:HyperLink ID="WebApplication_app_Seguridad_Usuarios" runat="server" CssClass="dropdown-item" NavigateUrl="~/app/Seguridad/UsuarioBrowse.aspx" Visible="false"><i class="fa fa-users mr-1" ></i>Usuarios</asp:HyperLink>--%>
+                                <asp:HyperLink ID="WebApplication_app_Seguridad_UsuarioBrowse" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaUsuarios %>" Visible="true"><i class="fa fa-user mr-1 fawidth" ></i>Usuarios</asp:HyperLink>
+                                <asp:HyperLink ID="WebApplication_app_Seguridad_UsuarioRolEdit" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-eye mr-2 fawidth" ></i>Permisos</asp:HyperLink>
+                                <asp:HyperLink ID="WebApplication_app_Seguridad_UsuarioClave" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-lock fa-spin mr-2 fawidth" ></i>Cambiar Clave</asp:HyperLink>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Otros</a>
+                            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                                <asp:HyperLink ID="WebApplication_app_Parametros_OrigenBrowse" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="false"><i class="fa fa-user mr-1" ></i>Orígenes de clientes</asp:HyperLink>
+                                <asp:HyperLink ID="WebApplication_app_Parametros_TyCBrowse" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="false"><i class="fa fa-user mr-1" ></i>Términos y Condiciones</asp:HyperLink>
+                                <asp:HyperLink ID="WebApplication_app_Parametros_EmailLogBrowse" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="false"><i class="fa fa-user mr-1" ></i>Emails enviados</asp:HyperLink>
+                                <asp:HyperLink ID="WebApplication_app_Parametros_ParametroBrowse" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="false"><i class="fa fa-user mr-1" ></i>Parámetros</asp:HyperLink>
+                            </div>
+                        </li>
+
+                        <li class="nav-item" runat="server" id="idSalir">
+                            <asp:HyperLink ID="WebApplication_app_Seguridad_UsuarioLogin" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=Login %>" Visible="true"><i class="fa fa-power-off mr-1" ></i>Salir</asp:HyperLink>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md ml-sm-auto pt-3 px-4">
+
+  <!-- Inicio codigo spinner -->
+    <style>
+        #divLoadingImg {
+        background: url("/img/Spinner.gif") no-repeat center center;
+        height: 100px;
+        width: 120px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        top: 50%;
+        /*margin-top: -50%;*/
+        }
+
+        #divLoadingContent {
+        /*display: none;  Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        /*  background-color: rgb(0,0,0); */ /* Fallback color */
+        background-color: Black; /* Black w/ opacity */
+        opacity: 0.75;
+        }
+    </style>
+    <script>
+        $(document).ready(function () { $('#divLoadingContent').fadeOut(400); });
+        function divLoadingContentFadeOut() { $('#divLoadingContent').fadeOut(400); }
+        function divIniciaSpinner() { $('#divLoadingContent').show(); }
+    </script>
+    <div id="divLoadingContent"><div id="divLoadingImg"></div></div>
+<!-- Fin codigo spinner -->
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+            </main>
+        </div>
+
+        
+
+    </div>
+
+
+
+    <!-- Espaciado abajo para que el footer no tape el final de la pagina -->
+    <div style="min-height:60px !important;color:blue"></div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue fixed-bottom" style="font-size:0.8rem" runat="server" id="footerDiv">
+
+      <div class="footer-copyright text-center py-1">© 2021 Copyright:
+        <a href="http://casacampus.com/"> CasaCampus </a>
+      </div>
+
+    </footer>
+    <!-- Footer -->
+
+    <asp:ContentPlaceHolder ID="foot" runat="server">
+    </asp:ContentPlaceHolder>
+        
+  
+
+    
+    </form>
+</body>
+</html>

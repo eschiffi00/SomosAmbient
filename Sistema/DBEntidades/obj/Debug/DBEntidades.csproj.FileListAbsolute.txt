@@ -1,0 +1,11 @@
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\DBEntidades.dll
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\DBEntidades.pdb
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\LibDB2.dll
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\log4net.dll
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\LibDB2.pdb
+C:\SomosAmbient\Sistema\DBEntidades\bin\Debug\log4net.xml
+C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.CoreCompileInputs.cache
+C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.CopyComplete
+C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.dll
+C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.pdb
+C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.csprojAssemblyReference.cache

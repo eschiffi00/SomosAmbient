@@ -1,0 +1,515 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2BD6D962-E622-4B0A-88A4-2056949E9C0C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Logistore</RootNamespace>
+    <AssemblyName>Logistore</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44328</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\Administracion\ClienteBrowse.aspx" />
+    <Content Include="app\Administracion\ClienteEdit.aspx" />
+    <Content Include="app\Administracion\EntidadBrowse.aspx" />
+    <Content Include="app\Administracion\ProveedorBrowse.aspx" />
+    <Content Include="app\Administracion\ProveedoresEdit.aspx" />
+    <Content Include="app\Main.aspx" />
+    <Content Include="app\Seguridad\UsuarioBrowse.aspx" />
+    <Content Include="app\Seguridad\UsuarioClave.aspx" />
+    <Content Include="app\Seguridad\UsuarioEdit.aspx" />
+    <Content Include="app\Seguridad\UsuarioLogin.aspx" />
+    <Content Include="app\Seguridad\UsuarioOlvideClave.aspx" />
+    <Content Include="app\Seguridad\UsuarioRolEdit.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CasaC.css" />
+    <Content Include="Content\FreezeTable.css" />
+    <Content Include="Content\jQuery-Mask\dist\jquery.mask.js" />
+    <Content Include="Content\jQuery-Mask\dist\jquery.mask.min.js" />
+    <Content Include="Content\jQuery-Mask\Gruntfile.js" />
+    <Content Include="Content\jQuery-Mask\package.js" />
+    <Content Include="Content\jQuery-Mask\src\jquery.mask.js" />
+    <Content Include="Content\jQuery-Mask\test\jquery.mask.test.js" />
+    <Content Include="Content\jQuery-Mask\test\qunit.css" />
+    <Content Include="Content\jQuery-Mask\test\qunit.js" />
+    <Content Include="Content\jQuery-Mask\test\sinon-1.10.3.js" />
+    <Content Include="Content\jQuery-Mask\test\sinon-qunit-1.0.0.js" />
+    <Content Include="Content\jQuery-Mask\test\sinon-qunit.js" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-1.11.1.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-1.7.2.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-1.8.3.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-1.9.1.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-2.1.1.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-jquery-3.0.0.html" />
+    <Content Include="Content\jQuery-Mask\test\test-for-zepto.html" />
+    <Content Include="Content\jQuery-Mask\test\zepto\data.js" />
+    <Content Include="Content\jQuery-Mask\test\zepto\event.js" />
+    <Content Include="Content\jQuery-Mask\test\zepto\zepto.min.js" />
+    <Content Include="Content\jquery.datetimepicker.full.js" />
+    <Content Include="Content\jquery.datetimepicker.min.css" />
+    <Content Include="Content\select2\css\select2.css" />
+    <Content Include="Content\select2\css\select2.min.css" />
+    <Content Include="Content\select2\js\i18n\af.js" />
+    <Content Include="Content\select2\js\i18n\ar.js" />
+    <Content Include="Content\select2\js\i18n\az.js" />
+    <Content Include="Content\select2\js\i18n\bg.js" />
+    <Content Include="Content\select2\js\i18n\bn.js" />
+    <Content Include="Content\select2\js\i18n\bs.js" />
+    <Content Include="Content\select2\js\i18n\ca.js" />
+    <Content Include="Content\select2\js\i18n\cs.js" />
+    <Content Include="Content\select2\js\i18n\da.js" />
+    <Content Include="Content\select2\js\i18n\de.js" />
+    <Content Include="Content\select2\js\i18n\dsb.js" />
+    <Content Include="Content\select2\js\i18n\el.js" />
+    <Content Include="Content\select2\js\i18n\en.js" />
+    <Content Include="Content\select2\js\i18n\eo.js" />
+    <Content Include="Content\select2\js\i18n\es.js" />
+    <Content Include="Content\select2\js\i18n\et.js" />
+    <Content Include="Content\select2\js\i18n\eu.js" />
+    <Content Include="Content\select2\js\i18n\fa.js" />
+    <Content Include="Content\select2\js\i18n\fi.js" />
+    <Content Include="Content\select2\js\i18n\fr.js" />
+    <Content Include="Content\select2\js\i18n\gl.js" />
+    <Content Include="Content\select2\js\i18n\he.js" />
+    <Content Include="Content\select2\js\i18n\hi.js" />
+    <Content Include="Content\select2\js\i18n\hr.js" />
+    <Content Include="Content\select2\js\i18n\hsb.js" />
+    <Content Include="Content\select2\js\i18n\hu.js" />
+    <Content Include="Content\select2\js\i18n\hy.js" />
+    <Content Include="Content\select2\js\i18n\id.js" />
+    <Content Include="Content\select2\js\i18n\is.js" />
+    <Content Include="Content\select2\js\i18n\it.js" />
+    <Content Include="Content\select2\js\i18n\ja.js" />
+    <Content Include="Content\select2\js\i18n\ka.js" />
+    <Content Include="Content\select2\js\i18n\km.js" />
+    <Content Include="Content\select2\js\i18n\ko.js" />
+    <Content Include="Content\select2\js\i18n\lt.js" />
+    <Content Include="Content\select2\js\i18n\lv.js" />
+    <Content Include="Content\select2\js\i18n\mk.js" />
+    <Content Include="Content\select2\js\i18n\ms.js" />
+    <Content Include="Content\select2\js\i18n\nb.js" />
+    <Content Include="Content\select2\js\i18n\ne.js" />
+    <Content Include="Content\select2\js\i18n\nl.js" />
+    <Content Include="Content\select2\js\i18n\pa.js" />
+    <Content Include="Content\select2\js\i18n\pl.js" />
+    <Content Include="Content\select2\js\i18n\ps.js" />
+    <Content Include="Content\select2\js\i18n\pt-BR.js" />
+    <Content Include="Content\select2\js\i18n\pt.js" />
+    <Content Include="Content\select2\js\i18n\ro.js" />
+    <Content Include="Content\select2\js\i18n\ru.js" />
+    <Content Include="Content\select2\js\i18n\sk.js" />
+    <Content Include="Content\select2\js\i18n\sl.js" />
+    <Content Include="Content\select2\js\i18n\sq.js" />
+    <Content Include="Content\select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Content\select2\js\i18n\sr.js" />
+    <Content Include="Content\select2\js\i18n\sv.js" />
+    <Content Include="Content\select2\js\i18n\te.js" />
+    <Content Include="Content\select2\js\i18n\th.js" />
+    <Content Include="Content\select2\js\i18n\tk.js" />
+    <Content Include="Content\select2\js\i18n\tr.js" />
+    <Content Include="Content\select2\js\i18n\uk.js" />
+    <Content Include="Content\select2\js\i18n\vi.js" />
+    <Content Include="Content\select2\js\i18n\zh-CN.js" />
+    <Content Include="Content\select2\js\i18n\zh-TW.js" />
+    <Content Include="Content\select2\js\select2.full.js" />
+    <Content Include="Content\select2\js\select2.full.min.js" />
+    <Content Include="Content\select2\js\select2.js" />
+    <Content Include="Content\select2\js\select2.min.js" />
+    <Content Include="GeneralError.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="img\gotita.png" />
+    <Content Include="img\MainFondo.png" />
+    <Content Include="img\Spinner.gif" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="app\app.Master" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="app\Administracion\ClienteBrowse.aspx.cs">
+      <DependentUpon>ClienteBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Administracion\ClienteBrowse.aspx.designer.cs">
+      <DependentUpon>ClienteBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Administracion\ClienteEdit.aspx.cs">
+      <DependentUpon>ClienteEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Administracion\ClienteEdit.aspx.designer.cs">
+      <DependentUpon>ClienteEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Administracion\EntidadBrowse.aspx.cs">
+      <DependentUpon>EntidadBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Administracion\EntidadBrowse.aspx.designer.cs">
+      <DependentUpon>EntidadBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Administracion\ProveedorBrowse.aspx.cs">
+      <DependentUpon>ProveedorBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Administracion\ProveedorBrowse.aspx.designer.cs">
+      <DependentUpon>ProveedorBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Administracion\ProveedoresEdit.aspx.cs">
+      <DependentUpon>ProveedoresEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Administracion\ProveedoresEdit.aspx.designer.cs">
+      <DependentUpon>ProveedoresEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\app.Master.cs">
+      <DependentUpon>app.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\app.Master.designer.cs">
+      <DependentUpon>app.Master</DependentUpon>
+    </Compile>
+    <Compile Include="app\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioBrowse.aspx.cs">
+      <DependentUpon>UsuarioBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioBrowse.aspx.designer.cs">
+      <DependentUpon>UsuarioBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioClave.aspx.cs">
+      <DependentUpon>UsuarioClave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioClave.aspx.designer.cs">
+      <DependentUpon>UsuarioClave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioEdit.aspx.cs">
+      <DependentUpon>UsuarioEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioEdit.aspx.designer.cs">
+      <DependentUpon>UsuarioEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioLogin.aspx.cs">
+      <DependentUpon>UsuarioLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioLogin.aspx.designer.cs">
+      <DependentUpon>UsuarioLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioOlvideClave.aspx.cs">
+      <DependentUpon>UsuarioOlvideClave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioOlvideClave.aspx.designer.cs">
+      <DependentUpon>UsuarioOlvideClave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioRolEdit.aspx.cs">
+      <DependentUpon>UsuarioRolEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Seguridad\UsuarioRolEdit.aspx.designer.cs">
+      <DependentUpon>UsuarioRolEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CCLib.cs" />
+    <Compile Include="CryptorEngine.cs" />
+    <Compile Include="GeneralError.aspx.cs">
+      <DependentUpon>GeneralError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralError.aspx.designer.cs">
+      <DependentUpon>GeneralError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\jQuery-Mask\.gitignore" />
+    <Content Include="Content\jQuery-Mask\.jshintrc" />
+    <Content Include="Content\jQuery-Mask\.ruby-version" />
+    <Content Include="Content\jQuery-Mask\.travis.yml" />
+    <Content Include="Content\jQuery-Mask\bower.json" />
+    <Content Include="Content\jQuery-Mask\CHANGELOG.md" />
+    <Content Include="Content\jQuery-Mask\component.json" />
+    <Content Include="Content\jQuery-Mask\composer.json" />
+    <Content Include="Content\jQuery-Mask\CONTRIBUTING.md" />
+    <Content Include="Content\jQuery-Mask\deploy.rb" />
+    <Content Include="Content\jQuery-Mask\docker-compose.yml" />
+    <Content Include="Content\jQuery-Mask\Dockerfile" />
+    <Content Include="Content\jQuery-Mask\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\jQuery-Mask\LICENSE" />
+    <Content Include="Content\jQuery-Mask\package-lock.json" />
+    <Content Include="Content\jQuery-Mask\package.json" />
+    <Content Include="Content\jQuery-Mask\README.md" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBEntidades\DBEntidades.csproj">
+      <Project>{a97126b4-19b0-4d41-a3b1-32bb7fc0f1d2}</Project>
+      <Name>DBEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibDB2\LibDB2.csproj">
+      <Project>{ef6b6312-625a-45ad-aa77-8c3fcf01f179}</Project>
+      <Name>LibDB2</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\Deposito\" />
+    <Folder Include="app\Logistica\" />
+    <Folder Include="app\Reportes\" />
+    <Folder Include="app\Venta\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54968</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44328/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
