@@ -36,8 +36,8 @@ namespace WebApplication.app.Seguridad
                 ParametroOperator.ClearCache();
                 ddlServidoresBind();
 #if DEBUG
-                txtLogin.Text = "x";
-                txtPassword.Text = "x";
+                //txtLogin.Text = "x";
+                //txtPassword.Text = "x";
 #endif
             }
         }
