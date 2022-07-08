@@ -43,3 +43,12 @@ C:\SomosAmbient\Sistema\LibDB2\obj\Debug\LibDB2.csproj.CopyComplete
 C:\SomosAmbient\Sistema\LibDB2\obj\Debug\LibDB2.dll
 C:\SomosAmbient\Sistema\LibDB2\obj\Debug\LibDB2.pdb
 C:\SomosAmbient\Sistema\LibDB2\obj\Debug\LibDB2.csprojAssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\bin\Debug\LibDB2.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\bin\Debug\LibDB2.pdb
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\bin\Debug\log4net.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\bin\Debug\log4net.xml
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\obj\Debug\LibDB2.csproj.AssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\obj\Debug\LibDB2.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\obj\Debug\LibDB2.csproj.CopyComplete
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\obj\Debug\LibDB2.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\LibDB2\obj\Debug\LibDB2.pdb

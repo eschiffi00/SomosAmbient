@@ -26,7 +26,7 @@
                         event.preventDefault();
                         event.stopPropagation();
                     }
-                    form.classList.add('was-validated');
+                    /*form.classList.add('was-validated');*/
                 }, false);
             }, false);
         })();
@@ -53,7 +53,7 @@
             width: 30%;
             height: 300px;
             margin:0px auto;
-            color:white;
+            color: white;
             background-color:black;
             border-radius:1px;
             box-shadow: 5px 5px 8px 10px #888888;
@@ -65,7 +65,7 @@
             width: 100%;
             height: auto;
             margin:0px auto;
-            color:white;
+            color: white;
             align-self:center;
         }
         #btnSubmit{
@@ -91,6 +91,17 @@
             width:300px;
             margin-top:20px !important;
             border-radius: 2px !important;
+        }
+        .form-control:focus {
+            color: black;
+            background-color: #fff;
+            border-color: black;
+       
+            outline: 0;
+            box-shadow: 1px 0px 5px 1px white;
+        }
+        .form-control:valid{
+
         }
 
     </style>

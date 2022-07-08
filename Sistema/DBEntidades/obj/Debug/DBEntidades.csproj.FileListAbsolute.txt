@@ -9,3 +9,14 @@ C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.CopyComplete
 C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.dll
 C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.pdb
 C:\SomosAmbient\Sistema\DBEntidades\obj\Debug\DBEntidades.csprojAssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\DBEntidades.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\DBEntidades.pdb
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\LibDB2.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\log4net.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\LibDB2.pdb
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\bin\Debug\log4net.xml
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.AssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\obj\Debug\DBEntidades.csproj.CopyComplete
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\obj\Debug\DBEntidades.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DBEntidades\obj\Debug\DBEntidades.pdb

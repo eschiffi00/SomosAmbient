@@ -35,10 +35,7 @@ namespace WebApplication.app.Seguridad
                 Session["UsuarioId"] = null;
                 ParametroOperator.ClearCache();
                 ddlServidoresBind();
-#if DEBUG
-                //txtLogin.Text = "x";
-                //txtPassword.Text = "x";
-#endif
+
             }
         }
 
