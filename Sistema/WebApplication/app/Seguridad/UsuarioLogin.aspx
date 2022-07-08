@@ -100,9 +100,6 @@
             outline: 0;
             box-shadow: 1px 0px 5px 1px white;
         }
-        .form-control:valid{
-
-        }
 
     </style>
     
