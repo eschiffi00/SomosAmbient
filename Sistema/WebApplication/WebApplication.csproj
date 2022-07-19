@@ -104,12 +104,19 @@
     <Content Include="app\Seguridad\UsuarioLogin.aspx" />
     <Content Include="app\Seguridad\UsuarioOlvideClave.aspx" />
     <Content Include="app\Seguridad\UsuarioRolEdit.aspx" />
+    <Content Include="app\Stock\RecetaBrowse.aspx" />
+    <Content Include="app\Stock\ProductoBrowse.aspx" />
+    <Content Include="app\Stock\ItemBrowse.aspx" />
+    <Content Include="app\Stock\RecetaEdit.aspx" />
+    <Content Include="app\Stock\ProductoEdit.aspx" />
+    <Content Include="app\Stock\ItemEdit.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Main.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\CasaC.css" />
     <Content Include="Content\FreezeTable.css" />
@@ -388,6 +395,48 @@
     </Compile>
     <Compile Include="app\Seguridad\UsuarioRolEdit.aspx.designer.cs">
       <DependentUpon>UsuarioRolEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\RecetaBrowse.aspx.cs">
+      <DependentUpon>RecetaBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\RecetaBrowse.aspx.designer.cs">
+      <DependentUpon>RecetaBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\ProductoBrowse.aspx.cs">
+      <DependentUpon>ProductoBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\ProductoBrowse.aspx.designer.cs">
+      <DependentUpon>ProductoBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\ItemBrowse.aspx.cs">
+      <DependentUpon>ItemBrowse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\ItemBrowse.aspx.designer.cs">
+      <DependentUpon>ItemBrowse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\RecetaEdit.aspx.cs">
+      <DependentUpon>RecetaEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\RecetaEdit.aspx.designer.cs">
+      <DependentUpon>RecetaEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\ProductoEdit.aspx.cs">
+      <DependentUpon>ProductoEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\ProductoEdit.aspx.designer.cs">
+      <DependentUpon>ProductoEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\Stock\ItemEdit.aspx.cs">
+      <DependentUpon>ItemEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\Stock\ItemEdit.aspx.designer.cs">
+      <DependentUpon>ItemEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="CCLib.cs" />

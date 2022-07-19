@@ -17,6 +17,7 @@
     <script src="<%=ResolveUrl("~")%>Scripts/bootstrap.min.js"></script>
     <link   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
     <link   href="<%=ResolveUrl("~")%>Content/CasaC.css" rel="stylesheet" />
+    <link   href="<%=ResolveUrl("~")%>Content/Main.css" rel="stylesheet" />
     
     <!-- Estos dos de abajo son para el datetimepicker -->
     <script src="<%=ResolveUrl("~")%>Content/jquery.datetimepicker.full.js"></script>
@@ -116,7 +117,7 @@
             }
 
             .sidebar .nav-link.active {
-                color: #007bff;
+                color: Black;
             }
 
                 .sidebar .nav-link:hover .feather,
@@ -176,6 +177,9 @@
         #searchbox:focus {
             background-color: white;
         }
+        .form-group{
+            width: auto !important;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -202,7 +206,7 @@
                 <span data-feather="menu" class="my-1"></span>
             </a>
         </div>
-        <div class="navbar-collapse collapse text-right" id="topnav">
+        <%--<div class="navbar-collapse collapse text-right" id="topnav">
             <a class="text-light" href="/" style="width:160px">
                 <div style="width:40px; float:left">
                    <img src="/img/gotita.png" class="rounded ml-2 mr-2 d-inline-block" style="background-color: white;margin:auto;padding-top:3px" height="30" />
@@ -214,7 +218,7 @@
                 <div id="divEdificio" class="d-block h6 small mt-3"></div>
                 <div id="divUsername" class="d-block h6 small mb-3"></div>
             </div>
-        </div>
+        </div>--%>
     </nav>
 
 
@@ -235,7 +239,7 @@
                             </a>
                         </li>
                         
-                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <%--<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Ventas</span>
                             <a class="d-flex align-items-center text-muted" href="#">
                                 <span data-feather="plus-circle"></span>
@@ -252,6 +256,17 @@
                         </li>
                         <li class="nav-item" runat="server" id="Li2">
                             <asp:HyperLink ID="WebApplication_app_Ventas_ReservaBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-book mr-1 fawidth" ></i>Room-Plan</asp:HyperLink>
+                        </li>--%>
+                         <li class="nav-item dropdown">
+                             
+                            <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-archive mr-1 fawidth" ></i>Stock</a>
+                            <div class="dropdown-menu" <%--aria-labelledby="smallerscreenmenu"--%>>
+                                <%--<asp:HyperLink ID="WebApplication_app_Seguridad_Usuarios" runat="server" CssClass="dropdown-item" NavigateUrl="~/app/Seguridad/UsuarioBrowse.aspx" Visible="false"><i class="fa fa-users mr-1" ></i>Usuarios</asp:HyperLink>--%>
+                                <asp:HyperLink ID="HyperLink4" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaItems %>" Visible="true">Items</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink5" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true">Recetas</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink6" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaProductos %>" Visible="true">Productos</asp:HyperLink>
+                            </div>
                         </li>
                     </ul>
 
@@ -363,7 +378,7 @@
         function divLoadingContentFadeOut() { $('#divLoadingContent').fadeOut(400); }
         function divIniciaSpinner() { $('#divLoadingContent').show(); }
     </script>
-    <div id="divLoadingContent"><div id="divLoadingImg"></div></div>
+    <div id="divLoadingContent"></div>
 <!-- Fin codigo spinner -->
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

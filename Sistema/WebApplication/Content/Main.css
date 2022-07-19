@@ -1,0 +1,35 @@
+﻿
+#contStock {
+    margin: 20px auto;
+    padding: 0 10px;
+}
+#contStock label {
+    display: inline-block;
+}
+
+#contStock label:nth-of-type(2) {
+    margin: 0 20px;
+    padding: 0;
+    text-align: center;
+}
+    #contStock input[type=radio] {
+        height: 15px;
+        width: 15px;
+        accent-color: white;
+        border-radius: 15px !important;
+        padding: 20px;
+        /*border: 2px solid rgba(0,0,0,0.2);*/
+        transition: all .3s ease-in-out;
+        overflow: hidden;
+    }
+    #contStock input[type='radio']:checked {
+        padding-right: 20px;
+        /*border: 2px solid rgba(0,0,0,0.2);*/
+        accent-color: black;
+        /*box-shadow: 0 0 10px 0.1px black;*/
+        border-radius: 10px;
+    }
+
+
+
+    

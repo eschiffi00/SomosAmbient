@@ -61,5 +61,10 @@ namespace WebApplication.app.Seguridad
             //Response.Redirect("/edita-usuario");
             Response.Redirect(GetRouteUrl("NuevoUsuario", null));
         }
+
+        protected void grdUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

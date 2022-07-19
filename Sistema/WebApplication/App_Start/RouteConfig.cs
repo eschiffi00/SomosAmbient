@@ -41,6 +41,18 @@ namespace WebApplication
             routes.MapPageRoute("NuevoProveedor", "nuevo-proveedor", "~/app/Administracion/ProveedorEdit.aspx");
             routes.MapPageRoute("EditaProveedor", "edita-proveedor/{id}", "~/app/Administracion/ProveedorEdit.aspx");
 
+            routes.MapPageRoute("ListaItems", "lista-item", "~/app/Stock/ItemBrowse.aspx");
+            routes.MapPageRoute("NuevoItem", "nuevo-item", "~/app/Stock/ItemEdit.aspx");
+            routes.MapPageRoute("EditaItems", "edita-items/{id}", "~/app/Stock/ItemEdit.aspx");
+
+            routes.MapPageRoute("ListaProductos", "lista-producto", "~/app/Stock/ProductoBrowse.aspx");
+            routes.MapPageRoute("NuevoProducto", "nuevo-producto", "~/app/Stock/ProductoEdit.aspx");
+            routes.MapPageRoute("EditaProductos", "edita-productos/{id}", "~/app/Stock/ProductoEdit.aspx");
+
+            routes.MapPageRoute("ListaRecetas", "lista-receta", "~/app/Stock/RecetaBrowse.aspx");
+            routes.MapPageRoute("NuevoReceta", "nuevo-receta", "~/app/Stock/RecetaEdit.aspx");
+            routes.MapPageRoute("EditaRecetas", "edita-recetas/{id}", "~/app/Stock/RecetaEdit.aspx");
+
             routes.MapPageRoute("NuevoCliente", "nuevo-cliente", "~/app/Administracion/ClienteEdit.aspx");
             routes.MapPageRoute("EditaCliente", "edita-cliente/{id}", "~/app/Administracion/ClienteEdit.aspx");
             routes.MapPageRoute("ListaCliente", "lista-cliente", "~/app/Administracion/ClienteBrowse.aspx");

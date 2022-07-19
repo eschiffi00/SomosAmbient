@@ -7,3 +7,13 @@ C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.Cop
 C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.exe
 C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.pdb
 C:\SomosAmbient\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.AssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.exe.config
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.exe
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\bin\Debug\DbTableClassGen.pdb
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\bin\Debug\LibDB2.dll
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.AssemblyReference.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.SuggestedBindingRedirects.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.csproj.CopyComplete
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.exe
+C:\Users\Pc\Documents\GitHub\AmbientHouse\Sistema\DbTableClassGen\obj\x86\Debug\DbTableClassGen.pdb
