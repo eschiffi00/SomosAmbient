@@ -83,10 +83,8 @@ namespace DbEntidades.Operators
                     RecetaDetail.ID = Receta.ID;
                     RecetaDetail.Descripcion = Receta.Descripcion;
                     RecetaDetail.Detalle = GetDetalleById(Receta.ID);
-                    foreach(var detalle in RecetaDetail.Detalle)
-                    {
-                        RecetaDetail.Pasos = GetPasosById(detalle.RecetaID);
-                    }
+                    RecetaDetail.EstadoID = Receta.EstadoID;
+                    RecetaDetail.Pasos = GetPasosById(Receta.RecPasosID);
                     RecetaDetail.Cantidad = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Cantidad;
                     RecetaDetail.Peso = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Peso;
 
@@ -95,11 +93,11 @@ namespace DbEntidades.Operators
             }
             return lista;
         }
-        //public static void Delete(int id)
-        //{
-        //    Receta u = GetOneByIdentity(id);
-        //    u.EstadoID = EstadoOperator.GetDeshabilitadoID();
-        //    Update(u);
-        //}
+        public static void Delete(int id)
+        {
+            Receta u = GetOneByIdentity(id);
+            u.EstadoID = EstadoOperator.GetDeshabilitadoID();
+            Update(u);
+        }
     }
 }

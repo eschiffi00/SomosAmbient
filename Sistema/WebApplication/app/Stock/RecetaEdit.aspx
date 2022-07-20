@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="RecetaEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoEdit"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="RecetaEdit.aspx.cs" Inherits="WebApplication.app.StockNS.RecetaEdit"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         window.onload = function () {
@@ -80,59 +80,50 @@
     <!--#region divPpal -->
     <div runat="server" id="divPpal">
         <div class="row">
-            <h4 runat="server" id="h4Titulo" class="ml-3 mb-4">Modificación de Producto</h4>
+            <h4 runat="server" id="h4Titulo" class="ml-3 mb-4">Modificación de Receta</h4>
         </div>
 
         <div class="form-group row">
             <label for="txtDescripcion" class="col-sm-2 col-form-label text-sm-left text-md-right">Descripcion</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Descripcion del Producto" required="required" />
-                <div class="invalid-feedback">Debe ingresar una descripcion para el Producto</div>
+                <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Descripcion de la Receta" required="required" />
+                <div class="invalid-feedback">Debe ingresar una descripcion para la Receta</div>
             </div>
         </div>
-         <div class="form-group row">
-            <label for="ddlCategoriaID" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
-            <div class="col-sm-4">
-                <asp:DropDownList runat="server" ID="ddlCategoriaID" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="txtCosto" class="col-sm-2 col-form-label text-sm-left text-md-right">Costo</label>
-            <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtCosto" CssClass="form-control" placeholder="Ingrese el Costo" required="required" />        
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="txtMargen" class="col-sm-2 col-form-label text-sm-left text-md-right">Margen</label>
-            <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtMargen" CssClass="form-control" placeholder="Ingrese el Margen" required="required" />        
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="txtPrecio" class="col-sm-2 col-form-label text-sm-left text-md-right">Precio</label>
-            <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="Ingrese el Precio" required="required" />        
-            </div>
-        </div>
+        <asp:Panel class="form-group row" ID="PanelReceta" runat="server"  Height="100%" Width="100%">
+   
+           
+           <br />
+           <br />
+
+           <asp:Button ID="btnpanel" runat="server" Text="Button" style="width:82px" />
+        </asp:Panel>
+
         <div class="form-group row" id="contStock"></div>
         <div id="divPeso" class="form-group row">
             <label for="txtPeso" class="col-sm-2 col-form-label text-sm-left text-md-right">Peso</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtPeso" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
+                <asp:TextBox runat="server" ID="txtPeso" CssClass="form-control" placeholder="Ingrese el Stock" />        
             </div>
         </div>
         <div id="divCantidad" class="form-group row">
             <label for="txtCantidad" class="col-sm-2 col-form-label text-sm-left text-md-right">Cantidad</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
+                <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Ingrese el Stock" />        
+            </div>
+        </div>
+        <div id="divPasos" class="form-group row">
+            <label for="txtPasos" class="col-sm-2 col-form-label text-sm-left text-md-right">Pasos</label>
+            <div class="col-sm-6">
+                <asp:TextBox runat="server" TextMode="MultiLine" ID="TextBoxReceta" CssClass="form-control" placeholder="Ingrese aqui los pasos de su receta" Width="400px" Height="200px" />        
             </div>
         </div>
 
         <div class="form-group row">
             <label for="btnSubmit" class="col-sm-2 col-form-label text-sm-left text-md-right"></label>
             <div class="col-sm-4">
-                <a href="<%$RouteUrl:routename=ListaProductos%>" class="btn btn-primary mt-1" runat="server">Cancelar</a>
-                <asp:Button Text="Crear Producto" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btn-primary mt-1" OnClick="btnSubmit_Click" />
+                <a href="<%$RouteUrl:routename=ListaRecetas%>" class="btn btn-primary mt-1" runat="server">Cancelar</a>
+                <asp:Button Text="Crear Receta" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btn-primary mt-1" OnClick="btnSubmit_Click" />
             </div>
         </div>
 

@@ -30,6 +30,9 @@
     <!-- Jquery mask -->
     <script src="<%=ResolveUrl("~")%>Content/jQuery-Mask/dist/jquery.mask.min.js"></script>
 
+    <link href="<%=ResolveUrl("~")%>wwwroot/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <script src="<%=ResolveUrl("~")%>wwwroot/lib/jquery-ui/jquery-ui.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#searchbox').keypress(function (event) {
@@ -264,7 +267,7 @@
                             <div class="dropdown-menu" <%--aria-labelledby="smallerscreenmenu"--%>>
                                 <%--<asp:HyperLink ID="WebApplication_app_Seguridad_Usuarios" runat="server" CssClass="dropdown-item" NavigateUrl="~/app/Seguridad/UsuarioBrowse.aspx" Visible="false"><i class="fa fa-users mr-1" ></i>Usuarios</asp:HyperLink>--%>
                                 <asp:HyperLink ID="HyperLink4" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaItems %>" Visible="true">Items</asp:HyperLink>
-                                <asp:HyperLink ID="HyperLink5" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true">Recetas</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink5" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaRecetas %>" Visible="true">Recetas</asp:HyperLink>
                                 <asp:HyperLink ID="HyperLink6" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaProductos %>" Visible="true">Productos</asp:HyperLink>
                             </div>
                         </li>

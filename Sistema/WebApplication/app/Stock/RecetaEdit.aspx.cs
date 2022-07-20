@@ -10,14 +10,29 @@ using System.Globalization;
 
 namespace WebApplication.app.StockNS
 {
-    public partial class ProductoEdit : System.Web.UI.Page
+    public partial class RecetaEdit : System.Web.UI.Page
     {
-        Producto seProducto = null;
-
+        Receta seReceta = null; 
+        RecetaDetalle seRecetaDetalle = null;
+        static DropDownList[] arregloCombos;
+        static int contadorControles;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                //lblContador.Text = "";
+                arregloCombos = new DropDownList[20];
+                contadorControles = 0;
+                try
+                {
+                    for (int i = 0; i < contadorControles; i++)
+                        AgregarControles(arregloCombos[i]);
+                }
+                catch (Exception ex)
+                {
+                    //lblContador.Text = ex.Message;
+                }
+            
                 if (string.IsNullOrEmpty(Convert.ToString(Session["UsuarioId"]))) Response.Redirect("~/app/Seguridad/UsuarioLogin.aspx?url=" + Server.UrlEncode(Request.Url.AbsoluteUri));
                 if (!PermisoOperator.TienePermiso(Convert.ToInt32(Session["UsuarioId"]), GetType().BaseType.FullName)) throw new PermisoException();
 
@@ -27,63 +42,64 @@ namespace WebApplication.app.StockNS
                 object o = Page.RouteData.Values["id"];
                 if (o != null) s = Page.RouteData.Values["id"].ToString();
                 else s = Request.QueryString["id"];
-                CargaCategorias();
+                
                 if (s != null && s != string.Empty)
                 {
                     int uid = Convert.ToInt32(s);
-                    seProducto = ProductoOperator.GetOneByIdentity(uid);
-                    //obtengo todas las categorias y utilizo descripcion y id
-                    Categoria categoriaEdicion = CategoriaOperator.GetOneByIdentity(seProducto.CategoriaID);
-                    ddlCategoriaID.Items.Insert(0, new ListItem(categoriaEdicion.Descripcion, categoriaEdicion.ID.ToString()));
-                    txtDescripcion.Text = seProducto.Descripcion;
+                    seReceta = RecetaOperator.GetOneByIdentity(uid);
+                    //obtengo una lista del detalle de la receta
+                    List<REC_detalle> detalleReceta = RecetaOperator.GetDetalleById(uid);
+                    foreach(var ingrediente in detalleReceta)
+                    {
+                        CargaRecetas(ingrediente);
+                    }
                     //busco el stock para el StockID
                     Stock stockCant = new Stock();
-                    stockCant = StockOperator.GetOneByIdentity(seProducto.StockID);
+                    stockCant = StockOperator.GetOneByIdentity(seReceta.StockID);
                     txtCantidad.Text = stockCant.Cantidad.ToString();
-                    txtMargen.Text = seProducto.Margen.ToString();
-                    txtCosto.Text = seProducto.Costo.ToString();
-                    txtPrecio.Text = seProducto.Precio.ToString();
-                    btnSubmit.Text = "Modifica Producto";
+                    
+                    btnSubmit.Text = "Modifica Receta";
                 }
                 else
                 {
-                    ddlCategoriaID.Items.Insert(0, new ListItem("<Selecciona Categoria>", "0"));
-                    h4Titulo.InnerText = "Creación de nuevo Producto";
-                    seProducto = new Producto();
+                    h4Titulo.InnerText = "Creación de nuevo Receta";
+                    
                 }
                 SetMaximosTextBoxes();
                 SessionSaveAll();
             }
             SessionLoadAll();
         }
-
-        public void CargaCategorias()
+        public void CargaRecetas(REC_detalle ingrediente)
         {
-            List<Categoria> categorias = new List<Categoria>();
-            categorias = CategoriaOperator.GetAll();
-            ddlCategoriaID.DataSource = categorias;
-            ddlCategoriaID.DataTextField = "Descripcion";
-            ddlCategoriaID.DataValueField = "ID";
-            ddlCategoriaID.DataBind();
+                if (ingrediente.TipoRelacion == "item")
+                {
+                    seRecetaDetalle.Item.Add(ItemOperator.GetOneByIdentity(ingrediente.CodigoRelacion));
+                }
+                //FALTA CONTINUAR CON LAS SUB RECETAS
+                //if (ingrediente.TipoRelacion == "receta")
+                //{
+                //    pasos.Add(RecetaOperator.GetOneByIdentity(ingrediente.CodigoRelacion));
+                //    CargaRecetas(ingrediente);
+                //}
         }
-
         protected void SetMaximosTextBoxes()
         {
-            txtDescripcion.MaxLength = ProductoOperator.MaxLength.Descripcion;
+            txtDescripcion.MaxLength = RecetaOperator.MaxLength.Descripcion;
         }
 
         #region Session
         protected void SessionClearAll()
         {
-            Session["seProducto"] = null;
+            Session["seReceta"] = null;
         }
         protected void SessionLoadAll()
         {
-            seProducto = (Producto)Session["seProducto"];
+            seReceta = (Receta)Session["seReceta"];
         }
         protected void SessionSaveAll()
         {
-            Session["seProducto"] = seProducto;
+            Session["seReceta"] = seReceta;
         }
         protected override void OnPreRenderComplete(EventArgs e)
         {
@@ -112,46 +128,76 @@ namespace WebApplication.app.StockNS
 
             try
             {
-                seProducto.CategoriaID = Int32.Parse(ddlCategoriaID.Text);
-                seProducto.Descripcion = txtDescripcion.Text;
-                seProducto.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
-                seProducto.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
-                seProducto.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
-                Stock ProductoStock = new Stock();
-                if (seProducto.ID > 0) //producto existente
+
+                seReceta.Descripcion = txtDescripcion.Text;
+                Stock RecetaStock = new Stock();
+                if (seReceta.ID > 0) //Receta existente
                 {
-                    ProductoStock.ID = seProducto.StockID;
-                    ActualizaStock(ProductoStock);
+                    RecetaStock.ID = seReceta.StockID;
+                    ActualizaStock(RecetaStock);
                 }
-                else ///////////Producto NUEVO\\\\\\\\\\\\\\
+                else ///////////Receta NUEVO\\\\\\\\\\\\\\
                 {
-                    seProducto.StockID = ActualizaStock(ProductoStock);
-                    seProducto.EstadoID = EstadoOperator.GetHablitadoID();
-                    ProductoOperator.Save(seProducto);
-                    string url = GetRouteUrl("ListaProductos", null);
+                    seReceta.StockID = ActualizaStock(RecetaStock);
+                    seReceta.EstadoID = EstadoOperator.GetHablitadoID();
+                    RecetaOperator.Save(seReceta);
+                    string url = GetRouteUrl("ListaRecetas", null);
                     Response.Redirect(url);
                 }
-                ProductoOperator.Save(seProducto);
+                RecetaOperator.Save(seReceta);
             }
             catch (Exception ex)
             {
                 AlertaRoja(ex.Message);
             }
         }
-        public int ActualizaStock(Stock ProductoStock)
+        public int ActualizaStock(Stock RecetaStock)
         {
             if (txtCantidad.Text != "")
             {
-                ProductoStock.Cantidad = Int32.Parse(txtCantidad.Text);
-                ProductoStock.Peso = null;
+                RecetaStock.Cantidad = Int32.Parse(txtCantidad.Text);
+                RecetaStock.Peso = null;
             }
             else if (txtPeso.Text != "")
             {
-                ProductoStock.Peso = Decimal.Parse(txtPeso.Text, CultureInfo.InvariantCulture);
-                ProductoStock.Cantidad = null;
+                RecetaStock.Peso = Decimal.Parse(txtPeso.Text, CultureInfo.InvariantCulture);
+                RecetaStock.Cantidad = null;
             }
-            ProductoStock = StockOperator.Save(ProductoStock);
-            return ProductoStock.ID;
+            RecetaStock = StockOperator.Save(RecetaStock);
+            return RecetaStock.ID;
+        }
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int numeroRegistro = contadorControles;
+                DropDownList nuevoCmb = new DropDownList();
+                nuevoCmb.ID = "cmb" + numeroRegistro.ToString();
+                nuevoCmb.Items.Add("---Seleccione el Plazo---");
+                nuevoCmb.Items.Add("Corto Plazo");
+                nuevoCmb.Items.Add("Mediano Plazo");
+                nuevoCmb.Items.Add("Largo Plazo");
+                nuevoCmb.SelectedIndex = 0;
+                arregloCombos[numeroRegistro] = nuevoCmb;
+                AgregarControles(nuevoCmb);
+                contadorControles++;
+            }
+            catch (Exception ex)
+            {
+                //lblContador.Text = ex.Message;
+            }
+        }
+        protected void AgregarControles(DropDownList cmb)
+        {
+            try
+            {
+                PanelReceta.Controls.Add(cmb);
+                PanelReceta.Controls.Add(new LiteralControl(""));
+            }
+            catch (Exception ex)
+            {
+                //lblContador.Text = ex.Message;
+            }
         }
     }
 

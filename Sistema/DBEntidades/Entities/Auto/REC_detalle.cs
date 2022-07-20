@@ -16,18 +16,16 @@ namespace DbEntidades.Entities
 		public int CodigoRelacion { get; set; }
 		public int? Cantidad { get; set; }
 		public decimal Peso { get; set; }
-		public int RecPasosID { get; set; }
 
 		public override string ToString() 
 		{
-			return "\r\n " + 
-			"ID: " + ID.ToString() + "\r\n " + 
-			"RecetaID: " + RecetaID.ToString() + "\r\n " + 
-			"TipoRelacion: " + TipoRelacion.ToString() + "\r\n " + 
-			"CodigoRelacion: " + CodigoRelacion.ToString() + "\r\n " + 
-			"Cantidad: " + Cantidad.ToString() + "\r\n " + 
-			"Peso: " + Peso.ToString() + "\r\n " + 
-			"RecPasosID: " + RecPasosID.ToString() + "\r\n " ;
+			return "\r\n " +
+			"ID: " + ID.ToString() + "\r\n " +
+			"RecetaID: " + RecetaID.ToString() + "\r\n " +
+			"TipoRelacion: " + TipoRelacion.ToString() + "\r\n " +
+			"CodigoRelacion: " + CodigoRelacion.ToString() + "\r\n " +
+			"Cantidad: " + Cantidad.ToString() + "\r\n " +
+			"Peso: " + Peso.ToString() + "\r\n ";
 		}
         public REC_detalle()
         {
