@@ -18,7 +18,6 @@ namespace DbEntidades.Entities
 		public List<REC_detalle> Detalle { get; set; }
 		public List<REC_pasos> Pasos { get; set; }
 		public List<Item> Item { get; set; }
-		public int RecPasosID { get; set; }
 		public int EstadoID { get; set; }
 
 		public override string ToString() 

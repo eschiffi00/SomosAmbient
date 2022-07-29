@@ -140,6 +140,7 @@
     <Compile Include="Operators\PermisoOperator.cs" />
     <Compile Include="Operators\ProductoOperator.cs" />
     <Compile Include="Operators\RecetaOperator.cs" />
+    <Compile Include="Operators\REC_detalleOperator.cs" />
     <Compile Include="Operators\StockOperator.cs" />
     <Compile Include="Operators\UsuarioOperator.cs" />
     <Compile Include="Operators\UsuarioRolOperator.cs" />

@@ -35,5 +35,18 @@ namespace DbEntidades.Entities
 			"Peso: " + EstadoID.ToString() + "\r\n " ;
 		}
     }
+	public partial class ItemCombo
+	{
+		public int ID { get; set; }
+		public string Descripcion { get; set; }
+
+
+		public override string ToString()
+		{
+			return "\r\n " +
+			//"ID: " + ID.ToString() + "\r\n " +
+			"Descripcion: " + Descripcion.ToString() + "\r\n ";
+		}
+	}
 }
 

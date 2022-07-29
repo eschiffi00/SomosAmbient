@@ -54,5 +54,32 @@ namespace DbEntidades.Operators
             }
             return lista;
         }
+        public static List<ItemCombo> GetAllForCombo()
+        {
+            if (!DbEntidades.Seguridad.Permiso("PermisoItemBrowse")) throw new PermisoException();
+            string columnas = string.Empty;
+            foreach (PropertyInfo prop in typeof(Item).GetProperties()) columnas += prop.Name + ", ";
+            columnas = columnas.Substring(0, columnas.Length - 2);
+            DB db = new DB();
+            List<ItemCombo> lista = new List<ItemCombo>();
+            DataTable dt = db.GetDataSet("select " + columnas + " from Item").Tables[0];
+            foreach (DataRow dr in dt.AsEnumerable())
+            {
+                Item item = new Item();
+                foreach (PropertyInfo prop in typeof(Item).GetProperties())
+                {
+                    object value = dr[prop.Name];
+                    if (value == DBNull.Value) value = null;
+                    try { prop.SetValue(item, value, null); }
+                    catch (System.ArgumentException) { }
+                }
+                    ItemCombo itemcombo = new ItemCombo();
+                    itemcombo.ID = item.ID;
+                    itemcombo.Descripcion = item.Descripcion;
+                    lista.Add(itemcombo);
+
+            }
+            return lista;
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace WebApplication.app
 #if DEBUG
             if (Session["UsuarioId"] == null) Session["UsuarioId"] = "1";
             LibDB2.DB.deshabilita_encripcion = false;
-            Session["WebApplication"] = "Logistore";
+            Session["WebApplication"] = "SomosAmbient";
             string conn = System.Configuration.ConfigurationManager.ConnectionStrings[Session["WebApplication"].ToString()].ConnectionString;
             LibDB2.DB db = new LibDB2.DB(conn);
 #endif

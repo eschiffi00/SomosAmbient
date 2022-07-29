@@ -4,7 +4,7 @@
 
 <html lang="es-ar">
 <head runat="server">
-    <title>Casa Campus - Bondi</title>
+    <title>Ambient System</title>
 
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,9 +29,11 @@
 
     <!-- Jquery mask -->
     <script src="<%=ResolveUrl("~")%>Content/jQuery-Mask/dist/jquery.mask.min.js"></script>
+    <!-- JS file -->
+    <script src="<%=ResolveUrl("~")%>Scripts/jquery.easy-autocomplete.min.js"></script>
 
-    <link href="<%=ResolveUrl("~")%>wwwroot/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-    <script src="<%=ResolveUrl("~")%>wwwroot/lib/jquery-ui/jquery-ui.min.js"></script>
+    <!-- CSS file -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~")%>Scripts/easy-autocomplete.min.css">
 
     <script>
         $(document).ready(function () {
@@ -214,7 +216,7 @@
                 <div style="width:40px; float:left">
                    <img src="/img/gotita.png" class="rounded ml-2 mr-2 d-inline-block" style="background-color: white;margin:auto;padding-top:3px" height="30" />
                 </div>
-                <div class="rounded text-left text-nowrap" style="background-color:white;color:black;height:35px;vertical-align:bottom;padding-top:3px">casa campus</div>
+                <div class="rounded text-left text-nowrap" style="background-color:white;color:black;height:35px;vertical-align:bottom;padding-top:3px">Ambient System</div>
             </a>
             
             <div class="m-auto w-100 px-5">
@@ -402,7 +404,7 @@
     <footer class="page-footer font-small blue fixed-bottom" style="font-size:0.8rem" runat="server" id="footerDiv">
 
       <div class="footer-copyright text-center py-1">© 2021 Copyright:
-        <a href="http://casacampus.com/"> CasaCampus </a>
+        <a href="http://SomosAmbient.com/"> SomosAmbient </a>
       </div>
 
     </footer>

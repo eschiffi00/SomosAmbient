@@ -65,7 +65,7 @@
                                 <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="CommandNameDelete" Text="" ToolTip="Borrar cliente" CssClass="ml-2 mr-2" OnClientClick="return ConfirmaBorrado(this);"><i class="fa fa-trash" ></i></asp:LinkButton>
                             </div>
                             <div>
-                                <asp:LinkButton ID="LinkButtonEdit" runat="server" CausesValidation="False" CommandName="CommandNameEdit" Text="" ToolTip="Modificar" CssClass="ml-2 mr-2" OnClick="LinkButtonEdit_Click" ><i class="fa fa-pencil" ></i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButtonEdit" runat="server" CausesValidation="False" CommandName="CommandNameEdit" Text="" ToolTip="Modificar" CssClass="ml-2 mr-2" ><i class="fa fa-pencil" ></i></asp:LinkButton>
                             </div>
                             <%--<div>
                                 <asp:LinkButton ID="LinkButtonTarifa" runat="server" CausesValidation="False" CommandName="CommandNameTarifa" Text="" ToolTip="Tarifas" CssClass="mr-2"><i class="fa fa-usd" ></i></asp:LinkButton>
@@ -75,14 +75,10 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="ID" HeaderText="ID" HeaderStyle-CssClass="invisible" ItemStyle-CssClass="invisible" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" Visible="true" />
-                <asp:BoundField DataField="CategoriaID" HeaderText="Categoria" Visible="false" />
-                <asp:BoundField DataField="CategoriaDescripcion" HeaderText="Categoria" Visible="true" />
-                <asp:BoundField DataField="Costo" HeaderText="Costo" Visible="true" />
-                <asp:BoundField DataField="Margen" HeaderText="Margen" Visible="true" />
-                <asp:BoundField DataField="Precio" HeaderText="Precio" Visible="true" />
                 <asp:BoundField DataField="StockID" HeaderText="Stock" Visible="false" />
-                <asp:BoundField DataField="Cantidad" HeaderText="Stock Unidad" Visible="true" />
                 <asp:BoundField DataField="Peso" HeaderText="Stock Peso" Visible="true" />
+                <asp:BoundField DataField="Cantidad" HeaderText="Stock Unidad" Visible="true" />
+
                
               
             </Columns>

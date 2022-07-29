@@ -232,7 +232,7 @@ namespace WebApplication
 
                 aRevData = strContents.Split('\r')[0];
                 //repo = strContents.Split('\r')[6].Split('/').Reverse().Take(2).Last();
-                repo = "CasaCampus " + strContents.Split('\r')[6].Split('/').Last();
+                repo = "SomosAmbient " + strContents.Split('\r')[6].Split('/').Last();
                 //string cnn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 //SqlConnectionStringBuilder s = new SqlConnectionStringBuilder(cnn);
                 repo += "(" + aRevData + ") - " ;
@@ -475,7 +475,7 @@ namespace WebApplication
             //mLog.Body = body;
             //EmailLogOperator.Save(mLog);
 
-            EnviaMailGeneral(email, string.Empty, "CasaCampus - Recuperación Contraseña", body);
+            EnviaMailGeneral(email, string.Empty, "SomosAmbient - Recuperación Contraseña", body);
         }
 
         /*

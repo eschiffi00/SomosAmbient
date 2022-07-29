@@ -42,7 +42,7 @@ namespace DbEntidades.Operators
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
             List<REC_pasos> lista = new List<REC_pasos>();
-            DataTable dt = db.GetDataSet("select " + columnas + " from REC_pasos where PasosID = " + ID.ToString()).Tables[0];
+            DataTable dt = db.GetDataSet("select " + columnas + " from REC_pasos where RecetaID = " + ID.ToString()).Tables[0];
             foreach (DataRow dr in dt.AsEnumerable())
             {
                 REC_pasos paso = new REC_pasos();
@@ -77,19 +77,24 @@ namespace DbEntidades.Operators
                     try { prop.SetValue(Receta, value, null); }
                     catch (System.ArgumentException) { }
                 }
+                RecetaDetalle RecetaDetail = new RecetaDetalle();
+                RecetaDetail.ID = Receta.ID;
+                RecetaDetail.Descripcion = Receta.Descripcion;
+                RecetaDetail.Detalle = GetDetalleById(Receta.ID);
+                RecetaDetail.EstadoID = Receta.EstadoID;
+                RecetaDetail.Pasos = GetPasosById(Receta.ID);
                 if (Receta.StockID > 0)
                 {
-                    RecetaDetalle RecetaDetail = new RecetaDetalle();
-                    RecetaDetail.ID = Receta.ID;
-                    RecetaDetail.Descripcion = Receta.Descripcion;
-                    RecetaDetail.Detalle = GetDetalleById(Receta.ID);
-                    RecetaDetail.EstadoID = Receta.EstadoID;
-                    RecetaDetail.Pasos = GetPasosById(Receta.RecPasosID);
+
                     RecetaDetail.Cantidad = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Cantidad;
                     RecetaDetail.Peso = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Peso;
-
-                    lista.Add(RecetaDetail);
                 }
+                else
+                {
+                    RecetaDetail.Cantidad = 0;
+                    RecetaDetail.Peso = 0;
+                }
+                lista.Add(RecetaDetail);
             }
             return lista;
         }

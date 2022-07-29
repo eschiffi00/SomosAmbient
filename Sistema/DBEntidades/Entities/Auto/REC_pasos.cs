@@ -11,7 +11,7 @@ namespace DbEntidades.Entities
     public partial class REC_pasos
     {
 		public int ID { get; set; }
-		public int RecDetalleID { get; set; }
+		public int RecetaID { get; set; }
 		public string Paso { get; set; }
 		public string Orden { get; set; }
 
@@ -19,7 +19,7 @@ namespace DbEntidades.Entities
 		{
 			return "\r\n " + 
 			"ID: " + ID.ToString() + "\r\n " + 
-			"RecDetalleID: " + RecDetalleID.ToString() + "\r\n " + 
+			"RecDetalleID: " + RecetaID.ToString() + "\r\n " + 
 			"Paso: " + Paso.ToString() + "\r\n " + 
 			"Orden: " + Orden.ToString() + "\r\n " ;
 		}
@@ -38,7 +38,7 @@ namespace DbEntidades.Entities
 			switch (colName) 
 			{
 				case "ID": return false;
-				case "RecDetalleID": return false;
+				case "RecPasosID": return false;
 				case "Paso": return false;
 				case "Orden": return false;
 				default: return false;

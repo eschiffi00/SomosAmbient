@@ -39,10 +39,6 @@ namespace WebApplication.app.StockNS
         {
             Response.Redirect(GetRouteUrl("NuevoReceta", null));
         }
-        protected void LinkButtonEdit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(GetRouteUrl("EditaRecetas", null));
-        }
 
         protected void txtBuscar_TextChanged(object sender, EventArgs e)
         {
@@ -52,6 +48,23 @@ namespace WebApplication.app.StockNS
         protected void grdRecetas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        protected void grdRecetas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
+            int colindex = CCLib.GetColumnIndexByHeaderText((GridView)sender, "ID");
+            int id = Convert.ToInt32(row.Cells[colindex].Text);
+
+            if (e.CommandName == "CommandNameDelete")
+            {
+                ItemOperator.Delete(id);
+                grdRecetasBind();
+            }
+            if (e.CommandName == "CommandNameEdit")
+            {
+                string url = GetRouteUrl("EditaRecetas", new { id = id.ToString() });
+                Response.Redirect(url);
+            }
         }
     }
 }

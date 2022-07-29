@@ -13,7 +13,6 @@ namespace DbEntidades.Entities
 		public int ID { get; set; }
 		public string Descripcion { get; set; }
 		public int StockID { get; set; }
-		public int RecPasosID { get; set; }
 		public int EstadoID { get; set; }
 
 		public override string ToString() 
@@ -22,7 +21,6 @@ namespace DbEntidades.Entities
 			"ID: " + ID.ToString() + "\r\n " + 
 			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
 			"StockID: " + StockID.ToString() + "\r\n " +
-			"RecPasosID: " + RecPasosID.ToString() + "\r\n " +
 			"EstadoID: " + StockID.ToString() + "\r\n " ;
 		}
         public Receta()
