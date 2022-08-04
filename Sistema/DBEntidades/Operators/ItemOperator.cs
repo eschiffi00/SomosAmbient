@@ -9,74 +9,74 @@ using LibDB2;
 
 namespace DbEntidades.Operators
 {
-    public partial class ItemOperator
+    public partial class ItemsOperator
     {
 
         public static void Delete(int id)
         {
-            Item u = GetOneByIdentity(id);
-            u.EstadoID = EstadoOperator.GetDeshabilitadoID();
+            Items u = GetOneByIdentity(id);
+            u.EstadoId = EstadoOperator.GetDeshabilitadoID();
             Update(u);
         }
-        public static List<ItemDetalle> GetAllWithDetails()
+        public static List<ItemsListado> GetAllWithDetails()
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoItemBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Item).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(Items).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            List<ItemDetalle> lista = new List<ItemDetalle>();
+            List<ItemsListado> lista = new List<ItemsListado>();
             DataTable dt = db.GetDataSet("select " + columnas + " from Item").Tables[0];
             foreach (DataRow dr in dt.AsEnumerable())
             {
-                Item item = new Item();
-                foreach (PropertyInfo prop in typeof(Item).GetProperties())
+                Items item = new Items();
+                foreach (PropertyInfo prop in typeof(Items).GetProperties())
                 {
                     object value = dr[prop.Name];
                     if (value == DBNull.Value) value = null;
                     try { prop.SetValue(item, value, null); }
                     catch (System.ArgumentException) { }
                 }
-                if(item.StockID > 0)
-                {
-                    ItemDetalle itemStock = new ItemDetalle();
-                    itemStock.ID = item.ID;
-                    itemStock.Descripcion = item.Descripcion;
-                    itemStock.CuentaID = item.CuentaID;
+                    ItemsListado itemStock = new ItemsListado();
+                    itemStock.Id = item.Id;
+                    itemStock.Detalle = item.Detalle;
+                    itemStock.CategoriaID = 1;
+                    itemStock.CategoriaDescripcion = "aqui va la vategoria";
+                    itemStock.CuentaId = item.CuentaId;
                     itemStock.CuentaDescripcion = "Pendiente tabla cuentas";
-                    itemStock.StockID = item.StockID;
-                    itemStock.ProItemID = item.ProItemID;
-                    itemStock.EstadoID = item.EstadoID;
-                    itemStock.Cantidad = StockOperator.GetOneByIdentity(itemStock.StockID).Cantidad;
-                    itemStock.Peso = StockOperator.GetOneByIdentity(itemStock.StockID).Peso;
+                    itemStock.DepositoId = item.DepositoId;
+                    itemStock.ItemDetalleId = item.ItemDetalleId;
+                    itemStock.EstadoId = item.EstadoId;
+                var unidadid = INVENTARIO_ProductoOperator.GetOneByIdentity(itemStock.DepositoId).UnidadId;
+                    itemStock.Unidad = INVENTARIO_UnidadesOperator.GetOneByIdentity(unidadid).Descripcion;
+                    itemStock.Cantidad = INVENTARIO_ProductoOperator.GetOneByIdentity(itemStock.DepositoId).Cantidad;
                     lista.Add(itemStock);
-                }
             }
             return lista;
         }
-        public static List<ItemCombo> GetAllForCombo()
+        public static List<ItemsCombo> GetAllForCombo()
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoItemBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Item).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(Items).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            List<ItemCombo> lista = new List<ItemCombo>();
+            List<ItemsCombo> lista = new List<ItemsCombo>();
             DataTable dt = db.GetDataSet("select " + columnas + " from Item").Tables[0];
             foreach (DataRow dr in dt.AsEnumerable())
             {
-                Item item = new Item();
-                foreach (PropertyInfo prop in typeof(Item).GetProperties())
+                Items item = new Items();
+                foreach (PropertyInfo prop in typeof(Items).GetProperties())
                 {
                     object value = dr[prop.Name];
                     if (value == DBNull.Value) value = null;
                     try { prop.SetValue(item, value, null); }
                     catch (System.ArgumentException) { }
                 }
-                    ItemCombo itemcombo = new ItemCombo();
-                    itemcombo.ID = item.ID;
-                    itemcombo.Descripcion = item.Descripcion;
-                    lista.Add(itemcombo);
+                    ItemsCombo ItemsCombo = new ItemsCombo();
+                    ItemsCombo.Id = item.Id;
+                    ItemsCombo.Detalle = item.Detalle;
+                    lista.Add(ItemsCombo);
 
             }
             return lista;

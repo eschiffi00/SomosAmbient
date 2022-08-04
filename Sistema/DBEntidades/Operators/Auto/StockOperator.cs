@@ -108,7 +108,7 @@ namespace DbEntidades.Operators
 
         public static Stock Update(Stock stock)
         {
-            if (!Seguridad.Permiso("PermisoStockSave")) throw new PermisoException();
+            if (!DbEntidades.Seguridad.Permiso("PermisoStockSave")) throw new PermisoException();
             string sql = "update Stock set ";
             string columnas = string.Empty;
             List<object> param = new List<object>();

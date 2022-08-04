@@ -12,14 +12,14 @@ namespace DbEntidades.Operators
     public partial class TipoExperienciaOperator
     {
 
-        public static TipoExperiencia GetOneByIdentity(int ID)
+        public static TipoExperiencia GetOneByIdentity(int Id)
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoTipoExperienciaBrowse")) throw new PermisoException();
             string columnas = string.Empty;
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            DataTable dt = db.GetDataSet("select " + columnas + " from TipoExperiencia where ID = " + ID.ToString()).Tables[0];
+            DataTable dt = db.GetDataSet("select " + columnas + " from TipoExperiencia where  = " + Id.ToString()).Tables[0];
             TipoExperiencia tipoExperiencia = new TipoExperiencia();
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties())
             {
@@ -59,6 +59,7 @@ namespace DbEntidades.Operators
 
         public class MaxLength
         {
+			public static int Descripcion { get; set; } = 100;
 
 
         }
@@ -82,7 +83,7 @@ namespace DbEntidades.Operators
 
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "") continue; //es identity
                 columnas += prop.Name + ", ";
                 valores += "@" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
@@ -90,7 +91,7 @@ namespace DbEntidades.Operators
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             valores = valores.Substring(0, valores.Length - 2);
-            sql += columnas + ") output inserted.ID values (" + valores + ")";
+            sql += columnas + ") output inserted. values (" + valores + ")";
             DB db = new DB();
             List<object> parametros = new List<object>();
             for (int i = 0; i < param.Count; i++)
@@ -117,7 +118,7 @@ namespace DbEntidades.Operators
 
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "") continue; //es identity
                 columnas += prop.Name + " = @" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
                 valor.Add(prop.GetValue(tipoExperiencia, null));
@@ -132,7 +133,7 @@ namespace DbEntidades.Operators
                 SqlParameter p = new SqlParameter(param[i].ToString(), valor[i]);
                 sqlParams.Add(p);
         }
-            sql += " where ID = " + tipoExperiencia.ID;
+            sql += " where  = " + tipoExperiencia.ID;
             DB db = new DB();
             //db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());

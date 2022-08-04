@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ProductoBrowse.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoBrowse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsBrowse.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoBrowse" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         function ConfirmaBorrado(e) {
@@ -73,16 +73,17 @@
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="ID" HeaderText="ID" HeaderStyle-CssClass="invisible" ItemStyle-CssClass="invisible" />
-                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" Visible="true" />
-                <asp:BoundField DataField="CategoriaID" HeaderText="Categoria" Visible="false" />
+                <asp:BoundField DataField="Id" HeaderText="ID" HeaderStyle-CssClass="invisible" ItemStyle-CssClass="invisible" />
+                <asp:BoundField DataField="Detalle" HeaderText="Detalle" Visible="true" />
+                <asp:BoundField DataField="CategoriaItemId" HeaderText="Categoria" Visible="false" />
                 <asp:BoundField DataField="CategoriaDescripcion" HeaderText="Categoria" Visible="true" />
                 <asp:BoundField DataField="Costo" HeaderText="Costo" Visible="true" />
                 <asp:BoundField DataField="Margen" HeaderText="Margen" Visible="true" />
                 <asp:BoundField DataField="Precio" HeaderText="Precio" Visible="true" />
-                <asp:BoundField DataField="StockID" HeaderText="Stock" Visible="false" />
-                <asp:BoundField DataField="Cantidad" HeaderText="Stock Unidad" Visible="true" />
-                <asp:BoundField DataField="Peso" HeaderText="Stock Peso" Visible="true" />
+                <asp:BoundField DataField="DepositoId" HeaderText="Stock" Visible="false" />
+                <asp:BoundField DataField="Unidad" HeaderText="Unidad" Visible="true" />
+                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" Visible="true" />
+                <asp:BoundField DataField="Estado" HeaderText="Habilitado" Visible="true" />
                
               
             </Columns>

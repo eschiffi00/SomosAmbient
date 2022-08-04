@@ -12,7 +12,7 @@ namespace DbEntidades.Entities
     {
 		public int ID { get; set; }
 		public int? Cantidad { get; set; }
-		public decimal? Peso { get; set; }
+		public decimal Peso { get; set; }
 
 		public override string ToString() 
 		{
@@ -23,7 +23,7 @@ namespace DbEntidades.Entities
 		}
         public Stock()
         {
-			ID = -1;
+            ID = -1;
 
         }
 

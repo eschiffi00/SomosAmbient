@@ -13,12 +13,13 @@ namespace DbEntidades.Entities
 		public int ID { get; set; }
 		public string Descripcion { get; set; }
 		public int EstadoID { get; set; }
+
 		public override string ToString() 
 		{
-			return "\r\n " +
-			"ID: " + ID.ToString() + "\r\n " +
-			"ProductoID: " + Descripcion.ToString() + "\r\n " +
-			"TipoRelacion: " + EstadoID.ToString() + "\r\n ";
+			return "\r\n " + 
+			"ID: " + ID.ToString() + "\r\n " + 
+			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
+			"EstadoID: " + EstadoID.ToString() + "\r\n " ;
 		}
         public TipoExperiencia()
         {
@@ -26,8 +27,18 @@ namespace DbEntidades.Entities
 
         }
 
+		public Estado GetRelatedEstadoID()
+		{
+			Estado estado = EstadoOperator.GetOneByIdentity(EstadoID);
+			return estado;
+		}
 
 
+
+		public List<Experiencia> GetRelatedExperiencias()
+		{
+			return ExperienciaOperator.GetAll().Where(x => x.ExpTipoID == ID).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

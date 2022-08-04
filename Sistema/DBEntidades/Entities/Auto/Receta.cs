@@ -20,12 +20,12 @@ namespace DbEntidades.Entities
 			return "\r\n " + 
 			"ID: " + ID.ToString() + "\r\n " + 
 			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
-			"StockID: " + StockID.ToString() + "\r\n " +
-			"EstadoID: " + StockID.ToString() + "\r\n " ;
+			"StockID: " + StockID.ToString() + "\r\n " + 
+			"EstadoID: " + EstadoID.ToString() + "\r\n " ;
 		}
         public Receta()
         {
-			ID = -1;
+            ID = -1;
 
         }
 
@@ -41,7 +41,6 @@ namespace DbEntidades.Entities
 				case "Descripcion": return false;
 				case "StockID": return false;
 				case "EstadoID": return false;
-				case "RecPasosID": return false;
 				default: return false;
 			}
 		}

@@ -14,19 +14,38 @@ namespace DbEntidades.Entities
 		public int ExperienciaID { get; set; }
 		public int TiempoID { get; set; }
 		public int ProductoID { get; set; }
+
 		public override string ToString() 
 		{
-			return "\r\n " +
-			"ID: " + ID.ToString() + "\r\n " +
-			"ExperienciaID: " + ExperienciaID.ToString() + "\r\n " +
-			"TiempoID: " + TiempoID.ToString() + "\r\n " +
-			"ProductoID: " + ProductoID.ToString() + "\r\n ";
+			return "\r\n " + 
+			"ID: " + ID.ToString() + "\r\n " + 
+			"ExperienciaID: " + ExperienciaID.ToString() + "\r\n " + 
+			"TiempoID: " + TiempoID.ToString() + "\r\n " + 
+			"ProductoID: " + ProductoID.ToString() + "\r\n " ;
 		}
         public ExpTiempoProd()
         {
-			ID = -1;
+            ID = -1;
 
         }
+
+		public Experiencia GetRelatedExperienciaID()
+		{
+			Experiencia experiencia = ExperienciaOperator.GetOneByIdentity(ExperienciaID);
+			return experiencia;
+		}
+
+		public Tiempo GetRelatedTiempoID()
+		{
+			Tiempo tiempo = TiempoOperator.GetOneByIdentity(TiempoID);
+			return tiempo;
+		}
+
+		public Items GetRelatedProductoID()
+		{
+			Items producto = ItemsOperator.GetOneByIdentity(ProductoID);
+			return producto;
+		}
 
 
 
@@ -37,7 +56,7 @@ namespace DbEntidades.Entities
 			switch (colName) 
 			{
 				case "ID": return false;
-				case "ExperienciaID": return true;
+				case "ExperienciaID": return false;
 				case "TiempoID": return false;
 				case "ProductoID": return false;
 				default: return false;

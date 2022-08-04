@@ -31,7 +31,7 @@ namespace WebApplication.app.StockNS
                 if (s != null && s != string.Empty)
                 {
                     int uid = Convert.ToInt32(s);
-                    seProducto = ProductoOperator.GetOneByIdentity(uid);
+                    seProducto = ItemsOperator.GetOneByIdentity(uid);
                     //obtengo todas las categorias y utilizo descripcion y id
                     Categoria categoriaEdicion = CategoriaOperator.GetOneByIdentity(seProducto.CategoriaID);
                     ddlCategoriaID.Items.Insert(0, new ListItem(categoriaEdicion.Descripcion, categoriaEdicion.ID.ToString()));
@@ -69,7 +69,7 @@ namespace WebApplication.app.StockNS
 
         protected void SetMaximosTextBoxes()
         {
-            txtDescripcion.MaxLength = ProductoOperator.MaxLength.Descripcion;
+            txtDescripcion.MaxLength = ItemsOperator.MaxLength.Descripcion;
         }
 
         #region Session
@@ -127,11 +127,11 @@ namespace WebApplication.app.StockNS
                 {
                     seProducto.StockID = ActualizaStock(ProductoStock);
                     seProducto.EstadoID = EstadoOperator.GetHablitadoID();
-                    ProductoOperator.Save(seProducto);
+                    ItemsOperator.Save(seProducto);
                     string url = GetRouteUrl("ListaProductos", null);
                     Response.Redirect(url);
                 }
-                ProductoOperator.Save(seProducto);
+                ItemsOperator.Save(seProducto);
             }
             catch (Exception ex)
             {

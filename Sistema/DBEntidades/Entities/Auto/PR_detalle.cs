@@ -25,9 +25,15 @@ namespace DbEntidades.Entities
 		}
         public PR_detalle()
         {
-			ID = -1;
+            ID = -1;
 
         }
+
+		public Producto GetRelatedProductoID()
+		{
+			Producto producto = ProductoOperator.GetOneByIdentity(ProductoID);
+			return producto;
+		}
 
 
 

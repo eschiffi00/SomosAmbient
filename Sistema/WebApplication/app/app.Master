@@ -270,7 +270,7 @@
                                 <%--<asp:HyperLink ID="WebApplication_app_Seguridad_Usuarios" runat="server" CssClass="dropdown-item" NavigateUrl="~/app/Seguridad/UsuarioBrowse.aspx" Visible="false"><i class="fa fa-users mr-1" ></i>Usuarios</asp:HyperLink>--%>
                                 <asp:HyperLink ID="HyperLink4" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaItems %>" Visible="true">Items</asp:HyperLink>
                                 <asp:HyperLink ID="HyperLink5" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaRecetas %>" Visible="true">Recetas</asp:HyperLink>
-                                <asp:HyperLink ID="HyperLink6" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaProductos %>" Visible="true">Productos</asp:HyperLink>
+                                <%--<asp:HyperLink ID="HyperLink6" runat="server" CssClass="dropdown-item" NavigateUrl="<%$RouteUrl:routename=ListaProductos %>" Visible="true">Productos</asp:HyperLink>--%>
                             </div>
                         </li>
                     </ul>

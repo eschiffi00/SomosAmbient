@@ -23,9 +23,21 @@ namespace DbEntidades.Entities
 		}
         public Fa_categorias()
         {
-			ID = -1;
+            ID = -1;
 
         }
+
+		public Familia GetRelatedFamiliaID()
+		{
+			Familia familia = FamiliaOperator.GetOneByIdentity(FamiliaID);
+			return familia;
+		}
+
+		public Categoria GetRelatedCategoriaID()
+		{
+			Categoria categoria = CategoriaOperator.GetOneByIdentity(CategoriaID);
+			return categoria;
+		}
 
 
 

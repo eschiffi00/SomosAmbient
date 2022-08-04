@@ -19,17 +19,17 @@ namespace DbEntidades.Entities
 
 		public override string ToString() 
 		{
-			return "\r\n " +
-			"ID: " + ID.ToString() + "\r\n " +
-			"RecetaID: " + RecetaID.ToString() + "\r\n " +
-			"TipoRelacion: " + TipoRelacion.ToString() + "\r\n " +
-			"CodigoRelacion: " + CodigoRelacion.ToString() + "\r\n " +
-			"Cantidad: " + Cantidad.ToString() + "\r\n " +
-			"Peso: " + Peso.ToString() + "\r\n ";
+			return "\r\n " + 
+			"ID: " + ID.ToString() + "\r\n " + 
+			"RecetaID: " + RecetaID.ToString() + "\r\n " + 
+			"TipoRelacion: " + TipoRelacion.ToString() + "\r\n " + 
+			"CodigoRelacion: " + CodigoRelacion.ToString() + "\r\n " + 
+			"Cantidad: " + Cantidad.ToString() + "\r\n " + 
+			"Peso: " + Peso.ToString() + "\r\n " ;
 		}
         public REC_detalle()
         {
-			ID = -1;
+            ID = -1;
 
         }
 
@@ -47,7 +47,6 @@ namespace DbEntidades.Entities
 				case "CodigoRelacion": return false;
 				case "Cantidad": return true;
 				case "Peso": return true;
-				case "RecPasosID": return false;
 				default: return false;
 			}
 		}

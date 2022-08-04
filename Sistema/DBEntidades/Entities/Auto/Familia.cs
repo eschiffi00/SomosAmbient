@@ -21,12 +21,16 @@ namespace DbEntidades.Entities
 		}
         public Familia()
         {
-			ID = -1;
+            ID = -1;
 
         }
 
 
 
+		public List<Fa_categorias> GetRelatedFa_categoriases()
+		{
+			return Fa_categoriasOperator.GetAll().Where(x => x.FamiliaID == ID).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

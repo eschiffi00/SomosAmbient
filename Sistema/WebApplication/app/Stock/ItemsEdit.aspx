@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ProductoEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoEdit"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoEdit"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         window.onload = function () {

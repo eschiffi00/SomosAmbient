@@ -12,14 +12,14 @@ namespace DbEntidades.Operators
     public partial class Exp_detalleOperator
     {
 
-        public static Exp_detalle GetOneByIdentity(int ID)
+        public static Exp_detalle GetOneByIdentity(int Id)
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoExp_detalleBrowse")) throw new PermisoException();
             string columnas = string.Empty;
             foreach (PropertyInfo prop in typeof(Exp_detalle).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            DataTable dt = db.GetDataSet("select " + columnas + " from Exp_detalle where ID = " + ID.ToString()).Tables[0];
+            DataTable dt = db.GetDataSet("select " + columnas + " from Exp_detalle where Id = " + Id.ToString()).Tables[0];
             Exp_detalle exp_detalle = new Exp_detalle();
             foreach (PropertyInfo prop in typeof(Exp_detalle).GetProperties())
             {
@@ -59,7 +59,6 @@ namespace DbEntidades.Operators
 
         public class MaxLength
         {
-			public static int TipoRelacion { get; set; } = 50;
 
 
         }
@@ -67,7 +66,7 @@ namespace DbEntidades.Operators
         public static Exp_detalle Save(Exp_detalle exp_detalle)
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoExp_detalleSave")) throw new PermisoException();
-            if (exp_detalle.ID == -1) return Insert(exp_detalle);
+            if (exp_detalle.Id == -1) return Insert(exp_detalle);
             else return Update(exp_detalle);
         }
 
@@ -83,7 +82,7 @@ namespace DbEntidades.Operators
 
             foreach (PropertyInfo prop in typeof(Exp_detalle).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + ", ";
                 valores += "@" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
@@ -91,7 +90,7 @@ namespace DbEntidades.Operators
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             valores = valores.Substring(0, valores.Length - 2);
-            sql += columnas + ") output inserted.ID values (" + valores + ")";
+            sql += columnas + ") output inserted.Id values (" + valores + ")";
             DB db = new DB();
             List<object> parametros = new List<object>();
             for (int i = 0; i < param.Count; i++)
@@ -103,7 +102,7 @@ namespace DbEntidades.Operators
             }
             //object resp = db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());
-            exp_detalle.ID = Convert.ToInt32(resp);
+            exp_detalle.Id = Convert.ToInt32(resp);
             return exp_detalle;
         }
 
@@ -118,7 +117,7 @@ namespace DbEntidades.Operators
 
             foreach (PropertyInfo prop in typeof(Exp_detalle).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + " = @" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
                 valor.Add(prop.GetValue(exp_detalle, null));
@@ -133,7 +132,7 @@ namespace DbEntidades.Operators
                 SqlParameter p = new SqlParameter(param[i].ToString(), valor[i]);
                 sqlParams.Add(p);
         }
-            sql += " where ID = " + exp_detalle.ID;
+            sql += " where Id = " + exp_detalle.Id;
             DB db = new DB();
             //db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());

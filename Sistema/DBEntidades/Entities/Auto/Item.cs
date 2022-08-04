@@ -15,8 +15,7 @@ namespace DbEntidades.Entities
 		public int CuentaID { get; set; }
 		public int StockID { get; set; }
 		public int? ProItemID { get; set; }
-		public int EstadoID { get; set; }
-
+		public int? EstadoID { get; set; }
 
 		public override string ToString() 
 		{
@@ -25,13 +24,24 @@ namespace DbEntidades.Entities
 			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
 			"CuentaID: " + CuentaID.ToString() + "\r\n " + 
 			"StockID: " + StockID.ToString() + "\r\n " + 
-			"ProItemID: " + ProItemID.ToString() + "\r\n " ;
+			"ProItemID: " + ProItemID.ToString() + "\r\n " + 
+			"EstadoID: " + EstadoID.ToString() + "\r\n " ;
 		}
         public Item()
         {
-			ID = -1;
+            ID = -1;
 
         }
+
+		public Estado GetRelatedEstadoID()
+		{
+			if (EstadoID != null)
+			{
+				Estado estado = EstadoOperator.GetOneByIdentity(EstadoID ?? 0);
+				return estado;
+			}
+			return null;
+		}
 
 
 
@@ -46,6 +56,7 @@ namespace DbEntidades.Entities
 				case "CuentaID": return false;
 				case "StockID": return false;
 				case "ProItemID": return true;
+				case "EstadoID": return true;
 				default: return false;
 			}
 		}

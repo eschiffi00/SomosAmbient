@@ -24,7 +24,7 @@ namespace WebApplication.app.StockNS
         {
             if (!IsPostBack)
             {
-                var inicio = 0;
+                //var inicio = 0;
                 tablagrid.Columns.Add(new DataColumn("Item", typeof(string)));
                 tablagrid.Columns.Add(new DataColumn("Cantidad", typeof(string)));
                 tablagrid.Columns.Add(new DataColumn("Peso", typeof(string)));
@@ -217,7 +217,7 @@ namespace WebApplication.app.StockNS
                     
                 }
                 seReceta = RecetaOperator.Save(seReceta);
-
+                //se para los parrafos del texto y los graba uno a uno para evitar un overflow
                 string[] pasos = TextBoxReceta.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 for (var x = 0; x < pasos.Length; x++)
                 {
@@ -227,7 +227,9 @@ namespace WebApplication.app.StockNS
                     paso.RecetaID = seReceta.ID;
                     REC_pasosOperator.Save(paso);
                 }
-
+                //00
+                //recorro filas del grid y verifico si es item o receta
+                //proximamente agregar una tabla ocultable que muestre items de la receta
                 List<string> list = new List<string>();
                 foreach (GridViewRow fila in GridView1.Rows)
                 {
@@ -246,15 +248,10 @@ namespace WebApplication.app.StockNS
 
                     }
                     detalle.Cantidad = Int32.Parse(((TextBox)fila.FindControl("Cantidad")).Text);
-                    detalle.Peso = Int32.Parse(((TextBox)fila.FindControl("Peso")).Text);
+                    detalle.Peso = Convert.ToDecimal(((TextBox)fila.FindControl("Peso")).Text);
                     detalle.RecetaID = seReceta.ID;
 
                     REC_detalleOperator.Save(detalle);
-                    //DataRow OneRow = tablagrid.Rows[fila.RowIndex];
-                    //list.Add(((DropDownList)fila.FindControl("ddlItems")).Text);
-                    //OneRow["Descripcion"] = ((DropDownList)fila.FindControl("ddlItems")).Text;
-                    //OneRow["Peso"] = ((TextBox)fila.FindControl("Peso")).Text;
-                    //OneRow["Cantidad"] = ((TextBox)fila.FindControl("Cantidad")).Text;
                 }
                 string url = GetRouteUrl("ListaRecetas", null);
                 Response.Redirect(url);
@@ -266,98 +263,21 @@ namespace WebApplication.app.StockNS
         }
         public int ActualizaStock(Stock RecetaStock)
         {
-            //if (txtCantidad.Text != "")
-            //{
-            //    RecetaStock.Cantidad = Int32.Parse(txtCantidad.Text);
-            //    RecetaStock.Peso = null;
-            //}
-            //else if (txtPeso.Text != "")
-            //{
-            //    RecetaStock.Peso = Decimal.Parse(txtPeso.Text, CultureInfo.InvariantCulture);
-            //    RecetaStock.Cantidad = null;
-            //}
-            //RecetaStock = StockOperator.Save(RecetaStock);
-            //return RecetaStock.ID;
-            return 0;
+            //00
+            //actualiza el stock ya sea en peso o en cantidad no ambos
+            if (txtCantidad.Text != "")
+            {
+                RecetaStock.Cantidad = Int32.Parse(txtCantidad.Text);
+                RecetaStock.Peso = null;
+            }
+            else if (txtPeso.Text != "")
+            {
+                RecetaStock.Peso = Convert.ToDecimal(txtPeso.Text);
+                RecetaStock.Cantidad = null;
+            }
+            RecetaStock = StockOperator.Save(RecetaStock);
+            return RecetaStock.ID;
         }
-        //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        //{
-        //    GridView1.EditIndex = e.NewEditIndex;
-
-        //    int id = Convert.ToInt32(GridView1.Rows[e.NewEditIndex].Cells[0].Text);
-        //    Item item = ItemOperator.GetOneByIdentity(id);
-        //    //DataRow row = null;
-
-        //    //row["ID"] = Convert.ToInt32(GridView1.DataKeys[e.NewEditIndex].Value);
-        //    //row["Descripcion"] = item.Descripcion;
-        //    //row["CuentaDescripcion"] = "";
-        //    //row["StockID"] = item.StockID;
-        //    //row["ProItemID"] = item.ProItemID;
-        //    //row["EstadoID"] = item.EstadoID;
-        //    //row["Cantidad"] = StockOperator.GetOneByIdentity(item.StockID).Cantidad;
-        //    //row["Peso"] = StockOperator.GetOneByIdentity(item.StockID).Peso;
-        //    GridView1Bind();
-
-        //    DropDownList combo = GridView1.Rows[e.NewEditIndex].FindControl("ddlItems") as DropDownList;
-
-        //    if (combo != null)
-        //    {
-        //        combo.DataSource = ItemOperator.GetAllForCombo(); 
-        //        combo.DataTextField = "Descripcion";
-        //        combo.DataValueField = "ID";
-        //        combo.DataBind();
-        //    }
-
-        //    //combo.SelectedValue = Convert.ToString(row["Descripcion"]);
-        //}
-        //protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        //{
-        //    int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
-
-        //    DropDownList combo = GridView1.Rows[e.RowIndex].FindControl("ddlItems") as DropDownList;
-        //    int Item = Convert.ToInt32(combo.SelectedValue);
-
-        //    TextBox text = GridView1.Rows[e.RowIndex].Cells[1].Controls[0] as TextBox;
-        //    string nombre = text.Text;
-
-        //    //DataAccess.UpdateUsuario(id, nombre, pais);
-
-        //    GridView1.EditIndex = -1;
-        //    GridView1Bind();
-
-        //}
-
-        //protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        //{
-        //    GridView1.EditIndex = -1;
-        //    GridView1Bind();
-        //}
-        //private void SetInitialRow()
-        //{
-        //    DataTable dt = new DataTable();
-        //    DataRow dr = null;
-        //    dt.Columns.Add(new DataColumn("ddlItems", typeof(DropDownList)));
-        //    dt.Columns.Add(new DataColumn("Cantidad", typeof(string)));
-        //    dt.Columns.Add(new DataColumn("Peso", typeof(string)));
-        //    dr = dt.NewRow();
-        //    DropDownList combo = new DropDownList();
-        //    combo.DataSource = ItemOperator.GetAllForCombo();
-        //    combo.DataTextField = "Descripcion";
-        //    combo.DataValueField = "ID";
-        //    combo.DataBind(); 
-        //    dr["ddlItems"] = combo;
-        //    dr["Cantidad"] = "1";
-        //    dr["Peso"] = string.Empty;
-        //    dt.Rows.Add(dr);
-
-        //    //Store the DataTable in ViewState
-        //    //ViewState["CurrentTable"] = dt;
-        //    Session["dataGrid"] = dt;
-
-        //    GridView1.DataSource = dt;
-        //    GridView1.DataBind();
-        //}
-
         
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -368,26 +288,8 @@ namespace WebApplication.app.StockNS
                 mydrop.DataTextField = "Descripcion";
                 mydrop.DataValueField = "ID";
                 mydrop.DataBind();
-                // add blank row
-                // set drop down list to row value (use table to get this value)
-
-                //mydrop.Text = tablagrid.Rows[e.Row.RowIndex]["Descripcion"].ToString();
             }
         }
-        //public void LoadGrid(int estadio)
-        //{
-        //    DataRow dr;
-        //    dr = tablagrid.NewRow();
-        //    dr["Cantidad"] = "1";
-        //    dr["Peso"] = 123;
-        //    tablagrid.Rows.Add(dr);
-        //    GridView1.DataSource = tablagrid;
-        //    GridView1.DataBind();
-        //    //DataRow dritem;
-        //    //dritem = tablaitem.NewRow();
-        //    //dritem["item"] = 1;
-        //    //tablaitem.Rows.Add(dr);
-        //}
 
         //////////////////////////////////
         //COMIENZA CODIGO FILAS DINAMICAS/

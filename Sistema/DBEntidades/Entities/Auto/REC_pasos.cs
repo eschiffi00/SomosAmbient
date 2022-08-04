@@ -19,13 +19,13 @@ namespace DbEntidades.Entities
 		{
 			return "\r\n " + 
 			"ID: " + ID.ToString() + "\r\n " + 
-			"RecDetalleID: " + RecetaID.ToString() + "\r\n " + 
+			"RecetaID: " + RecetaID.ToString() + "\r\n " + 
 			"Paso: " + Paso.ToString() + "\r\n " + 
 			"Orden: " + Orden.ToString() + "\r\n " ;
 		}
         public REC_pasos()
         {
-			ID = -1;
+            ID = -1;
 
         }
 
@@ -38,7 +38,7 @@ namespace DbEntidades.Entities
 			switch (colName) 
 			{
 				case "ID": return false;
-				case "RecPasosID": return false;
+				case "RecetaID": return false;
 				case "Paso": return false;
 				case "Orden": return false;
 				default: return false;

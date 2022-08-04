@@ -31,6 +31,10 @@ namespace DbEntidades.Entities
 		{
 			return DocumentosOperator.GetAll().Where(x => x.EmpresaId == Id).ToList();
 		}
+		public List<Cuentas> GetRelatedCuentases()
+		{
+			return CuentasOperator.GetAll().Where(x => x.EmpresaId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

@@ -33,14 +33,24 @@ namespace DbEntidades.Entities
 		}
         public Producto()
         {
-			ID = -1;
-			CategoriaID = -1;
-			StockID = -1;
-			EstadoID = -1;
+            ID = -1;
+
         }
 
 
 
+		public List<Cat_productos> GetRelatedCat_productoses()
+		{
+			return Cat_productosOperator.GetAll().Where(x => x.ProductoID == ID).ToList();
+		}
+		public List<PR_detalle> GetRelatedPR_detalles()
+		{
+			return PR_detalleOperator.GetAll().Where(x => x.ProductoID == ID).ToList();
+		}
+		public List<ExpTiempoProd> GetRelatedExpTiempoProdes()
+		{
+			return ExpTiempoProdOperator.GetAll().Where(x => x.ProductoID == ID).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

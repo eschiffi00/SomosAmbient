@@ -14,22 +14,27 @@ namespace DbEntidades.Entities
 		public string Descripcion { get; set; }
 		public int Duracion { get; set; }
 		public int Orden { get; set; }
+
 		public override string ToString() 
 		{
-			return "\r\n " +
-			"ID: " + ID.ToString() + "\r\n " +
-			"ProductoID: " + Descripcion.ToString() + "\r\n " +
-			"TipoRelacion: " + Duracion.ToString() + "\r\n " +
-			"CodigoRelacion: " + Orden.ToString() + "\r\n ";
+			return "\r\n " + 
+			"ID: " + ID.ToString() + "\r\n " + 
+			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
+			"Duracion: " + Duracion.ToString() + "\r\n " + 
+			"Orden: " + Orden.ToString() + "\r\n " ;
 		}
         public Tiempo()
         {
-			ID = -1;
+            ID = -1;
 
         }
 
 
 
+		public List<ExpTiempoProd> GetRelatedExpTiempoProdes()
+		{
+			return ExpTiempoProdOperator.GetAll().Where(x => x.TiempoID == ID).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)
@@ -39,7 +44,7 @@ namespace DbEntidades.Entities
 				case "ID": return false;
 				case "Descripcion": return false;
 				case "Duracion": return false;
-				case "Orden": return true;
+				case "Orden": return false;
 				default: return false;
 			}
 		}

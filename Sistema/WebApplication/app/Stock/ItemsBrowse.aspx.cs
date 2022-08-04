@@ -26,7 +26,7 @@ namespace WebApplication.app.StockNS
 
         protected void grdProductosBind()
         {
-            List<ProductoDetalle> ent = ProductoOperator.GetAllWithDetails().ToList();
+            List<ProductoDetalle> ent = ItemsOperator.GetAllWithDetails().ToList();
             grdProductos.DataSource = ent;
             grdProductos.DataBind();
         }

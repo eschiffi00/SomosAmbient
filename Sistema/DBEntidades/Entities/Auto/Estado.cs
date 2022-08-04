@@ -29,6 +29,22 @@ namespace DbEntidades.Entities
 
 
 
+		public List<Experiencia> GetRelatedExperiencias()
+		{
+			return ExperienciaOperator.GetAll().Where(x => x.EstadoID == ID).ToList();
+		}
+		public List<TipoExperiencia> GetRelatedTipoExperiencias()
+		{
+			return TipoExperienciaOperator.GetAll().Where(x => x.EstadoID == ID).ToList();
+		}
+		public List<Momento> GetRelatedMomentos()
+		{
+			return MomentoOperator.GetAll().Where(x => x.EstadoID == ID).ToList();
+		}
+		public List<Items> GetRelatedItemes()
+		{
+			return ItemsOperator.GetAll().Where(x => x.EstadoId == ID).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

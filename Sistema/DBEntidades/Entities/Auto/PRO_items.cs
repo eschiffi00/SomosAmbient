@@ -23,9 +23,15 @@ namespace DbEntidades.Entities
 		}
         public PRO_items()
         {
-			ID = -1;
+            ID = -1;
 
         }
+
+		public Proveedor GetRelatedProveedorID()
+		{
+			Proveedor proveedor = ProveedorOperator.GetOneByIdentity(ProveedorID);
+			return proveedor;
+		}
 
 
 
