@@ -83,8 +83,6 @@
     <Compile Include="Entities\Auto\Productos.cs" />
     <Compile Include="Entities\Auto\Proveedor.cs" />
     <Compile Include="Entities\Auto\Provincia.cs" />
-    <Compile Include="Entities\Auto\PRO_items.cs" />
-    <Compile Include="Entities\Auto\PR_detalle.cs" />
     <Compile Include="Entities\Auto\Receta.cs" />
     <Compile Include="Entities\Auto\REC_detalle.cs" />
     <Compile Include="Entities\Auto\REC_pasos.cs" />
@@ -138,8 +136,6 @@
     <Compile Include="Operators\Auto\ProductosOperator.cs" />
     <Compile Include="Operators\Auto\ProveedorOperator.cs" />
     <Compile Include="Operators\Auto\ProvinciaOperator.cs" />
-    <Compile Include="Operators\Auto\PRO_itemsOperator.cs" />
-    <Compile Include="Operators\Auto\PR_detalleOperator.cs" />
     <Compile Include="Operators\Auto\RecetaOperator.cs" />
     <Compile Include="Operators\Auto\REC_detalleOperator.cs" />
     <Compile Include="Operators\Auto\REC_pasosOperator.cs" />

@@ -19,29 +19,29 @@ namespace WebApplication.app.StockNS
             {
                 if (string.IsNullOrEmpty(Convert.ToString(Session["UsuarioId"]))) Response.Redirect("~/app/Seguridad/UsuarioLogin.aspx?url=" + Server.UrlEncode(Request.Url.AbsoluteUri));
                 if (!PermisoOperator.TienePermiso(Convert.ToInt32(Session["UsuarioId"]), GetType().BaseType.FullName)) throw new PermisoException();
-                grdProductosBind();
+                grdItemsBind();
 
             }
         }
 
-        protected void grdProductosBind()
+        protected void grdItemsBind()
         {
-            List<ProductoDetalle> ent = ItemsOperator.GetAllWithDetails().ToList();
-            grdProductos.DataSource = ent;
-            grdProductos.DataBind();
+            List<ItemsListado> ent = ItemsOperator.GetAllWithDetails().ToList();
+            grdItems.DataSource = ent;
+            grdItems.DataBind();
         }
         protected void btnExportar_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void btnNuevoProducto_Click(object sender, EventArgs e)
+        protected void btnNuevoItems_Click(object sender, EventArgs e)
         {
-            Response.Redirect(GetRouteUrl("NuevoProducto", null));
+            Response.Redirect(GetRouteUrl("NuevoItems", null));
         }
         protected void LinkButtonEdit_Click(object sender, EventArgs e)
         {
-            Response.Redirect(GetRouteUrl("EditaProductos", null));
+            Response.Redirect(GetRouteUrl("EditaItemss", null));
         }
 
         protected void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace WebApplication.app.StockNS
 
         }
 
-        protected void grdProductos_SelectedIndexChanged(object sender, EventArgs e)
+        protected void grdItems_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

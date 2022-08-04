@@ -55,8 +55,8 @@ namespace WebApplication.app.StockNS
                     //    CargaRecetas(ingrediente);
                     //}
                     //busco el stock para el StockID
-                    Stock stockCant = new Stock();
-                    stockCant = StockOperator.GetOneByIdentity(seReceta.StockID);
+                    INVENTARIO_Producto stockCant = new INVENTARIO_Producto();
+                    stockCant = INVENTARIO_ProductoOperator.GetOneByIdentity(seReceta.StockID);
                     //txtCantidad.Text = stockCant.Cantidad.ToString();
                     
                     btnSubmit.Text = "Modifica Receta";
@@ -132,7 +132,7 @@ namespace WebApplication.app.StockNS
 
             if (e.CommandName == "CommandNameDelete")
             {
-                ItemOperator.Delete(id);
+                //ItemOperator.Delete(id);
                 GridView1Bind();
             }
             if (e.CommandName == "CommandNameEdit")
@@ -203,10 +203,10 @@ namespace WebApplication.app.StockNS
 
                 seReceta.Descripcion = txtDescripcion.Text;
                 
-                Stock RecetaStock = new Stock();
+                INVENTARIO_Producto RecetaStock = new INVENTARIO_Producto();
                 if (seReceta.ID > 0) //Receta existente
                 {
-                    RecetaStock.ID = seReceta.StockID;
+                    RecetaStock.Id = seReceta.StockID;
                     ActualizaStock(RecetaStock);
                 }
                 else ///////////Receta NUEVO\\\\\\\\\\\\\\
@@ -235,8 +235,8 @@ namespace WebApplication.app.StockNS
                 {
                     REC_detalle detalle = new REC_detalle();
                     var codigo = ((DropDownList)fila.FindControl("ddlItems")).Text;
-                    Item item = ItemOperator.GetOneByIdentity(Int32.Parse(codigo));
-                    if (item.ID > 0)
+                    Items item = ItemsOperator.GetOneByIdentity(Int32.Parse(codigo));
+                    if (item.Id > 0)
                     {
                         detalle.TipoRelacion = "item";
                         detalle.CodigoRelacion = Int32.Parse(codigo);
@@ -261,22 +261,31 @@ namespace WebApplication.app.StockNS
                 AlertaRoja(ex.Message);
             }
         }
-        public int ActualizaStock(Stock RecetaStock)
+        public int ActualizaStock(INVENTARIO_Producto Receta)
         {
             //00
             //actualiza el stock ya sea en peso o en cantidad no ambos
-            if (txtCantidad.Text != "")
-            {
-                RecetaStock.Cantidad = Int32.Parse(txtCantidad.Text);
-                RecetaStock.Peso = null;
-            }
-            else if (txtPeso.Text != "")
-            {
-                RecetaStock.Peso = Convert.ToDecimal(txtPeso.Text);
-                RecetaStock.Cantidad = null;
-            }
-            RecetaStock = StockOperator.Save(RecetaStock);
-            return RecetaStock.ID;
+            Receta.RubroId = 1;
+            Receta.Codigo = "";
+            Receta.CodigoBarra = "";
+            Receta.Descripcion = "prueba";
+            Receta.CantidadNominal = 1.0m;
+            Receta.Cantidad = Decimal.Parse(txtCantidad.Text);
+            Receta.Costo = 1.0m;
+            Receta.UnidadId = 1;//Int32.Parse(ddlUnidad.SelectedValue);
+            Receta.UnidadPresentacionId = 1;
+            Receta.UnidadMedidaConversionId = 1;
+            Receta.TipoMovimientoId = 1;
+            Receta.CentroCostoId = 1;
+            if (Receta.Id > -1)
+                Receta.UpdateDate = DateTime.Now;
+            else
+                Receta.CreateDate = DateTime.Now;
+
+            Receta.Delete = 0;
+            Receta.DeleteDate = DateTime.Now;
+            Receta = INVENTARIO_ProductoOperator.Save(Receta);
+            return Receta.Id;
         }
         
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -284,7 +293,7 @@ namespace WebApplication.app.StockNS
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 DropDownList mydrop = (DropDownList)e.Row.FindControl("ddlItems");
-                mydrop.DataSource = ItemOperator.GetAllForCombo();
+                mydrop.DataSource = ItemsOperator.GetAllForCombo();
                 mydrop.DataTextField = "Descripcion";
                 mydrop.DataValueField = "ID";
                 mydrop.DataBind();

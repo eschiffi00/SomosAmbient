@@ -1,65 +1,65 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoEdit"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ItemsEdit"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
-        window.onload = function () {
-            document.getElementById("divPeso").style.display = 'none';
-            document.getElementById("divCantidad").style.display = 'none';
-            CreaRadios();
-            if (document.querySelector('#divPeso input').value != "") {
-                document.getElementById("divPeso").style.display = 'flex';
-                document.getElementById("Peso").checked = true;
-            } else if (document.querySelector('#divCantidad input').value != "") {
-                document.getElementById("divCantidad").style.display = 'flex';
-                document.getElementById("Cantidad").checked = true;
-            }
-        };
+        //window.onload = function () {
+        //    document.getElementById("divPeso").style.display = 'none';
+        //    document.getElementById("divCantidad").style.display = 'none';
+        //    CreaRadios();
+        //    if (document.querySelector('#divPeso input').value != "") {
+        //        document.getElementById("divPeso").style.display = 'flex';
+        //        document.getElementById("Peso").checked = true;
+        //    } else if (document.querySelector('#divCantidad input').value != "") {
+        //        document.getElementById("divCantidad").style.display = 'flex';
+        //        document.getElementById("Cantidad").checked = true;
+        //    }
+        //};
 
-        function CreaRadios() {
-            let stockdescripcion = ["Peso", "Cantidad"];
-            for (var i = 0; i <= 1; i++) {
-                var label = document.createElement('label');
-                label.htmlFor = 'tipoStock';
-                if (stockdescripcion[i] == "Peso") {
-                    label.className = 'col-sm-3 text-sm-left text-md-right radio';
-                } else {
-                    label.className = 'text-sm-left text-md-right radio';
-                }
-
-
-                var radiobox = document.createElement('input');
-                radiobox.type = 'radio';
-                radiobox.name = 'radio';
-                radiobox.id = stockdescripcion[i];
-
-                label.appendChild(radiobox);
+        //function CreaRadios() {
+        //    let stockdescripcion = ["Peso", "Cantidad"];
+        //    for (var i = 0; i <= 1; i++) {
+        //        var label = document.createElement('label');
+        //        label.htmlFor = 'tipoStock';
+        //        if (stockdescripcion[i] == "Peso") {
+        //            label.className = 'col-sm-3 text-sm-left text-md-right radio';
+        //        } else {
+        //            label.className = 'text-sm-left text-md-right radio';
+        //        }
 
 
-                var span = document.createElement('span');
-                span.className = 'checkmark';
-                label.appendChild(span);
+        //        var radiobox = document.createElement('input');
+        //        radiobox.type = 'radio';
+        //        radiobox.name = 'radio';
+        //        radiobox.id = stockdescripcion[i];
 
-                var p = document.createElement('span');
-                p.className = 'checkmark';
-                p.textContent = stockdescripcion[i];
-                label.appendChild(p);
+        //        label.appendChild(radiobox);
 
-                var container = document.getElementById('contStock');
 
-                container.appendChild(label);
-            }
-            var radioSelect = document.getElementById("Peso");
-            radioSelect.addEventListener('click', (event) => {
-                document.getElementById("divPeso").style.display = 'flex';
-                document.getElementById("divCantidad").style.display = 'none';
-                document.querySelector('#divCantidad input').value = ""
-            });
-            radioSelect = document.getElementById("Cantidad");
-            radioSelect.onclick = function () {
-                document.getElementById("divPeso").style.display = 'none';
-                document.getElementById("divCantidad").style.display = 'flex';
-                document.querySelector('#divPeso input').value = ""
-            }
-        }
+        //        var span = document.createElement('span');
+        //        span.className = 'checkmark';
+        //        label.appendChild(span);
+
+        //        var p = document.createElement('span');
+        //        p.className = 'checkmark';
+        //        p.textContent = stockdescripcion[i];
+        //        label.appendChild(p);
+
+        //        var container = document.getElementById('contStock');
+
+        //        container.appendChild(label);
+        //    }
+        //    var radioSelect = document.getElementById("Peso");
+        //    radioSelect.addEventListener('click', (event) => {
+        //        document.getElementById("divPeso").style.display = 'flex';
+        //        document.getElementById("divCantidad").style.display = 'none';
+        //        document.querySelector('#divCantidad input').value = ""
+        //    });
+        //    radioSelect = document.getElementById("Cantidad");
+        //    radioSelect.onclick = function () {
+        //        document.getElementById("divPeso").style.display = 'none';
+        //        document.getElementById("divCantidad").style.display = 'flex';
+        //        document.querySelector('#divPeso input').value = ""
+        //    }
+        //}
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -80,20 +80,20 @@
     <!--#region divPpal -->
     <div runat="server" id="divPpal">
         <div class="row">
-            <h4 runat="server" id="h4Titulo" class="ml-3 mb-4">Modificación de Producto</h4>
+            <h4 runat="server" id="h4Titulo" class="ml-3 mb-4">Modificación de Items</h4>
         </div>
 
         <div class="form-group row">
             <label for="txtDescripcion" class="col-sm-2 col-form-label text-sm-left text-md-right">Descripcion</label>
             <div class="col-sm-6">
                 <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Descripcion del Producto" required="required" />
-                <div class="invalid-feedback">Debe ingresar una descripcion para el Producto</div>
+                <div class="invalid-feedback">Debe ingresar una descripcion para el Item</div>
             </div>
         </div>
          <div class="form-group row">
-            <label for="ddlCategoriaID" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
+            <label for="ddlCategoriaId" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
             <div class="col-sm-4">
-                <asp:DropDownList runat="server" ID="ddlCategoriaID" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="ddlCategoriaId" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
             </div>
         </div>
         <div class="form-group row">
@@ -114,25 +114,33 @@
                 <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="Ingrese el Precio" required="required" />        
             </div>
         </div>
-        <div class="form-group row" id="contStock"></div>
-        <div id="divPeso" class="form-group row">
-            <label for="txtPeso" class="col-sm-2 col-form-label text-sm-left text-md-right">Peso</label>
-            <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtPeso" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
+        <div class="form-group row">
+            <label for="ddlUnidad" class="col-sm-2 col-form-label text-sm-left text-md-right">Unidad</label>
+            <div class="col-sm-4">
+                <asp:DropDownList runat="server" ID="ddlUnidad" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
             </div>
         </div>
-        <div id="divCantidad" class="form-group row">
+        <div class="form-group row">
             <label for="txtCantidad" class="col-sm-2 col-form-label text-sm-left text-md-right">Cantidad</label>
             <div class="col-sm-6">
                 <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ddlEstado" class="col-sm-2 col-form-label text-sm-left text-md-right">Estado</label>
+            <div class="col-sm-4">
+                <asp:DropDownList runat="server" ID="ddlEstado" ClientIDMode="Static" CssClass="form-control mt-1">
+                    <asp:ListItem Text="Habilitado" Value="0" Selected="True" />
+                    <asp:ListItem Text="Deshabilitado" Value="1" />
+                </asp:DropDownList>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="btnSubmit" class="col-sm-2 col-form-label text-sm-left text-md-right"></label>
             <div class="col-sm-4">
-                <a href="<%$RouteUrl:routename=ListaProductos%>" class="btn btn-primary mt-1" runat="server">Cancelar</a>
-                <asp:Button Text="Crear Producto" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btn-primary mt-1" OnClick="btnSubmit_Click" />
+                <a href="<%$RouteUrl:routename=ListaItems%>" class="btn btn-primary mt-1" runat="server">Cancelar</a>
+                <asp:Button Text="Crear Item" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btn-primary mt-1" OnClick="btnSubmit_Click" />
             </div>
         </div>
 

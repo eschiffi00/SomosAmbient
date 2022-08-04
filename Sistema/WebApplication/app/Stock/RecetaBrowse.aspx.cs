@@ -57,7 +57,7 @@ namespace WebApplication.app.StockNS
 
             if (e.CommandName == "CommandNameDelete")
             {
-                ItemOperator.Delete(id);
+                RecetaOperator.Delete(id);
                 grdRecetasBind();
             }
             if (e.CommandName == "CommandNameEdit")

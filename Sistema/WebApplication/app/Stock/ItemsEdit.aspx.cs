@@ -10,9 +10,9 @@ using System.Globalization;
 
 namespace WebApplication.app.StockNS
 {
-    public partial class ProductoEdit : System.Web.UI.Page
+    public partial class ItemsEdit : System.Web.UI.Page
     {
-        Producto seProducto = null;
+        Items seItems = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,25 +31,25 @@ namespace WebApplication.app.StockNS
                 if (s != null && s != string.Empty)
                 {
                     int uid = Convert.ToInt32(s);
-                    seProducto = ItemsOperator.GetOneByIdentity(uid);
+                    seItems = ItemsOperator.GetOneByIdentity(uid);
                     //obtengo todas las categorias y utilizo descripcion y id
-                    Categoria categoriaEdicion = CategoriaOperator.GetOneByIdentity(seProducto.CategoriaID);
-                    ddlCategoriaID.Items.Insert(0, new ListItem(categoriaEdicion.Descripcion, categoriaEdicion.ID.ToString()));
-                    txtDescripcion.Text = seProducto.Descripcion;
+                    Categoria categoriaEdicion = CategoriaOperator.GetOneByIdentity(seItems.CategoriaItemId);
+                    ddlCategoriaId.Items.Insert(0, new ListItem(categoriaEdicion.Descripcion, categoriaEdicion.ID.ToString()));
+                    txtDescripcion.Text = seItems.Detalle;
                     //busco el stock para el StockID
-                    Stock stockCant = new Stock();
-                    stockCant = StockOperator.GetOneByIdentity(seProducto.StockID);
+                    INVENTARIO_Producto stockCant = new INVENTARIO_Producto();
+                    stockCant = INVENTARIO_ProductoOperator.GetOneByIdentity(seItems.DepositoId);
                     txtCantidad.Text = stockCant.Cantidad.ToString();
-                    txtMargen.Text = seProducto.Margen.ToString();
-                    txtCosto.Text = seProducto.Costo.ToString();
-                    txtPrecio.Text = seProducto.Precio.ToString();
-                    btnSubmit.Text = "Modifica Producto";
+                    txtMargen.Text = seItems.Margen.ToString();
+                    txtCosto.Text = seItems.Costo.ToString();
+                    txtPrecio.Text = seItems.Precio.ToString();
+                    btnSubmit.Text = "Modifica Items";
                 }
                 else
                 {
-                    ddlCategoriaID.Items.Insert(0, new ListItem("<Selecciona Categoria>", "0"));
-                    h4Titulo.InnerText = "Creación de nuevo Producto";
-                    seProducto = new Producto();
+                    ddlCategoriaId.Items.Insert(0, new ListItem("<Selecciona Categoria>", "0"));
+                    h4Titulo.InnerText = "Creación de nuevo Item";
+                    seItems = new Items();
                 }
                 SetMaximosTextBoxes();
                 SessionSaveAll();
@@ -61,29 +61,29 @@ namespace WebApplication.app.StockNS
         {
             List<Categoria> categorias = new List<Categoria>();
             categorias = CategoriaOperator.GetAll();
-            ddlCategoriaID.DataSource = categorias;
-            ddlCategoriaID.DataTextField = "Descripcion";
-            ddlCategoriaID.DataValueField = "ID";
-            ddlCategoriaID.DataBind();
+            ddlCategoriaId.DataSource = categorias;
+            ddlCategoriaId.DataTextField = "Descripcion";
+            ddlCategoriaId.DataValueField = "ID";
+            ddlCategoriaId.DataBind();
         }
 
         protected void SetMaximosTextBoxes()
         {
-            txtDescripcion.MaxLength = ItemsOperator.MaxLength.Descripcion;
+            txtDescripcion.MaxLength = ItemsOperator.MaxLength.Detalle;
         }
 
         #region Session
         protected void SessionClearAll()
         {
-            Session["seProducto"] = null;
+            Session["seItems"] = null;
         }
         protected void SessionLoadAll()
         {
-            seProducto = (Producto)Session["seProducto"];
+            seItems = (Items)Session["seItems"];
         }
         protected void SessionSaveAll()
         {
-            Session["seProducto"] = seProducto;
+            Session["seItems"] = seItems;
         }
         protected override void OnPreRenderComplete(EventArgs e)
         {
@@ -112,46 +112,55 @@ namespace WebApplication.app.StockNS
 
             try
             {
-                seProducto.CategoriaID = Int32.Parse(ddlCategoriaID.Text);
-                seProducto.Descripcion = txtDescripcion.Text;
-                seProducto.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
-                seProducto.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
-                seProducto.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
-                Stock ProductoStock = new Stock();
-                if (seProducto.ID > 0) //producto existente
+                seItems.CategoriaItemId = Int32.Parse(ddlCategoriaId.Text);
+                seItems.Detalle = txtDescripcion.Text;
+                seItems.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
+                seItems.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
+                seItems.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
+                INVENTARIO_Producto ItemsStock = new INVENTARIO_Producto();
+                if (seItems.Id > 0) //Items existente
                 {
-                    ProductoStock.ID = seProducto.StockID;
-                    ActualizaStock(ProductoStock);
+                    ItemsStock.Id = seItems.DepositoId;
+                    ActualizaStock(ItemsStock);
                 }
-                else ///////////Producto NUEVO\\\\\\\\\\\\\\
+                else ///////////Items NUEVO\\\\\\\\\\\\\\
                 {
-                    seProducto.StockID = ActualizaStock(ProductoStock);
-                    seProducto.EstadoID = EstadoOperator.GetHablitadoID();
-                    ItemsOperator.Save(seProducto);
-                    string url = GetRouteUrl("ListaProductos", null);
+                    seItems.DepositoId = ActualizaStock(ItemsStock);
+                    seItems.EstadoId = EstadoOperator.GetHablitadoID();
+                    ItemsOperator.Save(seItems);
+                    string url = GetRouteUrl("ListaItemss", null);
                     Response.Redirect(url);
                 }
-                ItemsOperator.Save(seProducto);
+                ItemsOperator.Save(seItems);
             }
             catch (Exception ex)
             {
                 AlertaRoja(ex.Message);
             }
         }
-        public int ActualizaStock(Stock ProductoStock)
+        public int ActualizaStock(INVENTARIO_Producto Item)
         {
-            if (txtCantidad.Text != "")
-            {
-                ProductoStock.Cantidad = Int32.Parse(txtCantidad.Text);
-                ProductoStock.Peso = null;
-            }
-            else if (txtPeso.Text != "")
-            {
-                ProductoStock.Peso = Decimal.Parse(txtPeso.Text, CultureInfo.InvariantCulture);
-                ProductoStock.Cantidad = null;
-            }
-            ProductoStock = StockOperator.Save(ProductoStock);
-            return ProductoStock.ID;
+            Item.RubroId = 1;
+            Item.Codigo = "";
+            Item.CodigoBarra = "";
+            Item.Descripcion = "prueba";
+            Item.CantidadNominal = 1.0m;
+            Item.Cantidad = Decimal.Parse(txtCantidad.Text);
+            Item.Costo = 1.0m;
+            Item.UnidadId = Int32.Parse(ddlUnidad.SelectedValue);
+            Item.UnidadPresentacionId = 1;
+            Item.UnidadMedidaConversionId = 1;
+            Item.TipoMovimientoId = 1;
+            Item.CentroCostoId = 1;
+            if(Item.Id > -1)
+                Item.UpdateDate = DateTime.Now;
+            else
+                Item.CreateDate = DateTime.Now;
+
+            Item.Delete = 0;
+            Item.DeleteDate = DateTime.Now;
+            Item = INVENTARIO_ProductoOperator.Save(Item);
+            return Item.Id;
         }
     }
 

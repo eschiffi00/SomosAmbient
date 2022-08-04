@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <asp:GridView ID="grdProductos" CssClass="table table-striped table-bordered table-hover table-sm" runat="server" AutoGenerateColumns="false" >
+        <asp:GridView ID="grdItems" CssClass="table table-striped table-bordered table-hover table-sm" runat="server" AutoGenerateColumns="false" >
             <Columns>
                 <asp:TemplateField HeaderText="" HeaderStyle-CssClass="text-center columna-iconos-th">
                     <ItemStyle HorizontalAlign="Center" CssClass="verticalMiddle columna-iconos-td" />

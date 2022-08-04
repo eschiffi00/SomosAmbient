@@ -17,7 +17,7 @@ namespace DbEntidades.Entities
 		public int? Cantidad { get; set; }
 		public List<REC_detalle> Detalle { get; set; }
 		public List<REC_pasos> Pasos { get; set; }
-		public List<Item> Item { get; set; }
+		public List<Items> Item { get; set; }
 		public int EstadoID { get; set; }
 
 		public override string ToString() 

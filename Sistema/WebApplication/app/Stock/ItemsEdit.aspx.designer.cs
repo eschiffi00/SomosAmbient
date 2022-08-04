@@ -11,7 +11,7 @@ namespace WebApplication.app.StockNS
 {
 
 
-    public partial class ProductoEdit
+    public partial class ItemsEdit
     {
 
         /// <summary>
@@ -69,13 +69,13 @@ namespace WebApplication.app.StockNS
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
 
         /// <summary>
-        /// Control ddlCategoriaID.
+        /// Control ddlCategoriaId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoriaID;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoriaId;
 
         /// <summary>
         /// Control txtCosto.
@@ -105,13 +105,13 @@ namespace WebApplication.app.StockNS
         protected global::System.Web.UI.WebControls.TextBox txtPrecio;
 
         /// <summary>
-        /// Control txtPeso.
+        /// Control ddlUnidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPeso;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUnidad;
 
         /// <summary>
         /// Control txtCantidad.
@@ -121,6 +121,15 @@ namespace WebApplication.app.StockNS
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+
+        /// <summary>
+        /// Control ddlEstado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
 
         /// <summary>
         /// Control btnSubmit.

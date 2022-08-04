@@ -83,17 +83,17 @@ namespace DbEntidades.Operators
                 RecetaDetail.Detalle = GetDetalleById(Receta.ID);
                 RecetaDetail.EstadoID = Receta.EstadoID;
                 RecetaDetail.Pasos = GetPasosById(Receta.ID);
-                if (Receta.StockID > 0)
-                {
+                //if (Receta.StockID > 0)
+                //{
 
-                    RecetaDetail.Cantidad = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Cantidad;
-                    RecetaDetail.Peso = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Peso;
-                }
-                else
-                {
-                    RecetaDetail.Cantidad = 0;
-                    RecetaDetail.Peso = 0;
-                }
+                //    RecetaDetail.Cantidad = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Cantidad;
+                //    RecetaDetail.Peso = StockOperator.GetOneByIdentity(RecetaDetail.StockID).Peso;
+                //}
+                //else
+                //{
+                //    RecetaDetail.Cantidad = 0;
+                //    RecetaDetail.Peso = 0;
+                //}
                 lista.Add(RecetaDetail);
             }
             return lista;
