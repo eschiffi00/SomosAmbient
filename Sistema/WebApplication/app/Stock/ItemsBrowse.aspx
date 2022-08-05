@@ -77,6 +77,8 @@
                 <asp:BoundField DataField="Detalle" HeaderText="Detalle" Visible="true" />
                 <asp:BoundField DataField="CategoriaItemId" HeaderText="Categoria" Visible="false" />
                 <asp:BoundField DataField="CategoriaDescripcion" HeaderText="Categoria" Visible="true" />
+                <asp:BoundField DataField="CuentaId" HeaderText="CuentaId" Visible="false" />
+                <asp:BoundField DataField="CuentaDescripcion" HeaderText="Cuenta" Visible="true" />
                 <asp:BoundField DataField="Costo" HeaderText="Costo" Visible="true" />
                 <asp:BoundField DataField="Margen" HeaderText="Margen" Visible="true" />
                 <asp:BoundField DataField="Precio" HeaderText="Precio" Visible="true" />
