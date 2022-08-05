@@ -71,7 +71,6 @@ namespace DbEntidades.Operators
                 ItemsCombo ItemsStock = new ItemsCombo();
                 ItemsStock.Id = Items.Id;
                 ItemsStock.Detalle = Items.Detalle;
-
                 lista.Add(ItemsStock);
             }
             return lista;

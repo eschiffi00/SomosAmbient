@@ -86,50 +86,56 @@
         <div class="form-group row">
             <label for="txtDescripcion" class="col-sm-2 col-form-label text-sm-left text-md-right">Descripcion</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Descripcion del Producto" required="required" />
+                <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" TabIndex="1" placeholder="Descripcion del Producto" required="required" />
                 <div class="invalid-feedback">Debe ingresar una descripcion para el Item</div>
             </div>
         </div>
          <div class="form-group row">
-            <label for="ddlCategoriaId" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
+            <label for="ddlCategoriaId" class="col-sm-2 col-form-label text-sm-left text-md-right">Categoria</label>
             <div class="col-sm-4">
-                <asp:DropDownList runat="server" ID="ddlCategoriaId" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="ddlCategoriaId" ClientIDMode="Static" TabIndex="2" CssClass="form-control mt-1"></asp:DropDownList>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ddlCuenta" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
+            <div class="col-sm-4">
+                <asp:DropDownList runat="server" ID="ddlCuenta" ClientIDMode="Static" TabIndex="2" CssClass="form-control mt-1"></asp:DropDownList>
             </div>
         </div>
         <div class="form-group row">
             <label for="txtCosto" class="col-sm-2 col-form-label text-sm-left text-md-right">Costo</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtCosto" CssClass="form-control" placeholder="Ingrese el Costo" required="required" />        
+                <asp:TextBox runat="server" ID="txtCosto" TabIndex="3" CssClass="form-control" placeholder="Ingrese el Costo" required="required" />        
             </div>
         </div>
         <div class="form-group row">
             <label for="txtMargen" class="col-sm-2 col-form-label text-sm-left text-md-right">Margen</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtMargen" CssClass="form-control" placeholder="Ingrese el Margen" required="required" />        
+                <asp:TextBox runat="server" ID="txtMargen" TabIndex="4" CssClass="form-control" placeholder="Ingrese el Margen" required="required" />        
             </div>
         </div>
         <div class="form-group row">
             <label for="txtPrecio" class="col-sm-2 col-form-label text-sm-left text-md-right">Precio</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" placeholder="Ingrese el Precio" required="required" />        
+                <asp:TextBox runat="server" ID="txtPrecio" TabIndex="5" CssClass="form-control" placeholder="Ingrese el Precio" required="required" />        
             </div>
         </div>
         <div class="form-group row">
             <label for="ddlUnidad" class="col-sm-2 col-form-label text-sm-left text-md-right">Unidad</label>
             <div class="col-sm-4">
-                <asp:DropDownList runat="server" ID="ddlUnidad" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="ddlUnidad" TabIndex="6" ClientIDMode="Static" CssClass="form-control mt-1"></asp:DropDownList>
             </div>
         </div>
         <div class="form-group row">
             <label for="txtCantidad" class="col-sm-2 col-form-label text-sm-left text-md-right">Cantidad</label>
             <div class="col-sm-6">
-                <asp:TextBox runat="server" ID="txtCantidad" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
+                <asp:TextBox runat="server" ID="txtCantidad" TabIndex="7" CssClass="form-control" placeholder="Ingrese el Stock" required="required" />        
             </div>
         </div>
         <div class="form-group row">
             <label for="ddlEstado" class="col-sm-2 col-form-label text-sm-left text-md-right">Estado</label>
             <div class="col-sm-4">
-                <asp:DropDownList runat="server" ID="ddlEstado" ClientIDMode="Static" CssClass="form-control mt-1">
+                <asp:DropDownList runat="server" ID="ddlEstado" TabIndex="8" ClientIDMode="Static" CssClass="form-control mt-1">
                     <asp:ListItem Text="Habilitado" Value="0" Selected="True" />
                     <asp:ListItem Text="Deshabilitado" Value="1" />
                 </asp:DropDownList>
@@ -139,8 +145,8 @@
         <div class="form-group row">
             <label for="btnSubmit" class="col-sm-2 col-form-label text-sm-left text-md-right"></label>
             <div class="col-sm-4">
-                <a href="<%$RouteUrl:routename=ListaItems%>" class="btn btn-primary mt-1" runat="server">Cancelar</a>
-                <asp:Button Text="Crear Item" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btn-primary mt-1" OnClick="btnSubmit_Click" />
+                <a href="<%$RouteUrl:routename=ListaItems%>" class="btn btncancel mt-1" TabIndex="9" runat="server">Cancelar</a>
+                <asp:Button Text="Crear Item" runat="server" ID="btnSubmit" ClientIDMode="Static" TabIndex="10" CssClass="btn btnsubmit mt-1" OnClick="btnSubmit_Click" />
             </div>
         </div>
 

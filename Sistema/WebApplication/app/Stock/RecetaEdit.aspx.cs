@@ -263,8 +263,7 @@ namespace WebApplication.app.StockNS
         }
         public int ActualizaStock(INVENTARIO_Producto Receta)
         {
-            //00
-            //actualiza el stock ya sea en peso o en cantidad no ambos
+
             Receta.RubroId = 1;
             Receta.Codigo = "";
             Receta.CodigoBarra = "";
@@ -294,8 +293,8 @@ namespace WebApplication.app.StockNS
             {
                 DropDownList mydrop = (DropDownList)e.Row.FindControl("ddlItems");
                 mydrop.DataSource = ItemsOperator.GetAllForCombo();
-                mydrop.DataTextField = "Descripcion";
-                mydrop.DataValueField = "ID";
+                mydrop.DataTextField = "Detalle";
+                mydrop.DataValueField = "Id";
                 mydrop.DataBind();
             }
         }
@@ -362,9 +361,6 @@ namespace WebApplication.app.StockNS
                         box1.SelectedValue = dt.Rows[i]["Item"].ToString();
                         box2.Text = dt.Rows[i]["Cantidad"].ToString();
                         box3.Text = dt.Rows[i]["Peso"].ToString();
-
-
-
                         rowIndex++;
                     }
                 }

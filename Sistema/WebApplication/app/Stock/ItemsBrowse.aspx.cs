@@ -37,7 +37,7 @@ namespace WebApplication.app.StockNS
 
         protected void btnNuevoItems_Click(object sender, EventArgs e)
         {
-            Response.Redirect(GetRouteUrl("NuevoItems", null));
+            Response.Redirect(GetRouteUrl("NuevoItem", null));
         }
         protected void LinkButtonEdit_Click(object sender, EventArgs e)
         {

@@ -8,26 +8,30 @@ using DbEntidades.Operators;
 
 namespace DbEntidades.Entities
 {
-    public partial class Tiempo
+    public partial class PRO_items
     {
 		public int ID { get; set; }
-		public string Descripcion { get; set; }
-		public int Duracion { get; set; }
-		public int Orden { get; set; }
+		public int ProveedorID { get; set; }
+		public decimal Precio { get; set; }
 
 		public override string ToString() 
 		{
 			return "\r\n " + 
 			"ID: " + ID.ToString() + "\r\n " + 
-			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
-			"Duracion: " + Duracion.ToString() + "\r\n " + 
-			"Orden: " + Orden.ToString() + "\r\n " ;
+			"ProveedorID: " + ProveedorID.ToString() + "\r\n " + 
+			"Precio: " + Precio.ToString() + "\r\n " ;
 		}
-        public Tiempo()
+        public PRO_items()
         {
             ID = -1;
 
         }
+
+		public Proveedor GetRelatedProveedorID()
+		{
+			Proveedor proveedor = ProveedorOperator.GetOneByIdentity(ProveedorID);
+			return proveedor;
+		}
 
 
 
@@ -38,9 +42,8 @@ namespace DbEntidades.Entities
 			switch (colName) 
 			{
 				case "ID": return false;
-				case "Descripcion": return false;
-				case "Duracion": return false;
-				case "Orden": return false;
+				case "ProveedorID": return false;
+				case "Precio": return true;
 				default: return false;
 			}
 		}

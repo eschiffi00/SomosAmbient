@@ -28,13 +28,16 @@ namespace WebApplication.app.StockNS
                 if (o != null) s = Page.RouteData.Values["id"].ToString();
                 else s = Request.QueryString["id"];
                 CargaCategorias();
+                CargaCuentas();
+                CargaUnidades();
                 if (s != null && s != string.Empty)
                 {
                     int uid = Convert.ToInt32(s);
                     seItems = ItemsOperator.GetOneByIdentity(uid);
                     //obtengo todas las categorias y utilizo descripcion y id
-                    Categoria categoriaEdicion = CategoriaOperator.GetOneByIdentity(seItems.CategoriaItemId);
-                    ddlCategoriaId.Items.Insert(0, new ListItem(categoriaEdicion.Descripcion, categoriaEdicion.ID.ToString()));
+                    ddlCategoriaId.SelectedValue = CategoriasOperator.GetOneByIdentity(seItems.CategoriaItemId).Id.ToString();
+                    ddlCuenta.SelectedValue = CuentasOperator.GetOneByIdentity(seItems.CuentaId).Id.ToString();
+                    ddlUnidad.SelectedValue = INVENTARIO_UnidadesOperator.GetOneByIdentity((INVENTARIO_ProductoOperator.GetOneByIdentity(seItems.DepositoId).Id)).Descripcion;
                     txtDescripcion.Text = seItems.Detalle;
                     //busco el stock para el StockID
                     INVENTARIO_Producto stockCant = new INVENTARIO_Producto();
@@ -44,10 +47,12 @@ namespace WebApplication.app.StockNS
                     txtCosto.Text = seItems.Costo.ToString();
                     txtPrecio.Text = seItems.Precio.ToString();
                     btnSubmit.Text = "Modifica Items";
+                    ddlEstado.SelectedValue = EstadoOperator.GetOneByIdentity(seItems.EstadoId).ID.ToString();
                 }
                 else
                 {
                     ddlCategoriaId.Items.Insert(0, new ListItem("<Selecciona Categoria>", "0"));
+                    ddlCuenta.Items.Insert(0, new ListItem("<Selecciona Cuenta Contable>", "0"));
                     h4Titulo.InnerText = "Creación de nuevo Item";
                     seItems = new Items();
                 }
@@ -59,12 +64,27 @@ namespace WebApplication.app.StockNS
 
         public void CargaCategorias()
         {
-            List<Categoria> categorias = new List<Categoria>();
-            categorias = CategoriaOperator.GetAll();
-            ddlCategoriaId.DataSource = categorias;
+            List<Categorias> categoriasList = CategoriasOperator.GetAll();
+            ddlCategoriaId.DataSource = categoriasList;
             ddlCategoriaId.DataTextField = "Descripcion";
             ddlCategoriaId.DataValueField = "ID";
             ddlCategoriaId.DataBind();
+        }
+        public void CargaCuentas()
+        {
+            List<Cuentas> cuentasList = CuentasOperator.GetAll();
+            ddlCuenta.DataSource = cuentasList;
+            ddlCuenta.DataTextField = "Descripcion";
+            ddlCuenta.DataValueField = "ID";
+            ddlCuenta.DataBind();
+        }
+        public void CargaUnidades()
+        {
+            List<INVENTARIO_Unidades> unidadesList = INVENTARIO_UnidadesOperator.GetAll();
+            ddlUnidad.DataSource = unidadesList;
+            ddlUnidad.DataTextField = "Descripcion";
+            ddlUnidad.DataValueField = "ID";
+            ddlUnidad.DataBind();
         }
 
         protected void SetMaximosTextBoxes()
@@ -113,10 +133,12 @@ namespace WebApplication.app.StockNS
             try
             {
                 seItems.CategoriaItemId = Int32.Parse(ddlCategoriaId.Text);
+                seItems.CuentaId = Int32.Parse(ddlCuenta.Text);
                 seItems.Detalle = txtDescripcion.Text;
                 seItems.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
                 seItems.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
                 seItems.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
+                seItems.EstadoId = Int32.Parse(ddlEstado.Text);
                 INVENTARIO_Producto ItemsStock = new INVENTARIO_Producto();
                 if (seItems.Id > 0) //Items existente
                 {
@@ -147,18 +169,22 @@ namespace WebApplication.app.StockNS
             Item.CantidadNominal = 1.0m;
             Item.Cantidad = Decimal.Parse(txtCantidad.Text);
             Item.Costo = 1.0m;
-            Item.UnidadId = Int32.Parse(ddlUnidad.SelectedValue);
+            Item.UnidadId = 1;//Int32.Parse(ddlUnidad.SelectedValue);
             Item.UnidadPresentacionId = 1;
             Item.UnidadMedidaConversionId = 1;
             Item.TipoMovimientoId = 1;
             Item.CentroCostoId = 1;
-            if(Item.Id > -1)
+            Item.UpdateDate = null;
+            if (Item.Id > -1)
+            {
                 Item.UpdateDate = DateTime.Now;
+            }
             else
+            {
                 Item.CreateDate = DateTime.Now;
-
-            Item.Delete = 0;
-            Item.DeleteDate = DateTime.Now;
+            }
+            Item.Delete = 1;
+            Item.DeleteDate = null;
             Item = INVENTARIO_ProductoOperator.Save(Item);
             return Item.Id;
         }

@@ -130,7 +130,7 @@
         </div>
         <div class="form-group row">
             <label for="btnSubmit" class="col-sm-2 col-form-label text-sm-left text-md-right"></label>
-            <div class="col-sm-4">
+            <div class="col-sm-4"/>
                 <a href="<%$RouteUrl:routename=ListaRecetas%>" class="btn btncancel mt-1" runat="server">Cancelar</a>
                 <asp:Button Text="Crear Receta" runat="server" ID="btnSubmit" ClientIDMode="Static" CssClass="btn btnsubmit mt-1" OnClick="btnSubmit_Click" />
             </div>

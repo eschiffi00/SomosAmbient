@@ -262,7 +262,7 @@
                         <li class="nav-item" runat="server" id="Li2">
                             <asp:HyperLink ID="WebApplication_app_Ventas_ReservaBrowse" runat="server" CssClass="nav-link" NavigateUrl="<%$RouteUrl:routename=z1 %>" Visible="true"><i class="fa fa-book mr-1 fawidth" ></i>Room-Plan</asp:HyperLink>
                         </li>--%>
-                         <li class="nav-item dropdown">
+                         <li class="nav-item dropdown navblack">
                              
                             <a class="nav-link dropdown-toggle font-italic" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-archive mr-1 fawidth" ></i>Stock</a>

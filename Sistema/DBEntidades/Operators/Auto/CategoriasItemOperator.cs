@@ -9,48 +9,48 @@ using LibDB2;
 
 namespace DbEntidades.Operators
 {
-    public partial class ItemOperator
+    public partial class CategoriasItemOperator
     {
 
-        public static Item GetOneByIdentity(int ID)
+        public static CategoriasItem GetOneByIdentity(int Id)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoItemBrowse")) throw new PermisoException();
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasItemBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Item).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            DataTable dt = db.GetDataSet("select " + columnas + " from Item where ID = " + ID.ToString()).Tables[0];
-            Item item = new Item();
-            foreach (PropertyInfo prop in typeof(Item).GetProperties())
+            DataTable dt = db.GetDataSet("select " + columnas + " from CategoriasItem where Id = " + Id.ToString()).Tables[0];
+            CategoriasItem categoriasItem = new CategoriasItem();
+            foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties())
             {
 				object value = dt.Rows[0][prop.Name];
 				if (value == DBNull.Value) value = null;
-                try { prop.SetValue(item, value, null); }
+                try { prop.SetValue(categoriasItem, value, null); }
                 catch (System.ArgumentException) { }
             }
-            return item;
+            return categoriasItem;
         }
 
-        public static List<Item> GetAll()
+        public static List<CategoriasItem> GetAll()
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoItemBrowse")) throw new PermisoException();
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasItemBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Item).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            List<Item> lista = new List<Item>();
-            DataTable dt = db.GetDataSet("select " + columnas + " from Item").Tables[0];
+            List<CategoriasItem> lista = new List<CategoriasItem>();
+            DataTable dt = db.GetDataSet("select " + columnas + " from CategoriasItem").Tables[0];
             foreach (DataRow dr in dt.AsEnumerable())
             {
-                Item item = new Item();
-                foreach (PropertyInfo prop in typeof(Item).GetProperties())
+                CategoriasItem categoriasItem = new CategoriasItem();
+                foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties())
                 {
 					object value = dr[prop.Name];
 					if (value == DBNull.Value) value = null;
-					try { prop.SetValue(item, value, null); }
+					try { prop.SetValue(categoriasItem, value, null); }
 					catch (System.ArgumentException) { }
                 }
-                lista.Add(item);
+                lista.Add(categoriasItem);
             }
             return lista;
         }
@@ -59,39 +59,39 @@ namespace DbEntidades.Operators
 
         public class MaxLength
         {
-			public static int Descripcion { get; set; } = 200;
+			public static int Descripcion { get; set; } = 500;
 
 
         }
 
-        public static Item Save(Item item)
+        public static CategoriasItem Save(CategoriasItem categoriasItem)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoItemSave")) throw new PermisoException();
-            if (item.ID == -1) return Insert(item);
-            else return Update(item);
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasItemSave")) throw new PermisoException();
+            if (categoriasItem.Id == -1) return Insert(categoriasItem);
+            else return Update(categoriasItem);
         }
 
-        public static Item Insert(Item item)
+        public static CategoriasItem Insert(CategoriasItem categoriasItem)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoItemSave")) throw new PermisoException();
-            string sql = "insert into Item(";
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasItemSave")) throw new PermisoException();
+            string sql = "insert into CategoriasItem(";
             string columnas = string.Empty;
             string valores = string.Empty;
             List<object> param = new List<object>();
             List<object> valor = new List<object>();
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            foreach (PropertyInfo prop in typeof(Item).GetProperties())
+            foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + ", ";
                 valores += "@" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
-                valor.Add(prop.GetValue(item, null));
+                valor.Add(prop.GetValue(categoriasItem, null));
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             valores = valores.Substring(0, valores.Length - 2);
-            sql += columnas + ") output inserted.ID values (" + valores + ")";
+            sql += columnas + ") output inserted.Id values (" + valores + ")";
             DB db = new DB();
             List<object> parametros = new List<object>();
             for (int i = 0; i < param.Count; i++)
@@ -103,25 +103,25 @@ namespace DbEntidades.Operators
             }
             //object resp = db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());
-            item.ID = Convert.ToInt32(resp);
-            return item;
+            categoriasItem.Id = Convert.ToInt32(resp);
+            return categoriasItem;
         }
 
-        public static Item Update(Item item)
+        public static CategoriasItem Update(CategoriasItem categoriasItem)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoItemSave")) throw new PermisoException();
-            string sql = "update Item set ";
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasItemSave")) throw new PermisoException();
+            string sql = "update CategoriasItem set ";
             string columnas = string.Empty;
             List<object> param = new List<object>();
             List<object> valor = new List<object>();
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            foreach (PropertyInfo prop in typeof(Item).GetProperties())
+            foreach (PropertyInfo prop in typeof(CategoriasItem).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + " = @" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
-                valor.Add(prop.GetValue(item, null));
+                valor.Add(prop.GetValue(categoriasItem, null));
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             sql += columnas;
@@ -133,11 +133,11 @@ namespace DbEntidades.Operators
                 SqlParameter p = new SqlParameter(param[i].ToString(), valor[i]);
                 sqlParams.Add(p);
         }
-            sql += " where ID = " + item.ID;
+            sql += " where Id = " + categoriasItem.Id;
             DB db = new DB();
             //db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());
-            return item;
+            return categoriasItem;
     }
 
         private static string GetComilla(string tipo)

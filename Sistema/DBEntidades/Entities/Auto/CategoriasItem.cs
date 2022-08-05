@@ -8,24 +8,22 @@ using DbEntidades.Operators;
 
 namespace DbEntidades.Entities
 {
-    public partial class Tiempo
+    public partial class CategoriasItem
     {
-		public int ID { get; set; }
+		public int Id { get; set; }
 		public string Descripcion { get; set; }
-		public int Duracion { get; set; }
-		public int Orden { get; set; }
+		public int? CategoriaItemPadreId { get; set; }
 
 		public override string ToString() 
 		{
 			return "\r\n " + 
-			"ID: " + ID.ToString() + "\r\n " + 
+			"Id: " + Id.ToString() + "\r\n " + 
 			"Descripcion: " + Descripcion.ToString() + "\r\n " + 
-			"Duracion: " + Duracion.ToString() + "\r\n " + 
-			"Orden: " + Orden.ToString() + "\r\n " ;
+			"CategoriaItemPadreId: " + CategoriaItemPadreId.ToString() + "\r\n " ;
 		}
-        public Tiempo()
+        public CategoriasItem()
         {
-            ID = -1;
+            Id = -1;
 
         }
 
@@ -37,10 +35,9 @@ namespace DbEntidades.Entities
 		{
 			switch (colName) 
 			{
-				case "ID": return false;
+				case "Id": return false;
 				case "Descripcion": return false;
-				case "Duracion": return false;
-				case "Orden": return false;
+				case "CategoriaItemPadreId": return true;
 				default: return false;
 			}
 		}

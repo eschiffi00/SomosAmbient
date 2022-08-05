@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Entities\Auto\Bloqueo.cs" />
     <Compile Include="Entities\Auto\Categoria.cs" />
+    <Compile Include="Entities\Auto\Categorias.cs" />
+    <Compile Include="Entities\Auto\CategoriasItem.cs" />
     <Compile Include="Entities\Auto\CentroCostos.cs" />
     <Compile Include="Entities\Auto\CondicionGanancias.cs" />
     <Compile Include="Entities\Auto\CondicionIIBB.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Entities\Auto\Productos.cs" />
     <Compile Include="Entities\Auto\Proveedor.cs" />
     <Compile Include="Entities\Auto\Provincia.cs" />
+    <Compile Include="Entities\Auto\PRO_items.cs" />
     <Compile Include="Entities\Auto\Receta.cs" />
     <Compile Include="Entities\Auto\REC_detalle.cs" />
     <Compile Include="Entities\Auto\REC_pasos.cs" />
@@ -100,6 +103,8 @@
     <Compile Include="Entities\RecetaDetalle.cs" />
     <Compile Include="Operators\Auto\BloqueoOperator.cs" />
     <Compile Include="Operators\Auto\CategoriaOperator.cs" />
+    <Compile Include="Operators\Auto\CategoriasItemOperator.cs" />
+    <Compile Include="Operators\Auto\CategoriasOperator.cs" />
     <Compile Include="Operators\Auto\CentroCostosOperator.cs" />
     <Compile Include="Operators\Auto\CondicionGananciasOperator.cs" />
     <Compile Include="Operators\Auto\CondicionIIBBOperator.cs" />
@@ -136,10 +141,12 @@
     <Compile Include="Operators\Auto\ProductosOperator.cs" />
     <Compile Include="Operators\Auto\ProveedorOperator.cs" />
     <Compile Include="Operators\Auto\ProvinciaOperator.cs" />
+    <Compile Include="Operators\Auto\PRO_itemsOperator.cs" />
     <Compile Include="Operators\Auto\RecetaOperator.cs" />
     <Compile Include="Operators\Auto\REC_detalleOperator.cs" />
     <Compile Include="Operators\Auto\REC_pasosOperator.cs" />
     <Compile Include="Operators\Auto\RolOperator.cs" />
+    <Compile Include="Operators\Auto\StockOperator.cs" />
     <Compile Include="Operators\Auto\sysdiagramsOperator.cs" />
     <Compile Include="Operators\Auto\TiempoOperator.cs" />
     <Compile Include="Operators\Auto\TipoDocumentosOperator.cs" />

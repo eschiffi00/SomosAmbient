@@ -59,10 +59,6 @@ namespace DbEntidades.Entities
 		{
 			return Exp_detalleOperator.GetAll().Where(x => x.ExperienciaID == ID).ToList();
 		}
-		public List<ExpTiempoProd> GetRelatedExpTiempoProdes()
-		{
-			return ExpTiempoProdOperator.GetAll().Where(x => x.ExperienciaID == ID).ToList();
-		}
 
 
 		public static bool CanBeNull(string colName)

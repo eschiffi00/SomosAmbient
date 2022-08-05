@@ -33,10 +33,6 @@ namespace DbEntidades.Entities
 		{
 			return ExperienciaOperator.GetAll().Where(x => x.EstadoID == ID).ToList();
 		}
-		public List<TipoExperiencia> GetRelatedTipoExperiencias()
-		{
-			return TipoExperienciaOperator.GetAll().Where(x => x.EstadoID == ID).ToList();
-		}
 		public List<Momento> GetRelatedMomentos()
 		{
 			return MomentoOperator.GetAll().Where(x => x.EstadoID == ID).ToList();

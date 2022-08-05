@@ -9,89 +9,105 @@ using LibDB2;
 
 namespace DbEntidades.Operators
 {
-    public partial class ProductoOperator
+    public partial class CategoriasOperator
     {
 
-        public static Producto GetOneByIdentity(int ID)
+        public static Categorias GetOneByIdentity(int Id)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoProductoBrowse")) throw new PermisoException();
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Producto).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(Categorias).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            DataTable dt = db.GetDataSet("select " + columnas + " from Producto where ID = " + ID.ToString()).Tables[0];
-            Producto producto = new Producto();
-            foreach (PropertyInfo prop in typeof(Producto).GetProperties())
+            DataTable dt = db.GetDataSet("select " + columnas + " from Categorias where Id = " + Id.ToString()).Tables[0];
+            Categorias categorias = new Categorias();
+            foreach (PropertyInfo prop in typeof(Categorias).GetProperties())
             {
 				object value = dt.Rows[0][prop.Name];
 				if (value == DBNull.Value) value = null;
-                try { prop.SetValue(producto, value, null); }
+                try { prop.SetValue(categorias, value, null); }
                 catch (System.ArgumentException) { }
             }
-            return producto;
+            return categorias;
         }
 
-        public static List<Producto> GetAll()
+        public static List<Categorias> GetAll()
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoProductoBrowse")) throw new PermisoException();
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasBrowse")) throw new PermisoException();
             string columnas = string.Empty;
-            foreach (PropertyInfo prop in typeof(Producto).GetProperties()) columnas += prop.Name + ", ";
+            foreach (PropertyInfo prop in typeof(Categorias).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            List<Producto> lista = new List<Producto>();
-            DataTable dt = db.GetDataSet("select " + columnas + " from Producto").Tables[0];
+            List<Categorias> lista = new List<Categorias>();
+            DataTable dt = db.GetDataSet("select " + columnas + " from Categorias").Tables[0];
             foreach (DataRow dr in dt.AsEnumerable())
             {
-                Producto producto = new Producto();
-                foreach (PropertyInfo prop in typeof(Producto).GetProperties())
+                Categorias categorias = new Categorias();
+                foreach (PropertyInfo prop in typeof(Categorias).GetProperties())
                 {
 					object value = dr[prop.Name];
 					if (value == DBNull.Value) value = null;
-					try { prop.SetValue(producto, value, null); }
+					try { prop.SetValue(categorias, value, null); }
 					catch (System.ArgumentException) { }
                 }
-                lista.Add(producto);
+                lista.Add(categorias);
             }
             return lista;
         }
 
+		public static List<Categorias> GetAllEstado1()
+		{
+			return GetAll().Where(x => x.EstadoId == 1).ToList();
+		}
+		public static List<Categorias> GetAllEstadoNot1()
+		{
+			return GetAll().Where(x => x.EstadoId != 1).ToList();
+		}
+		public static List<Categorias> GetAllEstadoN(int estado)
+		{
+			return GetAll().Where(x => x.EstadoId == estado).ToList();
+		}
+		public static List<Categorias> GetAllEstadoNotN(int estado)
+		{
+			return GetAll().Where(x => x.EstadoId != estado).ToList();
+		}
 
 
         public class MaxLength
         {
-			public static int Descripcion { get; set; } = 50;
+			public static int Descripcion { get; set; } = 200;
 
 
         }
 
-        public static Producto Save(Producto producto)
+        public static Categorias Save(Categorias categorias)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoProductoSave")) throw new PermisoException();
-            if (producto.ID == -1) return Insert(producto);
-            else return Update(producto);
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasSave")) throw new PermisoException();
+            if (categorias.Id == -1) return Insert(categorias);
+            else return Update(categorias);
         }
 
-        public static Producto Insert(Producto producto)
+        public static Categorias Insert(Categorias categorias)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoProductoSave")) throw new PermisoException();
-            string sql = "insert into Producto(";
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasSave")) throw new PermisoException();
+            string sql = "insert into Categorias(";
             string columnas = string.Empty;
             string valores = string.Empty;
             List<object> param = new List<object>();
             List<object> valor = new List<object>();
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            foreach (PropertyInfo prop in typeof(Producto).GetProperties())
+            foreach (PropertyInfo prop in typeof(Categorias).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + ", ";
                 valores += "@" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
-                valor.Add(prop.GetValue(producto, null));
+                valor.Add(prop.GetValue(categorias, null));
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             valores = valores.Substring(0, valores.Length - 2);
-            sql += columnas + ") output inserted.ID values (" + valores + ")";
+            sql += columnas + ") output inserted.Id values (" + valores + ")";
             DB db = new DB();
             List<object> parametros = new List<object>();
             for (int i = 0; i < param.Count; i++)
@@ -103,25 +119,25 @@ namespace DbEntidades.Operators
             }
             //object resp = db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());
-            producto.ID = Convert.ToInt32(resp);
-            return producto;
+            categorias.Id = Convert.ToInt32(resp);
+            return categorias;
         }
 
-        public static Producto Update(Producto producto)
+        public static Categorias Update(Categorias categorias)
         {
-            if (!DbEntidades.Seguridad.Permiso("PermisoProductoSave")) throw new PermisoException();
-            string sql = "update Producto set ";
+            if (!DbEntidades.Seguridad.Permiso("PermisoCategoriasSave")) throw new PermisoException();
+            string sql = "update Categorias set ";
             string columnas = string.Empty;
             List<object> param = new List<object>();
             List<object> valor = new List<object>();
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            foreach (PropertyInfo prop in typeof(Producto).GetProperties())
+            foreach (PropertyInfo prop in typeof(Categorias).GetProperties())
             {
-                if (prop.Name == "ID") continue; //es identity
+                if (prop.Name == "Id") continue; //es identity
                 columnas += prop.Name + " = @" + prop.Name + ", ";
                 param.Add("@" + prop.Name);
-                valor.Add(prop.GetValue(producto, null));
+                valor.Add(prop.GetValue(categorias, null));
             }
             columnas = columnas.Substring(0, columnas.Length - 2);
             sql += columnas;
@@ -133,11 +149,11 @@ namespace DbEntidades.Operators
                 SqlParameter p = new SqlParameter(param[i].ToString(), valor[i]);
                 sqlParams.Add(p);
         }
-            sql += " where ID = " + producto.ID;
+            sql += " where Id = " + categorias.Id;
             DB db = new DB();
             //db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());
-            return producto;
+            return categorias;
     }
 
         private static string GetComilla(string tipo)

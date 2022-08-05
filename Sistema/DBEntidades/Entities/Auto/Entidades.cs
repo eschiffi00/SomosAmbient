@@ -99,10 +99,6 @@ namespace DbEntidades.Entities
 
 
 
-		public List<Documentos> GetRelatedDocumentoses()
-		{
-			return DocumentosOperator.GetAll().Where(x => x.EntidadId == Id).ToList();
-		}
 
 
 		public static bool CanBeNull(string colName)

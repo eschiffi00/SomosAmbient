@@ -44,6 +44,13 @@ namespace DbEntidades.Entities
         }
 
 
+
+		public List<PRO_items> GetRelatedPRO_itemses()
+		{
+			return PRO_itemsOperator.GetAll().Where(x => x.ProveedorID == ID).ToList();
+		}
+
+
 		public static bool CanBeNull(string colName)
 		{
 			switch (colName) 

@@ -42,23 +42,36 @@
 .btnsubmit {
     background-color: black !important;
     color: white !important;
-    transition: background-color 1s;
+    transition: background-color 0.5s , transform 0.5s;
+    margin-left: 20px !important;
+    border-radius:2px;
 }
 
     .btnsubmit:hover {
         background-color: green !important;
+        transform: scale(1.1) !important;
     }
 .btncancel {
     background-color: black !important;
     color: white !important;
-    transition: background-color 1s;
+    transition: background-color 0.5s,transform 0.5s;
+    border-radius: 2px;
 }
 
     .btncancel:hover {
         background-color: #e40a0a !important;
-
-        
+        transform: scale(1.1) !important;
     }
 #divGrid {
     padding-left: 15% !important;
+}
+.form-control:focus {
+    border-color: black !important;
+    box-shadow: 0 0 7px 1px black !important;
+}
+.btn:focus{
+    box-shadow:none;
+}
+.sidebar{
+    box-shadow: 0 0 7px 1px black !important;
 }

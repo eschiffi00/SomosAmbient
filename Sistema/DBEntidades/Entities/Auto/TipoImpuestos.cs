@@ -27,10 +27,6 @@ namespace DbEntidades.Entities
 
 
 
-		public List<Productos> GetRelatedProductoses()
-		{
-			return ProductosOperator.GetAll().Where(x => x.TipoImpuestoId == Id).ToList();
-		}
 
 
 		public static bool CanBeNull(string colName)

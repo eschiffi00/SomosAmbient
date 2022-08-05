@@ -27,10 +27,6 @@ namespace DbEntidades.Entities
 
 
 
-		public List<Documentos> GetRelatedDocumentoses()
-		{
-			return DocumentosOperator.GetAll().Where(x => x.EmpresaId == Id).ToList();
-		}
 		public List<Cuentas> GetRelatedCuentases()
 		{
 			return CuentasOperator.GetAll().Where(x => x.EmpresaId == Id).ToList();
