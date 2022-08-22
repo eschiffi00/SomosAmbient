@@ -59,6 +59,12 @@ namespace DbEntidades.Entities
 			Delete = 0;
         }
 
+		public Rubros GetRelatedRubroId()
+		{
+			Rubros rubros = RubrosOperator.GetOneByIdentity(RubroId);
+			return rubros;
+		}
+
 		public INVENTARIO_Unidades GetRelatedUnidadId()
 		{
 			INVENTARIO_Unidades iNVENTARIO_Unidades = INVENTARIO_UnidadesOperator.GetOneByIdentity(UnidadId);
@@ -71,8 +77,30 @@ namespace DbEntidades.Entities
 			return iNVENTARIO_Unidades;
 		}
 
+		public INVENTARIO_UnidadesConversion GetRelatedUnidadMedidaConversionId()
+		{
+			INVENTARIO_UnidadesConversion iNVENTARIO_UnidadesConversion = INVENTARIO_UnidadesConversionOperator.GetOneByIdentity(UnidadMedidaConversionId);
+			return iNVENTARIO_UnidadesConversion;
+		}
 
 
+
+		public List<INVENTARIO_Movimiento_Producto> GetRelatedINVENTARIO_Movimiento_Productos()
+		{
+			return INVENTARIO_Movimiento_ProductoOperator.GetAll().Where(x => x.ProductoId == Id).ToList();
+		}
+		public List<INVENTARIO_ProductoDeposito> GetRelatedINVENTARIO_ProductoDepositos()
+		{
+			return INVENTARIO_ProductoDepositoOperator.GetAll().Where(x => x.ProductoId == Id).ToList();
+		}
+		public List<INVENTARIO_Recetas> GetRelatedINVENTARIO_RecetasesProducto()
+		{
+			return INVENTARIO_RecetasOperator.GetAll().Where(x => x.ProductoId == Id).ToList();
+		}
+		public List<INVENTARIO_Recetas> GetRelatedINVENTARIO_RecetasesIngrediente()
+		{
+			return INVENTARIO_RecetasOperator.GetAll().Where(x => x.IngredienteId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

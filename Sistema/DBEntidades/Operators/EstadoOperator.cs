@@ -9,16 +9,16 @@ using LibDB2;
 
 namespace DbEntidades.Operators
 {
-    public partial class EstadoOperator
+    public partial class EstadosOperator
     {
         public static int GetHablitadoID()
         {
-            int u = GetAll().Where(x => x.Descripcion == "Habilitado").FirstOrDefault().ID;
+            int u = GetAll().Where(x => x.Descripcion == "Activo" && x.Entidad == "Items").FirstOrDefault().Id;
             return u;
         }
         public static int GetDeshabilitadoID()
         {
-            int u = GetAll().Where(x => x.Descripcion == "Deshabilitado").FirstOrDefault().ID;
+            int u = GetAll().Where(x => x.Descripcion == "Inactivo" && x.Entidad == "Items").FirstOrDefault().Id;
             return u;
         }
     }

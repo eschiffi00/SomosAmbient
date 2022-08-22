@@ -11,19 +11,19 @@ namespace DbEntidades.Entities
     public partial class ItemDetalle
     {
 		public int Id { get; set; }
-		public int ItemDetalleID { get; set; }
+		public int ItemDetalleId { get; set; }
 		public decimal ItemId { get; set; }
 
 		public override string ToString() 
 		{
 			return "\r\n " + 
 			"Id: " + Id.ToString() + "\r\n " + 
-			"ItemDetalleID: " + ItemDetalleID.ToString() + "\r\n " + 
+			"ItemDetalleId: " + ItemDetalleId.ToString() + "\r\n " + 
 			"ItemId: " + ItemId.ToString() + "\r\n " ;
 		}
         public ItemDetalle()
         {
-           Id  = -1;
+			Id = -1;
 
         }
 
@@ -36,7 +36,7 @@ namespace DbEntidades.Entities
 			switch (colName) 
 			{
 				case "Id": return false;
-				case "ItemDetalleID": return false;
+				case "ItemDetalleId": return false;
 				case "ItemId": return false;
 				default: return false;
 			}

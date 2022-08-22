@@ -13,34 +13,50 @@ namespace DbEntidades.Entities
 		public int Id { get; set; }
 		public string Detalle { get; set; }
 		public int CategoriaItemId { get; set; }
-		public int ItemDetalleId { get; set; }
-		public int CuentaId { get; set; }
 		public decimal Costo { get; set; }
 		public decimal Margen { get; set; }
 		public decimal Precio { get; set; }
-		public int DepositoId { get; set; }
 		public int EstadoId { get; set; }
+		public int? ItemDetalleId { get; set; }
+		public int? CuentaId { get; set; }
+		public int? DepositoId { get; set; }
 
 		public override string ToString() 
 		{
 			return "\r\n " + 
 			"Id: " + Id.ToString() + "\r\n " + 
 			"Detalle: " + Detalle.ToString() + "\r\n " + 
-			"Categoria: " + CategoriaItemId.ToString() + "\r\n " +
+			"CategoriaItemId: " + CategoriaItemId.ToString() + "\r\n " + 
 			"Costo: " + Costo.ToString() + "\r\n " + 
 			"Margen: " + Margen.ToString() + "\r\n " + 
 			"Precio: " + Precio.ToString() + "\r\n " + 
-			"DepositoId: " + DepositoId.ToString() + "\r\n " + 
-			"EstadoId: " + EstadoId.ToString() + "\r\n " ;
+			"EstadoId: " + EstadoId.ToString() + "\r\n " + 
+			"ItemDetalleId: " + ItemDetalleId.ToString() + "\r\n " + 
+			"CuentaId: " + CuentaId.ToString() + "\r\n " + 
+			"DepositoId: " + DepositoId.ToString() + "\r\n " ;
 		}
         public Items()
         {
-           Id  = -1;
+			Id = -1;
 
         }
 
+		public CategoriasItem GetRelatedCategoriaItemId()
+		{
+			CategoriasItem categoriasItem = CategoriasItemOperator.GetOneByIdentity(CategoriaItemId);
+			return categoriasItem;
+		}
 
 
+
+		public List<AdicionalesItems> GetRelatedAdicionalesItemses()
+		{
+			return AdicionalesItemsOperator.GetAll().Where(x => x.ItemId == Id).ToList();
+		}
+		public List<ProductosCateringItems> GetRelatedProductosCateringItemses()
+		{
+			return ProductosCateringItemsOperator.GetAll().Where(x => x.ItemId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)
@@ -53,8 +69,10 @@ namespace DbEntidades.Entities
 				case "Costo": return false;
 				case "Margen": return false;
 				case "Precio": return false;
-				case "DepositoId": return false;
-				case "EstadoId": return true;
+				case "EstadoId": return false;
+				case "ItemDetalleId": return true;
+				case "CuentaId": return true;
+				case "DepositoId": return true;
 				default: return false;
 			}
 		}

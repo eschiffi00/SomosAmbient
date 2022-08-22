@@ -11,7 +11,7 @@ using System.Data;
 
 namespace WebApplication.app.StockNS
 {
-    public partial class ProductoBrowse : System.Web.UI.Page
+    public partial class ItemsBrowse : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,7 +20,6 @@ namespace WebApplication.app.StockNS
                 if (string.IsNullOrEmpty(Convert.ToString(Session["UsuarioId"]))) Response.Redirect("~/app/Seguridad/UsuarioLogin.aspx?url=" + Server.UrlEncode(Request.Url.AbsoluteUri));
                 if (!PermisoOperator.TienePermiso(Convert.ToInt32(Session["UsuarioId"]), GetType().BaseType.FullName)) throw new PermisoException();
                 grdItemsBind();
-
             }
         }
 
@@ -39,9 +38,22 @@ namespace WebApplication.app.StockNS
         {
             Response.Redirect(GetRouteUrl("NuevoItem", null));
         }
-        protected void LinkButtonEdit_Click(object sender, EventArgs e)
+        protected void grdItems_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Response.Redirect(GetRouteUrl("EditaItemss", null));
+            GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
+            int colindex = CCLib.GetColumnIndexByHeaderText((GridView)sender, "ID");
+            int id = Convert.ToInt32(row.Cells[colindex].Text);
+
+            if (e.CommandName == "CommandNameDelete")
+            {
+                ItemsOperator.Delete(id);
+                grdItemsBind();
+            }
+            if (e.CommandName == "CommandNameEdit")
+            {
+                string url = GetRouteUrl("EditaItems", new { id = id.ToString() });
+                Response.Redirect(url);
+            }
         }
 
         protected void txtBuscar_TextChanged(object sender, EventArgs e)

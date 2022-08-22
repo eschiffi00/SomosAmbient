@@ -31,7 +31,7 @@ namespace DbEntidades.Operators
             return iNVENTARIO_Producto;
         }
 
-        public static List<INVENTARIO_Producto> GetAll() 
+        public static List<INVENTARIO_Producto> GetAll()
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoINVENTARIO_ProductoBrowse")) throw new PermisoException();
             string columnas = string.Empty;

@@ -59,7 +59,9 @@ namespace DbEntidades.Operators
 
         public class MaxLength
         {
-			public static int RazonSocial { get; set; } = 50;
+			public static int RazonSocial { get; set; } = 300;
+			public static int Cuit { get; set; } = 15;
+			public static int CondicionIva { get; set; } = 50;
 
 
         }

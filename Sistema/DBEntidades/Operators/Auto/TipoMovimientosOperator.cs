@@ -59,6 +59,11 @@ namespace DbEntidades.Operators
 
         public class MaxLength
         {
+			public static int Codigo { get; set; } = 50;
+			public static int Descripcion { get; set; } = 500;
+			public static int Tipo { get; set; } = 50;
+			public static int Visible { get; set; } = 1;
+			public static int TipoGasto { get; set; } = 50;
 
 
         }

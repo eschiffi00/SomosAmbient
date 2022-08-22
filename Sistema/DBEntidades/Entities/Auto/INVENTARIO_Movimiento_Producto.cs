@@ -35,6 +35,12 @@ namespace DbEntidades.Entities
 
         }
 
+		public INVENTARIO_Producto GetRelatedProductoId()
+		{
+			INVENTARIO_Producto iNVENTARIO_Producto = INVENTARIO_ProductoOperator.GetOneByIdentity(ProductoId);
+			return iNVENTARIO_Producto;
+		}
+
 
 
 

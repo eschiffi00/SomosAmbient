@@ -12,17 +12,17 @@ namespace DbEntidades.Entities
     {
 		public int Id { get; set; }
 		public string Detalle { get; set; }
-		public int ItemDetalleId { get; set; }
-		public int CategoriaItemId { get; set; }
+		public int? ItemDetalleId { get; set; }
+		public int? CategoriaItemId { get; set; }
 		public string CategoriaDescripcion { get; set; }
-		public int CuentaId { get; set; }
+		public int? CuentaId { get; set; }
 		public string CuentaDescripcion { get; set; }
 		public decimal Costo { get; set; }
 		public decimal Margen { get; set; }
 		public decimal Precio { get; set; }
-		public int DepositoId { get; set; }
+		public int? DepositoId { get; set; }
 		public string Unidad{ get; set; }
-		public decimal Cantidad { get; set; }
+		public decimal? Cantidad { get; set; }
 		public int EstadoId { get; set; }
 		public string Estado { get; set; }
 
@@ -44,11 +44,21 @@ namespace DbEntidades.Entities
 			"EstadoID: " + EstadoId.ToString() + "\r\n " +
 			"Estado: " + Estado.ToString() + "\r\n " ;
 		}
-    }
+		public ItemsListado()
+		{
+			Id = -1;
+			ItemDetalleId = -1;
+			CategoriaItemId = -1;
+			CuentaId = -1;
+			DepositoId = -1;
+
+		}
+	}
 	public partial class ItemsCombo
     {
 		public int Id { get; set; }
 		public string Detalle { get; set; }
 	}
+	
 }
 

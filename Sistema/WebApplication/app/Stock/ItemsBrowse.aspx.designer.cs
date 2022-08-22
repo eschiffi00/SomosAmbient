@@ -11,7 +11,7 @@ namespace WebApplication.app.StockNS
 {
 
 
-    public partial class ProductoBrowse
+    public partial class ItemsBrowse
     {
 
         /// <summary>

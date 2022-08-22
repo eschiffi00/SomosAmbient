@@ -27,6 +27,10 @@ namespace DbEntidades.Entities
 
 
 
+		public List<ComprobantesProveedores_Detalles> GetRelatedComprobantesProveedores_Detalleses()
+		{
+			return ComprobantesProveedores_DetallesOperator.GetAll().Where(x => x.CentroCostoId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

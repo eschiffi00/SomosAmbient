@@ -33,6 +33,14 @@ namespace DbEntidades.Entities
 		{
 			return CuentasOperator.GetAll().Where(x => x.MonedaId == Id).ToList();
 		}
+		public List<ConversionMonedas> GetRelatedConversionMonedasesMonedaOrigen()
+		{
+			return ConversionMonedasOperator.GetAll().Where(x => x.MonedaOrigenId == Id).ToList();
+		}
+		public List<ConversionMonedas> GetRelatedConversionMonedasesMonedaDestino()
+		{
+			return ConversionMonedasOperator.GetAll().Where(x => x.MonedaDestinoId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

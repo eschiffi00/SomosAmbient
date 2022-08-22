@@ -27,9 +27,13 @@ namespace DbEntidades.Entities
 
 
 
-		public List<Entidades> GetRelatedEntidadeses()
+		public List<Proveedores> GetRelatedProveedoreses()
 		{
-			return EntidadesOperator.GetAll().Where(x => x.CondicionIvaId == Id).ToList();
+			return ProveedoresOperator.GetAll().Where(x => x.CondicionIvaId == Id).ToList();
+		}
+		public List<TipoComprobantes> GetRelatedTipoComprobanteses()
+		{
+			return TipoComprobantesOperator.GetAll().Where(x => x.CondicionIvaId == Id).ToList();
 		}
 
 

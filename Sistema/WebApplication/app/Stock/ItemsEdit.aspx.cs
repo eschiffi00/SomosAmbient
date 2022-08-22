@@ -22,7 +22,7 @@ namespace WebApplication.app.StockNS
                 if (!PermisoOperator.TienePermiso(Convert.ToInt32(Session["UsuarioId"]), GetType().BaseType.FullName)) throw new PermisoException();
 
                 SessionClearAll();
-
+                chkDetalle.InputAttributes.Add("class", "customCheck");
                 string s;
                 object o = Page.RouteData.Values["id"];
                 if (o != null) s = Page.RouteData.Values["id"].ToString();
@@ -35,19 +35,28 @@ namespace WebApplication.app.StockNS
                     int uid = Convert.ToInt32(s);
                     seItems = ItemsOperator.GetOneByIdentity(uid);
                     //obtengo todas las categorias y utilizo descripcion y id
-                    ddlCategoriaId.SelectedValue = CategoriasOperator.GetOneByIdentity(seItems.CategoriaItemId).Id.ToString();
-                    ddlCuenta.SelectedValue = CuentasOperator.GetOneByIdentity(seItems.CuentaId).Id.ToString();
-                    ddlUnidad.SelectedValue = INVENTARIO_UnidadesOperator.GetOneByIdentity((INVENTARIO_ProductoOperator.GetOneByIdentity(seItems.DepositoId).Id)).Descripcion;
-                    txtDescripcion.Text = seItems.Detalle;
+                    if (seItems.CategoriaItemId > 0)
+                    {
+                        ddlCategoriaId.SelectedValue = CategoriasOperator.GetOneByIdentity((int)seItems.CategoriaItemId).Id.ToString();
+                    }
+                    if(seItems.CuentaId > 0)
+                    {
+                        ddlCuenta.SelectedValue = CuentasOperator.GetOneByIdentity((int)seItems.CuentaId).Id.ToString();
+                    }
+                    if (seItems.DepositoId > 0)
+                    {
+                        ddlUnidad.SelectedValue = INVENTARIO_UnidadesOperator.GetOneByIdentity((INVENTARIO_ProductoOperator.GetOneByIdentity((int)seItems.DepositoId).Id)).Descripcion;
+                    }
+                        txtDescripcion.Text = seItems.Detalle;
                     //busco el stock para el StockID
-                    INVENTARIO_Producto stockCant = new INVENTARIO_Producto();
-                    stockCant = INVENTARIO_ProductoOperator.GetOneByIdentity(seItems.DepositoId);
-                    txtCantidad.Text = stockCant.Cantidad.ToString();
+                    //INVENTARIO_Producto stockCant = new INVENTARIO_Producto();
+                    //stockCant = INVENTARIO_ProductoOperator.GetOneByIdentity(seItems.DepositoId);
+                    //txtCantidad.Text = stockCant.Cantidad.ToString();
                     txtMargen.Text = seItems.Margen.ToString();
                     txtCosto.Text = seItems.Costo.ToString();
                     txtPrecio.Text = seItems.Precio.ToString();
-                    btnSubmit.Text = "Modifica Items";
-                    ddlEstado.SelectedValue = EstadoOperator.GetOneByIdentity(seItems.EstadoId).ID.ToString();
+                    btnSubmit.Text = "Grabar";
+                    ddlEstado.SelectedValue = EstadosOperator.GetOneByIdentity(seItems.EstadoId).Id.ToString();
                 }
                 else
                 {
@@ -74,7 +83,7 @@ namespace WebApplication.app.StockNS
         {
             List<Cuentas> cuentasList = CuentasOperator.GetAll();
             ddlCuenta.DataSource = cuentasList;
-            ddlCuenta.DataTextField = "Descripcion";
+            ddlCuenta.DataTextField = "Nombre";
             ddlCuenta.DataValueField = "ID";
             ddlCuenta.DataBind();
         }
@@ -142,13 +151,14 @@ namespace WebApplication.app.StockNS
                 INVENTARIO_Producto ItemsStock = new INVENTARIO_Producto();
                 if (seItems.Id > 0) //Items existente
                 {
-                    ItemsStock.Id = seItems.DepositoId;
-                    ActualizaStock(ItemsStock);
+                    //ItemsStock.Id = (int)seItems.DepositoId;
+                    //ActualizaStock(ItemsStock);
                 }
                 else ///////////Items NUEVO\\\\\\\\\\\\\\
                 {
-                    seItems.DepositoId = ActualizaStock(ItemsStock);
-                    seItems.EstadoId = EstadoOperator.GetHablitadoID();
+                    //seItems.DepositoId = ActualizaStock(ItemsStock);
+                    seItems.DepositoId = 0;
+                    seItems.EstadoId = EstadosOperator.GetHablitadoID();
                     ItemsOperator.Save(seItems);
                     string url = GetRouteUrl("ListaItemss", null);
                     Response.Redirect(url);

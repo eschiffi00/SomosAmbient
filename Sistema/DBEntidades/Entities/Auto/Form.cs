@@ -25,19 +25,10 @@ namespace DbEntidades.Entities
         {
             FormId = -1;
 
-			EstadoId = 1;
         }
 
 
 
-		public List<Bloqueo> GetRelatedBloqueos()
-		{
-			return BloqueoOperator.GetAll().Where(x => x.FormId == FormId).ToList();
-		}
-		public List<Permiso> GetRelatedPermisos()
-		{
-			return PermisoOperator.GetAll().Where(x => x.FormId == FormId).ToList();
-		}
 
 
 		public static bool CanBeNull(string colName)

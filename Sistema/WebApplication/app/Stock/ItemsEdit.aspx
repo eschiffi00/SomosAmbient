@@ -1,65 +1,33 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsEdit.aspx.cs" Inherits="WebApplication.app.StockNS.ItemsEdit"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
-        //window.onload = function () {
-        //    document.getElementById("divPeso").style.display = 'none';
-        //    document.getElementById("divCantidad").style.display = 'none';
-        //    CreaRadios();
-        //    if (document.querySelector('#divPeso input').value != "") {
-        //        document.getElementById("divPeso").style.display = 'flex';
-        //        document.getElementById("Peso").checked = true;
-        //    } else if (document.querySelector('#divCantidad input').value != "") {
-        //        document.getElementById("divCantidad").style.display = 'flex';
-        //        document.getElementById("Cantidad").checked = true;
-        //    }
-        //};
+        window.onload = function () {
+            document.getElementById("Itemcoleccion").style.display = 'none';
+            var chkdetalle = document.querySelector('[id$="chkDetalle"]');
+            chkdetalle.addEventListener('change', CheckDetalle);
+                
+            CheckDetalle();
+            //if (document.querySelector('#divPeso input').value != "") {
+            //    document.getElementById("divPeso").style.display = 'flex';
+            //    document.getElementById("Peso").checked = true;
+            //} else if (document.querySelector('#divCantidad input').value != "") {
+            //    document.getElementById("divCantidad").style.display = 'flex';
+            //    document.getElementById("Cantidad").checked = true;
+            //}
+        };
+        function CheckDetalle() {
+            var chkboxid = document.querySelector('[id$="chkDetalle"]').id;
+            if (document.getElementById(chkboxid).checked) {
+                document.getElementById("Itemcoleccion").style.display = 'flex';
+                document.getElementById("categorias").style.display = 'none';
+                document.getElementById("cuentas").style.display = 'none';
 
-        //function CreaRadios() {
-        //    let stockdescripcion = ["Peso", "Cantidad"];
-        //    for (var i = 0; i <= 1; i++) {
-        //        var label = document.createElement('label');
-        //        label.htmlFor = 'tipoStock';
-        //        if (stockdescripcion[i] == "Peso") {
-        //            label.className = 'col-sm-3 text-sm-left text-md-right radio';
-        //        } else {
-        //            label.className = 'text-sm-left text-md-right radio';
-        //        }
-
-
-        //        var radiobox = document.createElement('input');
-        //        radiobox.type = 'radio';
-        //        radiobox.name = 'radio';
-        //        radiobox.id = stockdescripcion[i];
-
-        //        label.appendChild(radiobox);
-
-
-        //        var span = document.createElement('span');
-        //        span.className = 'checkmark';
-        //        label.appendChild(span);
-
-        //        var p = document.createElement('span');
-        //        p.className = 'checkmark';
-        //        p.textContent = stockdescripcion[i];
-        //        label.appendChild(p);
-
-        //        var container = document.getElementById('contStock');
-
-        //        container.appendChild(label);
-        //    }
-        //    var radioSelect = document.getElementById("Peso");
-        //    radioSelect.addEventListener('click', (event) => {
-        //        document.getElementById("divPeso").style.display = 'flex';
-        //        document.getElementById("divCantidad").style.display = 'none';
-        //        document.querySelector('#divCantidad input').value = ""
-        //    });
-        //    radioSelect = document.getElementById("Cantidad");
-        //    radioSelect.onclick = function () {
-        //        document.getElementById("divPeso").style.display = 'none';
-        //        document.getElementById("divCantidad").style.display = 'flex';
-        //        document.querySelector('#divPeso input').value = ""
-        //    }
-        //}
+            } else {
+                document.getElementById("Itemcoleccion").style.display = 'none';
+                document.getElementById("categorias").style.display = 'flex';
+                document.getElementById("cuentas").style.display = 'flex';
+            }
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -90,13 +58,27 @@
                 <div class="invalid-feedback">Debe ingresar una descripcion para el Item</div>
             </div>
         </div>
-         <div class="form-group row">
+        <div>
+            <div class="form-group row">
+                <label for="chkDetalle" class="col-sm-2 col-form-label text-sm-left text-md-right">Collección</label>
+                <div class="col-sm-6">
+                     <asp:CheckBox ID="chkDetalle" CssClass="customCheck" runat="server" Enabled="true" Checked='<%# (int)Eval("ItemDetalleId") > 0 %>'></asp:CheckBox>        
+                </div>
+            </div>
+            <div class="form-group row" id="Itemcoleccion">
+                <label for="ddlItems" class="col-sm-2 col-form-label text-sm-left text-md-right">Item Collección</label>
+                <div class="col-sm-4">
+                    <asp:DropDownList  id="ddlItems" runat="server" datatextfield="Descripcion" datavaluefield="Descripcion" style="height:30px" ></asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" id="categorias">
             <label for="ddlCategoriaId" class="col-sm-2 col-form-label text-sm-left text-md-right">Categoria</label>
             <div class="col-sm-4">
                 <asp:DropDownList runat="server" ID="ddlCategoriaId" ClientIDMode="Static" TabIndex="2" CssClass="form-control mt-1"></asp:DropDownList>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" id="cuentas">
             <label for="ddlCuenta" class="col-sm-2 col-form-label text-sm-left text-md-right">Cuenta Contable</label>
             <div class="col-sm-4">
                 <asp:DropDownList runat="server" ID="ddlCuenta" ClientIDMode="Static" TabIndex="2" CssClass="form-control mt-1"></asp:DropDownList>
@@ -136,8 +118,8 @@
             <label for="ddlEstado" class="col-sm-2 col-form-label text-sm-left text-md-right">Estado</label>
             <div class="col-sm-4">
                 <asp:DropDownList runat="server" ID="ddlEstado" TabIndex="8" ClientIDMode="Static" CssClass="form-control mt-1">
-                    <asp:ListItem Text="Habilitado" Value="0" Selected="True" />
-                    <asp:ListItem Text="Deshabilitado" Value="1" />
+                    <asp:ListItem Text="Habilitado" Value="36" Selected="True" />
+                    <asp:ListItem Text="Deshabilitado" Value="37" />
                 </asp:DropDownList>
             </div>
         </div>

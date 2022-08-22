@@ -212,7 +212,7 @@ namespace WebApplication.app.StockNS
                 else ///////////Receta NUEVO\\\\\\\\\\\\\\
                 {
                     seReceta.StockID = ActualizaStock(RecetaStock);
-                    seReceta.EstadoID = EstadoOperator.GetHablitadoID();
+                    seReceta.EstadoID = EstadosOperator.GetHablitadoID();
                     RecetaOperator.Save(seReceta);
                     
                 }

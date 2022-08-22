@@ -75,3 +75,8 @@
 .sidebar{
     box-shadow: 0 0 7px 1px black !important;
 }
+.customCheck {
+    width: 20px !important;
+    height: 20px !important;
+    color: black !important;
+}

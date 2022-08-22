@@ -39,6 +39,10 @@ namespace DbEntidades.Entities
 
 
 
+		public List<INVENTARIO_Requerimiento_Detalle> GetRelatedINVENTARIO_Requerimiento_Detalles()
+		{
+			return INVENTARIO_Requerimiento_DetalleOperator.GetAll().Where(x => x.PedidoId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

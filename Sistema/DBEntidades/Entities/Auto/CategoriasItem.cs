@@ -29,6 +29,22 @@ namespace DbEntidades.Entities
 
 
 
+		public List<Familias> GetRelatedFamiliases()
+		{
+			return FamiliasOperator.GetAll().Where(x => x.CategoriaItemId == Id).ToList();
+		}
+		public List<TipoCateringTiempoProductoItem> GetRelatedTipoCateringTiempoProductoItemes()
+		{
+			return TipoCateringTiempoProductoItemOperator.GetAll().Where(x => x.CategoriaItemId == Id).ToList();
+		}
+		public List<Items> GetRelatedItemses()
+		{
+			return ItemsOperator.GetAll().Where(x => x.CategoriaItemId == Id).ToList();
+		}
+		public List<TipoBarraCategoriaItem> GetRelatedTipoBarraCategoriaItemes()
+		{
+			return TipoBarraCategoriaItemOperator.GetAll().Where(x => x.CategoriaItemId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

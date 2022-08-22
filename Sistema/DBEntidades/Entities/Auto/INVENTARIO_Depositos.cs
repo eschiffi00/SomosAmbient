@@ -37,6 +37,10 @@ namespace DbEntidades.Entities
 
 
 
+		public List<INVENTARIO_ProductoDeposito> GetRelatedINVENTARIO_ProductoDepositos()
+		{
+			return INVENTARIO_ProductoDepositoOperator.GetAll().Where(x => x.DepositoId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

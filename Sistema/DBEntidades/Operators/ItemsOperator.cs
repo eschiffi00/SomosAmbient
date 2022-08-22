@@ -30,22 +30,32 @@ namespace DbEntidades.Operators
                     try { prop.SetValue(Items, value, null); }
                     catch (System.ArgumentException) { }
                 }
-                ItemsListado ItemsStock = new ItemsListado();
-                ItemsStock.Id = Items.Id;
-                ItemsStock.Detalle = Items.Detalle;
-                ItemsStock.CategoriaItemId = Items.CategoriaItemId;
-                ItemsStock.CategoriaDescripcion = "Pendiente tabla cuentas";
-                ItemsStock.CuentaId = Items.CuentaId;
-                ItemsStock.CuentaDescripcion = CuentasOperator.GetOneByIdentity(ItemsStock.CuentaId).Descripcion;
-                ItemsStock.Costo = Items.Costo;
-                ItemsStock.Margen = Items.Margen;
-                ItemsStock.Precio = Items.Precio;
-                ItemsStock.DepositoId = Items.DepositoId;
-                ItemsStock.Unidad = INVENTARIO_UnidadesOperator.GetOneByIdentity(INVENTARIO_ProductoOperator.GetOneByIdentity(Items.DepositoId).UnidadId).Descripcion;
-                ItemsStock.Cantidad = INVENTARIO_ProductoOperator.GetOneByIdentity(INVENTARIO_DepositosOperator.GetOneByIdentity(Items.DepositoId).Id).Cantidad;
-                ItemsStock.EstadoId = Items.EstadoId;
+                ItemsListado ItemsDetail = new ItemsListado();
+                ItemsDetail.Id = Items.Id;
+                ItemsDetail.Detalle = Items.Detalle;
+                ItemsDetail.CategoriaItemId = Items.CategoriaItemId;
+                ItemsDetail.CategoriaDescripcion = CategoriasOperator.GetOneByIdentity(Items.CategoriaItemId).Descripcion;
+                ItemsDetail.CuentaId = Items.CuentaId;
+                if (ItemsDetail.CuentaId == 0 || ItemsDetail.CuentaId == null)
+                {
+                    ItemsDetail.CuentaDescripcion = "";
+                }
+                else
+                {
+                    ItemsDetail.CuentaDescripcion = CuentasOperator.GetOneByIdentity((int)ItemsDetail.CuentaId).Descripcion;
+                }
+                ItemsDetail.Costo = Items.Costo;
+                ItemsDetail.Margen = Items.Margen;
+                ItemsDetail.Precio = Items.Precio;
+                //ItemsDetail.DepositoId = Items.DepositoId;
+                ItemsDetail.DepositoId = 1;
+                //ItemsDetail.Unidad = INVENTARIO_UnidadesOperator.GetOneByIdentity(INVENTARIO_ProductoOperator.GetOneByIdentity(Items.DepositoId).UnidadId).Descripcion;
+                //ItemsDetail.Cantidad = INVENTARIO_ProductoOperator.GetOneByIdentity(INVENTARIO_DepositosOperator.GetOneByIdentity(Items.DepositoId).Id).Cantidad;
+                ItemsDetail.Unidad = "";
+                ItemsDetail.Cantidad = 0;
+                ItemsDetail.EstadoId = Items.EstadoId;
                 
-                lista.Add(ItemsStock);
+                lista.Add(ItemsDetail);
             }
             return lista;
         }
@@ -78,7 +88,7 @@ namespace DbEntidades.Operators
         public static void Delete(int id)
         {
             Items u = ItemsOperator.GetOneByIdentity(id);
-            u.EstadoId = EstadoOperator.GetDeshabilitadoID();
+            u.EstadoId = EstadosOperator.GetDeshabilitadoID();
             Update(u);
         }
     }

@@ -29,6 +29,18 @@ namespace DbEntidades.Entities
 
 
 
+		public List<INVENTARIO_Recetas> GetRelatedINVENTARIO_Recetases()
+		{
+			return INVENTARIO_RecetasOperator.GetAll().Where(x => x.UnidadId == Id).ToList();
+		}
+		public List<INVENTARIO_UnidadesConversion> GetRelatedINVENTARIO_UnidadesConversionesUnidadOriginal()
+		{
+			return INVENTARIO_UnidadesConversionOperator.GetAll().Where(x => x.UnidadOriginalId == Id).ToList();
+		}
+		public List<INVENTARIO_UnidadesConversion> GetRelatedINVENTARIO_UnidadesConversionesUnidadDestino()
+		{
+			return INVENTARIO_UnidadesConversionOperator.GetAll().Where(x => x.UnidadDestinoId == Id).ToList();
+		}
 		public List<INVENTARIO_Producto> GetRelatedINVENTARIO_ProductosUnidad()
 		{
 			return INVENTARIO_ProductoOperator.GetAll().Where(x => x.UnidadId == Id).ToList();

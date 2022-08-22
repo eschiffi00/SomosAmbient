@@ -62,7 +62,7 @@
                         <%--<div class="d-flex justify-content-between w-75 text-center mr-1">--%>
                         <div class="columna-iconos-gridview">
                             <div>
-                                <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="CommandNameDelete" Text="" ToolTip="Borrar cliente" CssClass="ml-2 mr-2" OnClientClick="return ConfirmaBorrado(this);"><i class="fa fa-trash" ></i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="CommandNameDelete" Text="" ToolTip="Borrar Receta" CssClass="ml-2 mr-2" OnClientClick="return ConfirmaBorrado(this);"><i class="fa fa-trash" ></i></asp:LinkButton>
                             </div>
                             <div>
                                 <asp:LinkButton ID="LinkButtonEdit" runat="server" CausesValidation="False" CommandName="CommandNameEdit" Text="" ToolTip="Modificar" CssClass="ml-2 mr-2" ><i class="fa fa-pencil" ></i></asp:LinkButton>

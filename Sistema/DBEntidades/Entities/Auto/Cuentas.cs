@@ -51,6 +51,18 @@ namespace DbEntidades.Entities
 
 
 
+		public List<Cuentas_Log> GetRelatedCuentas_Loges()
+		{
+			return Cuentas_LogOperator.GetAll().Where(x => x.CuentaId == Id).ToList();
+		}
+		public List<PagosProveedores> GetRelatedPagosProveedoreses()
+		{
+			return PagosProveedoresOperator.GetAll().Where(x => x.CuentaId == Id).ToList();
+		}
+		public List<ComprobantesProveedores> GetRelatedComprobantesProveedoreses()
+		{
+			return ComprobantesProveedoresOperator.GetAll().Where(x => x.CuentaId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsBrowse.aspx.cs" Inherits="WebApplication.app.StockNS.ProductoBrowse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/app.Master" AutoEventWireup="true" CodeBehind="ItemsBrowse.aspx.cs" Inherits="WebApplication.app.StockNS.ItemsBrowse" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         function ConfirmaBorrado(e) {
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <asp:GridView ID="grdItems" CssClass="table table-striped table-bordered table-hover table-sm" runat="server" AutoGenerateColumns="false" >
+        <asp:GridView ID="grdItems" CssClass="table table-striped table-bordered table-hover table-sm" runat="server" AutoGenerateColumns="false" onrowcommand="grdItems_RowCommand">
             <Columns>
                 <asp:TemplateField HeaderText="" HeaderStyle-CssClass="text-center columna-iconos-th">
                     <ItemStyle HorizontalAlign="Center" CssClass="verticalMiddle columna-iconos-td" />
@@ -62,10 +62,10 @@
                         <%--<div class="d-flex justify-content-between w-75 text-center mr-1">--%>
                         <div class="columna-iconos-gridview">
                             <div>
-                                <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="CommandNameDelete" Text="" ToolTip="Borrar cliente" CssClass="ml-2 mr-2" OnClientClick="return ConfirmaBorrado(this);"><i class="fa fa-trash" ></i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="false" CommandName="CommandNameDelete" Text="" ToolTip="Borrar Item" CssClass="ml-2 mr-2" OnClientClick="return ConfirmaBorrado(this);"><i class="fa fa-trash" ></i></asp:LinkButton>
                             </div>
                             <div>
-                                <asp:LinkButton ID="LinkButtonEdit" runat="server" CausesValidation="False" CommandName="CommandNameEdit" Text="" ToolTip="Modificar" CssClass="ml-2 mr-2" OnClick="LinkButtonEdit_Click" ><i class="fa fa-pencil" ></i></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButtonEdit" runat="server" CausesValidation="false" CommandName="CommandNameEdit" Text="" ToolTip="Modificar" CssClass="ml-2 mr-2" ><i class="fa fa-pencil" ></i></asp:LinkButton>
                             </div>
                             <%--<div>
                                 <asp:LinkButton ID="LinkButtonTarifa" runat="server" CausesValidation="False" CommandName="CommandNameTarifa" Text="" ToolTip="Tarifas" CssClass="mr-2"><i class="fa fa-usd" ></i></asp:LinkButton>
@@ -82,7 +82,7 @@
                 <asp:BoundField DataField="Costo" HeaderText="Costo" Visible="true" />
                 <asp:BoundField DataField="Margen" HeaderText="Margen" Visible="true" />
                 <asp:BoundField DataField="Precio" HeaderText="Precio" Visible="true" />
-                <asp:BoundField DataField="DepositoId" HeaderText="Stock" Visible="false" />
+                <%--<asp:BoundField DataField="DepositoId" HeaderText="Stock" Visible="false" />--%>
                 <asp:BoundField DataField="Unidad" HeaderText="Unidad" Visible="true" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" Visible="true" />
                 <asp:BoundField DataField="Estado" HeaderText="Habilitado" Visible="true" />

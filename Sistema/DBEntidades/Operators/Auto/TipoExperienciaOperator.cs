@@ -19,7 +19,7 @@ namespace DbEntidades.Operators
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties()) columnas += prop.Name + ", ";
             columnas = columnas.Substring(0, columnas.Length - 2);
             DB db = new DB();
-            DataTable dt = db.GetDataSet("select " + columnas + " from TipoExperiencia where  = " + Id.ToString()).Tables[0];
+            DataTable dt = db.GetDataSet("select " + columnas + " from TipoExperiencia where Id = " + Id.ToString()).Tables[0];
             TipoExperiencia tipoExperiencia = new TipoExperiencia();
             foreach (PropertyInfo prop in typeof(TipoExperiencia).GetProperties())
             {
@@ -133,7 +133,7 @@ namespace DbEntidades.Operators
                 SqlParameter p = new SqlParameter(param[i].ToString(), valor[i]);
                 sqlParams.Add(p);
         }
-            sql += " where  = " + tipoExperiencia.ID;
+            sql += " where ID = " + tipoExperiencia.ID;
             DB db = new DB();
             //db.execute_scalar(sql, parametros.ToArray());
             object resp = db.ExecuteScalar(sql, sqlParams.ToArray());

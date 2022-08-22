@@ -35,8 +35,30 @@ namespace DbEntidades.Entities
 
         }
 
+		public Locaciones GetRelatedLocacionId()
+		{
+			Locaciones locaciones = LocacionesOperator.GetOneByIdentity(LocacionId);
+			return locaciones;
+		}
+
+		public Caracteristicas GetRelatedCaracteristicaId()
+		{
+			Caracteristicas caracteristicas = CaracteristicasOperator.GetOneByIdentity(CaracteristicaId);
+			return caracteristicas;
+		}
+
+		public Segmentos GetRelatedSegmentoId()
+		{
+			Segmentos segmentos = SegmentosOperator.GetOneByIdentity(SegmentoId);
+			return segmentos;
+		}
 
 
+
+		public List<CostoAmbientacion> GetRelatedCostoAmbientaciones()
+		{
+			return CostoAmbientacionOperator.GetAll().Where(x => x.CategoriaId == Id).ToList();
+		}
 
 
 		public static bool CanBeNull(string colName)
