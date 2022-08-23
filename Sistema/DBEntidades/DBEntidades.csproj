@@ -390,6 +390,7 @@
     <Compile Include="Operators\Auto\UsuariosLocacionesOperator.cs" />
     <Compile Include="Operators\Auto\UsuariosOperator.cs" />
     <Compile Include="Operators\EstadoOperator.cs" />
+    <Compile Include="Operators\ItemDetalleOperator.cs" />
     <Compile Include="Operators\ParametroOperator.cs" />
     <Compile Include="Operators\PermisoOperator.cs" />
     <Compile Include="Operators\ItemsOperator.cs" />

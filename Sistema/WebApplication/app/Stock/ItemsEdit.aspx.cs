@@ -7,17 +7,28 @@ using System.Web.UI.WebControls;
 using DbEntidades.Entities;
 using DbEntidades.Operators;
 using System.Globalization;
+using System.Data;
+using System.Text.RegularExpressions;
 
 namespace WebApplication.app.StockNS
 {
     public partial class ItemsEdit : System.Web.UI.Page
     {
         Items seItems = null;
+        DataTable tablagrid = new DataTable();
+        List<int> listaitem = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                tablagrid.Columns.Add(new DataColumn("Item", typeof(string)));
+                //tablagrid.Columns.Add(new DataColumn("Cantidad", typeof(string)));
+                //tablagrid.Columns.Add(new DataColumn("Peso", typeof(string)));
+                Session["tablagrid"] = tablagrid;
+                Session["listaitem"] = listaitem;
+                AddNewRowToGrid(sender, e);
+
                 if (string.IsNullOrEmpty(Convert.ToString(Session["UsuarioId"]))) Response.Redirect("~/app/Seguridad/UsuarioLogin.aspx?url=" + Server.UrlEncode(Request.Url.AbsoluteUri));
                 if (!PermisoOperator.TienePermiso(Convert.ToInt32(Session["UsuarioId"]), GetType().BaseType.FullName)) throw new PermisoException();
 
@@ -30,6 +41,7 @@ namespace WebApplication.app.StockNS
                 CargaCategorias();
                 CargaCuentas();
                 CargaUnidades();
+                //CargaItems();
                 if (s != null && s != string.Empty)
                 {
                     int uid = Convert.ToInt32(s);
@@ -79,6 +91,14 @@ namespace WebApplication.app.StockNS
             ddlCategoriaId.DataValueField = "ID";
             ddlCategoriaId.DataBind();
         }
+        //public void CargaItems()
+        //{
+        //    List<ItemsCombo> ItemsList = ItemsOperator.GetAllForCombo();
+        //    ddlItems.DataSource = ItemsList;
+        //    ddlItems.DataTextField = "Detalle";
+        //    ddlItems.DataValueField = "Id";
+        //    ddlItems.DataBind();
+        //}
         public void CargaCuentas()
         {
             List<Cuentas> cuentasList = CuentasOperator.GetAll();
@@ -142,11 +162,26 @@ namespace WebApplication.app.StockNS
             try
             {
                 seItems.CategoriaItemId = Int32.Parse(ddlCategoriaId.Text);
-                seItems.CuentaId = Int32.Parse(ddlCuenta.Text);
                 seItems.Detalle = txtDescripcion.Text;
-                seItems.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
-                seItems.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
-                seItems.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
+                seItems.CuentaId = Int32.Parse(ddlCuenta.Text);
+                if (!chkDetalle.Checked)
+                {
+                    seItems.Margen = Decimal.Parse(txtMargen.Text, CultureInfo.InvariantCulture);
+                    seItems.Costo = Decimal.Parse(txtCosto.Text, CultureInfo.InvariantCulture);
+                    seItems.Precio = Decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
+                    
+                }
+                else
+                {
+                    ///se debe calcular el margen,costo y precio de la siguiente manera
+                    ///cada item que compone la coleccion debera tener asociada una cantidad
+                    ///se debe multiplicar la cantidad por el margen,precio,costo de ese item de coleccion
+                    ///los mismos se deben aplicar al item
+                    seItems.Margen = 0;
+                    seItems.Costo = 0;
+                    seItems.Precio = 0;
+                }
+                    
                 seItems.EstadoId = Int32.Parse(ddlEstado.Text);
                 INVENTARIO_Producto ItemsStock = new INVENTARIO_Producto();
                 if (seItems.Id > 0) //Items existente
@@ -159,8 +194,20 @@ namespace WebApplication.app.StockNS
                     //seItems.DepositoId = ActualizaStock(ItemsStock);
                     seItems.DepositoId = 0;
                     seItems.EstadoId = EstadosOperator.GetHablitadoID();
-                    ItemsOperator.Save(seItems);
-                    string url = GetRouteUrl("ListaItemss", null);
+                    seItems.ItemDetalleId = -1;
+                    var newItemId = ItemsOperator.Save(seItems).Id;
+                    if (chkDetalle.Checked)
+                    {
+                        foreach (GridViewRow fila in GridView1.Rows)
+                        {
+                            ItemDetalle detalle = new ItemDetalle();
+                            var codigo = ((DropDownList)fila.FindControl("ddlItems")).Text;
+                            detalle.ItemDetalleId = newItemId;
+                            detalle.ItemId = Int32.Parse(codigo);
+                            ItemDetalleOperator.Save(detalle);
+                        }
+                    }
+                    string url = GetRouteUrl("ListaItems", null);
                     Response.Redirect(url);
                 }
                 ItemsOperator.Save(seItems);
@@ -197,6 +244,117 @@ namespace WebApplication.app.StockNS
             Item.DeleteDate = null;
             Item = INVENTARIO_ProductoOperator.Save(Item);
             return Item.Id;
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
+            int colindex = CCLib.GetColumnIndexByHeaderText((GridView)sender, "Id");
+            int id = Convert.ToInt32(row.Cells[colindex].Text);
+
+            if (e.CommandName == "CommandNameDelete")
+            {
+                var idborrar = ItemDetalleOperator.GetOneRelative(id, seItems.Id).Id;
+                if(idborrar > 0)
+                {
+                    ItemDetalleOperator.Delete(id);
+                    
+                }
+                foreach (DataRow fila in tablagrid.Rows)
+                {
+                    if (fila["Id"].ToString() == id.ToString())
+                    {
+                        fila.Delete();
+                    }
+                }
+                tablagrid.AcceptChanges();
+                GridView1.DataSource = tablagrid;
+                GridView1.DataBind();
+            }
+            //if (e.CommandName == "CommandNameEdit")
+            //{
+            //    string url = GetRouteUrl("EditaItems", new { id = id.ToString() });
+            //    Response.Redirect(url);
+            //}
+        }
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DropDownList mydrop = (DropDownList)e.Row.FindControl("ddlItems");
+                mydrop.DataSource = ItemsOperator.GetAllForCombo().OrderBy(x => x.Detalle).ToList(); ;
+                mydrop.DataTextField = "Detalle";
+                mydrop.DataValueField = "Id";
+                mydrop.DataBind();
+            }
+        }
+
+        //////////////////////////////////
+        //COMIENZA CODIGO FILAS DINAMICAS/
+        //////////////////////////////////
+        protected void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            AddNewRowToGrid(sender, e);
+        }
+        public void AddNewRowToGrid(object sender, EventArgs e)
+        {
+            tablagrid = (DataTable)Session["tablagrid"];
+            DataRow gridrow;
+            gridrow = tablagrid.NewRow();
+            listaitem = (List<int>)Session["listaitem"];
+
+            if (GridView1.Rows.Count > 0)
+            {
+                var indice = 0;
+                foreach (GridViewRow fila in GridView1.Rows)
+                {
+                    tablagrid.Rows[indice]["Item"] = ((DropDownList)fila.FindControl("ddlItems")).Text;
+                    //tablagrid.Rows[indice]["Cantidad"] = ((TextBox)fila.FindControl("Cantidad")).Text;
+                    //tablagrid.Rows[indice]["Peso"] = ((TextBox)fila.FindControl("Peso")).Text;
+
+                    listaitem[indice] = Int32.Parse(((DropDownList)fila.FindControl("ddlItems")).Text);
+                    indice++;
+                }
+            }
+            gridrow = tablagrid.NewRow();
+            gridrow["Item"] = "1";
+            //gridrow["Peso"] = "1";
+            //gridrow["Cantidad"] = "1";
+            tablagrid.Rows.Add(gridrow);
+            listaitem.Add(0);
+            GridView1.DataSource = tablagrid;
+            GridView1.DataBind();
+            Session["tablagrid"] = tablagrid;
+            Session["listaitem"] = listaitem;
+
+            //Set Previous Data on Postbacks
+            if (GridView1.Rows.Count > 0)
+            {
+                SetPreviousData();
+            }
+
+        }
+        private void SetPreviousData()
+        {
+            int rowIndex = 0;
+            if (Session["tablagrid"] != null)
+            {
+                DataTable dt = (DataTable)Session["tablagrid"];
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        DropDownList box1 = (DropDownList)GridView1.Rows[rowIndex].Cells[1].FindControl("ddlItems");
+                        //TextBox box2 = (TextBox)GridView1.Rows[rowIndex].Cells[2].FindControl("Peso");
+                        //TextBox box3 = (TextBox)GridView1.Rows[rowIndex].Cells[3].FindControl("Cantidad");
+
+                        box1.SelectedValue = dt.Rows[i]["Item"].ToString();
+                        //box2.Text = dt.Rows[i]["Cantidad"].ToString();
+                        //box3.Text = dt.Rows[i]["Peso"].ToString();
+                        rowIndex++;
+                    }
+                }
+            }
         }
     }
 

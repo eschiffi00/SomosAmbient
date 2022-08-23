@@ -80,3 +80,15 @@
     height: 20px !important;
     color: black !important;
 }
+.customchkCon {
+    display: flex;
+    align-items: center;
+}
+.ddldinamico{
+    height:30px;
+    max-width:500px;
+}
+contGrid {
+    display: flex;
+    flex-direction: column;
+}
