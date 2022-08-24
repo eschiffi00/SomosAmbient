@@ -18,7 +18,7 @@ namespace DbEntidades.Operators
             db.ExecuteNonQuery(query);
         }
     
-        public static ItemDetalle GetOneRelative(int IdItem,int IdRel)
+        public static int GetOneRelative(int IdItem,int IdRel)
         {
             if (!DbEntidades.Seguridad.Permiso("PermisoItemDetalleBrowse")) throw new PermisoException();
             string columnas = string.Empty;
@@ -27,14 +27,18 @@ namespace DbEntidades.Operators
             DB db = new DB();
             DataTable dt = db.GetDataSet("select " + columnas + " from ItemDetalle where ItemId = " + IdItem.ToString() + "and ItemDetalleId = " + IdRel.ToString()).Tables[0];
             ItemDetalle itemDetalle = new ItemDetalle();
-            foreach (PropertyInfo prop in typeof(ItemDetalle).GetProperties())
+            if(dt.Rows.Count > 0)
             {
-                object value = dt.Rows[0][prop.Name];
-                if (value == DBNull.Value) value = null;
-                try { prop.SetValue(itemDetalle, value, null); }
-                catch (System.ArgumentException) { }
+                foreach (PropertyInfo prop in typeof(ItemDetalle).GetProperties())
+                {
+                    object value = dt.Rows[0][prop.Name];
+                    if (value == DBNull.Value) value = null;
+                    try { prop.SetValue(itemDetalle, value, null); }
+                    catch (System.ArgumentException) { }
+                }
+                
             }
-            return itemDetalle;
+            return itemDetalle.Id;
         }
     }
 }

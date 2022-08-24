@@ -245,38 +245,31 @@ namespace WebApplication.app.StockNS
             Item = INVENTARIO_ProductoOperator.Save(Item);
             return Item.Id;
         }
-
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
-            int colindex = CCLib.GetColumnIndexByHeaderText((GridView)sender, "Id");
-            int id = Convert.ToInt32(row.Cells[colindex].Text);
+            tablagrid = (DataTable)Session["tablagrid"];
+            int id = Int32.Parse(((DropDownList)GridView1.Rows[e.RowIndex].FindControl("ddlItems")).Text);
 
-            if (e.CommandName == "CommandNameDelete")
+            var idborrar = ItemDetalleOperator.GetOneRelative(id, seItems.Id);
+            if (idborrar > 0)
             {
-                var idborrar = ItemDetalleOperator.GetOneRelative(id, seItems.Id).Id;
-                if(idborrar > 0)
-                {
-                    ItemDetalleOperator.Delete(id);
-                    
-                }
-                foreach (DataRow fila in tablagrid.Rows)
-                {
-                    if (fila["Id"].ToString() == id.ToString())
-                    {
-                        fila.Delete();
-                    }
-                }
-                tablagrid.AcceptChanges();
-                GridView1.DataSource = tablagrid;
-                GridView1.DataBind();
+                ItemDetalleOperator.Delete(id);
+
             }
-            //if (e.CommandName == "CommandNameEdit")
+            tablagrid.Rows.RemoveAt(e.RowIndex);
+            //foreach (DataRow fila in tablagrid.Rows)
             //{
-            //    string url = GetRouteUrl("EditaItems", new { id = id.ToString() });
-            //    Response.Redirect(url);
+            //    if (fila["Id"].ToString() == id.ToString())
+            //    {
+            //        fila.Delete();
+            //    }
             //}
+            tablagrid.AcceptChanges();
+            GridView1.DataSource = tablagrid;
+            GridView1.DataBind();
+            
         }
+            
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
